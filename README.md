@@ -575,7 +575,7 @@ carbon_aware:
 ```bibtex
 @article{carbon_aware_training2025,
   title={Carbon-Aware Training: Reducing ML's Climate Impact through Intelligent Scheduling},
-  author={Your Name et al.},
+  author={Daniel Schmidt},
   journal={Science Advances},
   year={2025},
   doi={10.1126/sciadv.xxxxx}
@@ -583,7 +583,7 @@ carbon_aware:
 
 @inproceedings{adaptive_carbon_scheduling2024,
   title={Adaptive Carbon-Aware Scheduling for Distributed ML Training},
-  author={Your Team},
+  author={Daniel Schmidt},
   booktitle={ICML},
   year={2024}
 }
