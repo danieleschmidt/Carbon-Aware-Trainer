@@ -1,0 +1,247 @@
+{
+  "app": {
+    "name": "Koolstofbewuste Trainer",
+    "description": "Intelligente ML-trainingsplanner voor koolstofreductie"
+  },
+  "actions": {
+    "start": "Start",
+    "stop": "Stop",
+    "pause": "Pauzeer",
+    "resume": "Hervat",
+    "monitor": "Monitor",
+    "optimize": "Optimaliseer",
+    "migrate": "Migreer",
+    "save": "Opslaan",
+    "load": "Laden",
+    "export": "Exporteer",
+    "import": "Importeer",
+    "configure": "Configureer",
+    "analyze": "Analyseer"
+  },
+  "status": {
+    "running": "Actief",
+    "paused": "Gepauzeerd",
+    "stopped": "Gestopt",
+    "waiting": "Wachtend",
+    "migrating": "Migreren",
+    "error": "Fout",
+    "healthy": "Gezond",
+    "warning": "Waarschuwing",
+    "critical": "Kritiek",
+    "unknown": "Onbekend"
+  },
+  "training": {
+    "epoch": "Epoche",
+    "step": "Stap",
+    "loss": "Verlies",
+    "accuracy": "Nauwkeurigheid",
+    "learning_rate": "Leersnelheid",
+    "batch_size": "Batch Grootte",
+    "progress": "Voortgang",
+    "eta": "Geschatte Tijd",
+    "started": "Training gestart",
+    "completed": "Training voltooid",
+    "paused_high_carbon": "Training gepauzeerd vanwege hoge koolstofintensiteit",
+    "resumed_low_carbon": "Training hervat - koolstofintensiteit afgenomen",
+    "migrated_region": "Training gemigreerd naar schonere regio",
+    "checkpoint_saved": "Checkpoint opgeslagen",
+    "checkpoint_loaded": "Checkpoint geladen"
+  },
+  "carbon": {
+    "intensity": "Koolstofintensiteit",
+    "threshold": "Koolstofdrempel",
+    "emissions": "Koolstofuitstoot",
+    "savings": "Koolstofbesparing",
+    "footprint": "Koolstofvoetafdruk",
+    "current": "Huidige",
+    "average": "Gemiddelde",
+    "peak": "Piek",
+    "minimum": "Minimum",
+    "baseline": "Basislijn",
+    "reduced_by": "Verminderd met {percentage}%",
+    "increased_by": "Verhoogd met {percentage}%",
+    "intensity_unit": "gCO₂/kWh",
+    "high_intensity_warning": "Hoge koolstofintensiteit gedetecteerd: {intensity} gCO₂/kWh",
+    "low_intensity_opportunity": "Lage koolstofintensiteit gelegenheid: {intensity} gCO₂/kWh",
+    "optimal_window_found": "Optimaal trainingsvenster gevonden: {start_time} - {end_time}",
+    "no_optimal_window": "Geen geschikt trainingsvenster gevonden binnen koolstofdrempel"
+  },
+  "energy": {
+    "consumption": "Energieverbruik",
+    "efficiency": "Energie-efficiëntie",
+    "power": "Vermogen",
+    "estimated": "Geschat",
+    "measured": "Gemeten",
+    "total": "Totaal",
+    "per_step": "Per Stap",
+    "per_epoch": "Per Epoche"
+  },
+  "regions": {
+    "current": "Huidige Regio",
+    "available": "Beschikbare Regio's",
+    "cleanest": "Schoonste Regio",
+    "migration": "Regio Migratie",
+    "compare": "Vergelijk Regio's",
+    "us_ca": "Californië, VS",
+    "us_wa": "Washington, VS",
+    "us_tx": "Texas, VS",
+    "eu_fr": "Frankrijk",
+    "eu_de": "Duitsland",
+    "eu_gb": "Verenigd Koninkrijk",
+    "eu_no": "Noorwegen",
+    "eu_se": "Zweden",
+    "jp": "Japan",
+    "au_nsw": "New South Wales, Australië",
+    "ca_bc": "British Columbia, Canada"
+  },
+  "performance": {
+    "utilization": "Gebruik",
+    "throughput": "Doorvoer",
+    "latency": "Latentie",
+    "memory_usage": "Geheugengebruik",
+    "gpu_usage": "GPU Gebruik",
+    "cpu_usage": "CPU Gebruik",
+    "network_usage": "Netwerkgebruik",
+    "disk_usage": "Schijfgebruik",
+    "cache_hit_rate": "Cache Hit Ratio",
+    "requests_per_second": "Verzoeken per Seconde",
+    "steps_per_second": "Stappen per Seconde"
+  },
+  "monitoring": {
+    "dashboard": "Dashboard",
+    "metrics": "Metrieken",
+    "alerts": "Waarschuwingen",
+    "logs": "Logs",
+    "reports": "Rapporten",
+    "real_time": "Real-time",
+    "historical": "Historisch",
+    "forecast": "Voorspelling",
+    "trend": "Trend",
+    "analysis": "Analyse"
+  },
+  "units": {
+    "time": {
+      "seconds": "seconden",
+      "minutes": "minuten",
+      "hours": "uren",
+      "days": "dagen",
+      "weeks": "weken",
+      "months": "maanden",
+      "years": "jaren"
+    },
+    "carbon": {
+      "grams": "g CO₂",
+      "kilograms": "kg CO₂",
+      "tons": "t CO₂"
+    },
+    "energy": {
+      "watt_hours": "Wh",
+      "kilowatt_hours": "kWh",
+      "megawatt_hours": "MWh"
+    },
+    "data": {
+      "bytes": "B",
+      "kilobytes": "KB",
+      "megabytes": "MB",
+      "gigabytes": "GB",
+      "terabytes": "TB"
+    },
+    "percentage": "%",
+    "celsius": "°C",
+    "fahrenheit": "°F",
+    "watts": "W",
+    "kilowatts": "kW"
+  },
+  "messages": {
+    "welcome": "Welkom bij de Koolstofbewuste Trainer",
+    "initialization": "Koolstofbewuste training initialiseren...",
+    "monitoring_started": "Koolstofmonitoring gestart voor {regions}",
+    "monitoring_stopped": "Koolstofmonitoring gestopt",
+    "config_loaded": "Configuratie succesvol geladen",
+    "config_saved": "Configuratie succesvol opgeslagen",
+    "export_complete": "Export voltooid: {filename}",
+    "import_complete": "Import voltooid: {records} records",
+    "optimization_complete": "Training optimalisatie voltooid",
+    "migration_started": "Migratie naar {region} starten",
+    "migration_complete": "Migratie naar {region} voltooid",
+    "cleanup_complete": "Resource opruiming voltooid"
+  },
+  "errors": {
+    "network": {
+      "timeout": "Netwerk timeout opgetreden",
+      "connection": "Verbindingsfout",
+      "rate_limit": "Snelheidslimiet overschreden",
+      "unauthorized": "Ongeautoriseerde toegang",
+      "not_found": "Resource niet gevonden",
+      "server_error": "Serverfout"
+    },
+    "config": {
+      "invalid": "Ongeldige configuratie",
+      "missing_key": "Vereiste configuratiesleutel ontbreekt: {key}",
+      "invalid_region": "Ongeldige regiocode: {region}",
+      "invalid_threshold": "Ongeldige koolstofdrempel: {threshold}"
+    },
+    "training": {
+      "initialization_failed": "Training initialisatie mislukt",
+      "step_failed": "Training stap mislukt",
+      "checkpoint_save_failed": "Checkpoint opslaan mislukt",
+      "checkpoint_load_failed": "Checkpoint laden mislukt",
+      "model_not_found": "Model niet gevonden",
+      "optimizer_not_found": "Optimizer niet gevonden"
+    },
+    "monitoring": {
+      "provider_unavailable": "Koolstofdata provider niet beschikbaar",
+      "forecast_failed": "Koolstofvoorspelling mislukt",
+      "region_not_supported": "Regio niet ondersteund: {region}",
+      "api_key_missing": "API sleutel ontbreekt voor {provider}",
+      "data_invalid": "Ongeldige koolstofdata ontvangen"
+    },
+    "general": {
+      "unexpected": "Een onverwachte fout is opgetreden",
+      "permission_denied": "Toestemming geweigerd",
+      "file_not_found": "Bestand niet gevonden: {filename}",
+      "disk_full": "Schijfruimte vol",
+      "memory_exceeded": "Geheugenlimiet overschreden",
+      "timeout": "Bewerking time-out"
+    }
+  },
+  "warnings": {
+    "high_carbon": "Hoge koolstofintensiteit gedetecteerd",
+    "low_performance": "Lage trainingsprestaties gedetecteerd",
+    "memory_usage": "Hoog geheugengebruik gedetecteerd",
+    "disk_space": "Lage schijfruimte waarschuwing",
+    "api_limit": "Nadert API snelheidslimiet",
+    "configuration": "Configuratie heeft mogelijk aanpassing nodig",
+    "migration_recommended": "Migratie naar schonere regio aanbevolen",
+    "pause_recommended": "Training pauze aanbevolen"
+  },
+  "tips": {
+    "carbon_savings": "Tip: Plan training tijdens lage-koolstof periodes om uitstoot te verminderen",
+    "regional_differences": "Tip: Verschillende regio's hebben variërende koolstofintensiteiten",
+    "renewable_energy": "Tip: Kies regio's met hoge percentages hernieuwbare energie",
+    "batch_size": "Tip: Pas batch grootte aan gebaseerd op koolstofintensiteit",
+    "monitoring": "Tip: Schakel real-time monitoring in voor betere optimalisatie",
+    "forecasting": "Tip: Gebruik koolstofvoorspellingen om trainingsschema's te plannen",
+    "checkpointing": "Tip: Sla checkpoints frequent op tijdens koolstofbewuste training",
+    "migration": "Tip: Schakel cross-regio migratie in voor maximale koolstofbesparing"
+  },
+  "reports": {
+    "summary": "Training Samenvatting",
+    "carbon_impact": "Koolstof Impact Analyse",
+    "performance": "Prestatie Rapport",
+    "comparison": "Vergelijkings Rapport",
+    "generated_on": "Gegenereerd op {date}",
+    "session_id": "Sessie ID: {id}",
+    "duration": "Duur: {duration}",
+    "total_steps": "Totale Stappen: {steps}",
+    "total_epochs": "Totale Epoches: {epochs}",
+    "final_loss": "Eindverlies: {loss}",
+    "final_accuracy": "Eindnauwkeurigheid: {accuracy}",
+    "carbon_saved": "Koolstof Bespaard: {amount}",
+    "energy_used": "Energie Gebruikt: {amount}",
+    "regions_used": "Gebruikte Regio's: {regions}",
+    "migrations": "Migraties: {count}",
+    "pause_time": "Totale Pauzetijd: {duration}",
+    "efficiency": "Koolstof Efficiëntie: {ratio} g CO₂/parameter"
+  }
+}

@@ -1,0 +1,247 @@
+{
+  "app": {
+    "name": "Carbon-Aware Trainer",
+    "description": "Intelligent ML training scheduler for carbon reduction"
+  },
+  "actions": {
+    "start": "Start",
+    "stop": "Stop",
+    "pause": "Pause",
+    "resume": "Resume",
+    "monitor": "Monitor",
+    "optimize": "Optimize",
+    "migrate": "Migrate",
+    "save": "Save",
+    "load": "Load",
+    "export": "Export",
+    "import": "Import",
+    "configure": "Configure",
+    "analyze": "Analyze"
+  },
+  "status": {
+    "running": "Running",
+    "paused": "Paused",
+    "stopped": "Stopped",
+    "waiting": "Waiting",
+    "migrating": "Migrating",
+    "error": "Error",
+    "healthy": "Healthy",
+    "warning": "Warning",
+    "critical": "Critical",
+    "unknown": "Unknown"
+  },
+  "training": {
+    "epoch": "Epoch",
+    "step": "Step",
+    "loss": "Loss",
+    "accuracy": "Accuracy",
+    "learning_rate": "Learning Rate",
+    "batch_size": "Batch Size",
+    "progress": "Progress",
+    "eta": "ETA",
+    "started": "Training started",
+    "completed": "Training completed",
+    "paused_high_carbon": "Training paused due to high carbon intensity",
+    "resumed_low_carbon": "Training resumed - carbon intensity decreased",
+    "migrated_region": "Training migrated to cleaner region",
+    "checkpoint_saved": "Checkpoint saved",
+    "checkpoint_loaded": "Checkpoint loaded"
+  },
+  "carbon": {
+    "intensity": "Carbon Intensity",
+    "threshold": "Carbon Threshold",
+    "emissions": "Carbon Emissions",
+    "savings": "Carbon Savings",
+    "footprint": "Carbon Footprint",
+    "current": "Current",
+    "average": "Average",
+    "peak": "Peak",
+    "minimum": "Minimum",
+    "baseline": "Baseline",
+    "reduced_by": "Reduced by {percentage}%",
+    "increased_by": "Increased by {percentage}%",
+    "intensity_unit": "gCO₂/kWh",
+    "high_intensity_warning": "High carbon intensity detected: {intensity} gCO₂/kWh",
+    "low_intensity_opportunity": "Low carbon intensity opportunity: {intensity} gCO₂/kWh",
+    "optimal_window_found": "Optimal training window found: {start_time} - {end_time}",
+    "no_optimal_window": "No suitable training window found within carbon threshold"
+  },
+  "energy": {
+    "consumption": "Energy Consumption",
+    "efficiency": "Energy Efficiency",
+    "power": "Power",
+    "estimated": "Estimated",
+    "measured": "Measured",
+    "total": "Total",
+    "per_step": "Per Step",
+    "per_epoch": "Per Epoch"
+  },
+  "regions": {
+    "current": "Current Region",
+    "available": "Available Regions",
+    "cleanest": "Cleanest Region",
+    "migration": "Region Migration",
+    "compare": "Compare Regions",
+    "us_ca": "California, USA",
+    "us_wa": "Washington, USA",
+    "us_tx": "Texas, USA",
+    "eu_fr": "France",
+    "eu_de": "Germany", 
+    "eu_gb": "United Kingdom",
+    "eu_no": "Norway",
+    "eu_se": "Sweden",
+    "jp": "Japan",
+    "au_nsw": "New South Wales, Australia",
+    "ca_bc": "British Columbia, Canada"
+  },
+  "performance": {
+    "utilization": "Utilization",
+    "throughput": "Throughput",
+    "latency": "Latency",
+    "memory_usage": "Memory Usage",
+    "gpu_usage": "GPU Usage",
+    "cpu_usage": "CPU Usage",
+    "network_usage": "Network Usage",
+    "disk_usage": "Disk Usage",
+    "cache_hit_rate": "Cache Hit Rate",
+    "requests_per_second": "Requests per Second",
+    "steps_per_second": "Steps per Second"
+  },
+  "monitoring": {
+    "dashboard": "Dashboard",
+    "metrics": "Metrics",
+    "alerts": "Alerts",
+    "logs": "Logs",
+    "reports": "Reports",
+    "real_time": "Real-time",
+    "historical": "Historical",
+    "forecast": "Forecast",
+    "trend": "Trend",
+    "analysis": "Analysis"
+  },
+  "units": {
+    "time": {
+      "seconds": "seconds",
+      "minutes": "minutes", 
+      "hours": "hours",
+      "days": "days",
+      "weeks": "weeks",
+      "months": "months",
+      "years": "years"
+    },
+    "carbon": {
+      "grams": "g CO₂",
+      "kilograms": "kg CO₂",
+      "tons": "t CO₂"
+    },
+    "energy": {
+      "watt_hours": "Wh",
+      "kilowatt_hours": "kWh",
+      "megawatt_hours": "MWh"
+    },
+    "data": {
+      "bytes": "B",
+      "kilobytes": "KB",
+      "megabytes": "MB",
+      "gigabytes": "GB",
+      "terabytes": "TB"
+    },
+    "percentage": "%",
+    "celsius": "°C",
+    "fahrenheit": "°F",
+    "watts": "W",
+    "kilowatts": "kW"
+  },
+  "messages": {
+    "welcome": "Welcome to Carbon-Aware Trainer",
+    "initialization": "Initializing carbon-aware training...",
+    "monitoring_started": "Carbon monitoring started for {regions}",
+    "monitoring_stopped": "Carbon monitoring stopped",
+    "config_loaded": "Configuration loaded successfully",
+    "config_saved": "Configuration saved successfully",
+    "export_complete": "Export completed: {filename}",
+    "import_complete": "Import completed: {records} records",
+    "optimization_complete": "Training optimization complete",
+    "migration_started": "Starting migration to {region}",
+    "migration_complete": "Migration to {region} completed",
+    "cleanup_complete": "Resource cleanup completed"
+  },
+  "errors": {
+    "network": {
+      "timeout": "Network timeout occurred",
+      "connection": "Connection error",
+      "rate_limit": "Rate limit exceeded",
+      "unauthorized": "Unauthorized access",
+      "not_found": "Resource not found",
+      "server_error": "Server error"
+    },
+    "config": {
+      "invalid": "Invalid configuration",
+      "missing_key": "Missing required configuration key: {key}",
+      "invalid_region": "Invalid region code: {region}",
+      "invalid_threshold": "Invalid carbon threshold: {threshold}"
+    },
+    "training": {
+      "initialization_failed": "Training initialization failed",
+      "step_failed": "Training step failed",
+      "checkpoint_save_failed": "Failed to save checkpoint",
+      "checkpoint_load_failed": "Failed to load checkpoint",
+      "model_not_found": "Model not found",
+      "optimizer_not_found": "Optimizer not found"
+    },
+    "monitoring": {
+      "provider_unavailable": "Carbon data provider unavailable",
+      "forecast_failed": "Carbon forecast failed",
+      "region_not_supported": "Region not supported: {region}",
+      "api_key_missing": "API key missing for {provider}",
+      "data_invalid": "Invalid carbon data received"
+    },
+    "general": {
+      "unexpected": "An unexpected error occurred",
+      "permission_denied": "Permission denied",
+      "file_not_found": "File not found: {filename}",
+      "disk_full": "Disk space full",
+      "memory_exceeded": "Memory limit exceeded",
+      "timeout": "Operation timed out"
+    }
+  },
+  "warnings": {
+    "high_carbon": "High carbon intensity detected",
+    "low_performance": "Low training performance detected", 
+    "memory_usage": "High memory usage detected",
+    "disk_space": "Low disk space warning",
+    "api_limit": "Approaching API rate limit",
+    "configuration": "Configuration may need adjustment",
+    "migration_recommended": "Migration to cleaner region recommended",
+    "pause_recommended": "Training pause recommended"
+  },
+  "tips": {
+    "carbon_savings": "Tip: Schedule training during low-carbon periods to reduce emissions",
+    "regional_differences": "Tip: Different regions have varying carbon intensities",
+    "renewable_energy": "Tip: Choose regions with high renewable energy percentages",
+    "batch_size": "Tip: Adjust batch size based on carbon intensity",
+    "monitoring": "Tip: Enable real-time monitoring for better optimization",
+    "forecasting": "Tip: Use carbon forecasts to plan training schedules",
+    "checkpointing": "Tip: Save checkpoints frequently during carbon-aware training",
+    "migration": "Tip: Enable cross-region migration for maximum carbon savings"
+  },
+  "reports": {
+    "summary": "Training Summary",
+    "carbon_impact": "Carbon Impact Analysis",
+    "performance": "Performance Report",
+    "comparison": "Comparison Report",
+    "generated_on": "Generated on {date}",
+    "session_id": "Session ID: {id}",
+    "duration": "Duration: {duration}",
+    "total_steps": "Total Steps: {steps}",
+    "total_epochs": "Total Epochs: {epochs}",
+    "final_loss": "Final Loss: {loss}",
+    "final_accuracy": "Final Accuracy: {accuracy}",
+    "carbon_saved": "Carbon Saved: {amount}",
+    "energy_used": "Energy Used: {amount}",
+    "regions_used": "Regions Used: {regions}",
+    "migrations": "Migrations: {count}",
+    "pause_time": "Total Pause Time: {duration}",
+    "efficiency": "Carbon Efficiency: {ratio} g CO₂/parameter"
+  }
+}

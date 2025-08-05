@@ -1,0 +1,247 @@
+{
+  "app": {
+    "name": "カーボン意識トレーナー",
+    "description": "カーボン削減のためのインテリジェントMLトレーニングスケジューラー"
+  },
+  "actions": {
+    "start": "開始",
+    "stop": "停止",
+    "pause": "一時停止",
+    "resume": "再開",
+    "monitor": "監視",
+    "optimize": "最適化",
+    "migrate": "移行",
+    "save": "保存",
+    "load": "読み込み",
+    "export": "エクスポート",
+    "import": "インポート",
+    "configure": "設定",
+    "analyze": "分析"
+  },
+  "status": {
+    "running": "実行中",
+    "paused": "一時停止中",
+    "stopped": "停止",
+    "waiting": "待機中",
+    "migrating": "移行中",
+    "error": "エラー",
+    "healthy": "正常",
+    "warning": "警告",
+    "critical": "重要",
+    "unknown": "不明"
+  },
+  "training": {
+    "epoch": "エポック",
+    "step": "ステップ",
+    "loss": "損失",
+    "accuracy": "精度",
+    "learning_rate": "学習率",
+    "batch_size": "バッチサイズ",
+    "progress": "進捗",
+    "eta": "予想時間",
+    "started": "トレーニング開始",
+    "completed": "トレーニング完了",
+    "paused_high_carbon": "高いカーボン強度によりトレーニング一時停止",
+    "resumed_low_carbon": "トレーニング再開 - カーボン強度が低下",
+    "migrated_region": "よりクリーンな地域へトレーニング移行",
+    "checkpoint_saved": "チェックポイント保存",
+    "checkpoint_loaded": "チェックポイント読み込み"
+  },
+  "carbon": {
+    "intensity": "カーボン強度",
+    "threshold": "カーボン閾値",
+    "emissions": "カーボン排出量",
+    "savings": "カーボン削減量",
+    "footprint": "カーボンフットプリント",
+    "current": "現在",
+    "average": "平均",
+    "peak": "ピーク",
+    "minimum": "最小",
+    "baseline": "ベースライン",
+    "reduced_by": "{percentage}%削減",
+    "increased_by": "{percentage}%増加",
+    "intensity_unit": "gCO₂/kWh",
+    "high_intensity_warning": "高いカーボン強度を検出: {intensity} gCO₂/kWh",
+    "low_intensity_opportunity": "低いカーボン強度の機会: {intensity} gCO₂/kWh",
+    "optimal_window_found": "最適なトレーニングウィンドウを発見: {start_time} - {end_time}",
+    "no_optimal_window": "カーボン閾値内で適切なトレーニングウィンドウが見つかりません"
+  },
+  "energy": {
+    "consumption": "エネルギー消費",
+    "efficiency": "エネルギー効率",
+    "power": "電力",
+    "estimated": "推定",
+    "measured": "測定",
+    "total": "合計",
+    "per_step": "ステップあたり",
+    "per_epoch": "エポックあたり"
+  },
+  "regions": {
+    "current": "現在の地域",
+    "available": "利用可能な地域",
+    "cleanest": "最もクリーンな地域",
+    "migration": "地域移行",
+    "compare": "地域比較",
+    "us_ca": "カリフォルニア、アメリカ",
+    "us_wa": "ワシントン、アメリカ",
+    "us_tx": "テキサス、アメリカ",
+    "eu_fr": "フランス",
+    "eu_de": "ドイツ",
+    "eu_gb": "イギリス",
+    "eu_no": "ノルウェー",
+    "eu_se": "スウェーデン",
+    "jp": "日本",
+    "au_nsw": "ニューサウスウェールズ、オーストラリア",
+    "ca_bc": "ブリティッシュコロンビア、カナダ"
+  },
+  "performance": {
+    "utilization": "使用率",
+    "throughput": "スループット",
+    "latency": "レイテンシー",
+    "memory_usage": "メモリ使用量",
+    "gpu_usage": "GPU使用量",
+    "cpu_usage": "CPU使用量",
+    "network_usage": "ネットワーク使用量",
+    "disk_usage": "ディスク使用量",
+    "cache_hit_rate": "キャッシュヒット率",
+    "requests_per_second": "秒あたりリクエスト数",
+    "steps_per_second": "秒あたりステップ数"
+  },
+  "monitoring": {
+    "dashboard": "ダッシュボード",
+    "metrics": "メトリクス",
+    "alerts": "アラート",
+    "logs": "ログ",
+    "reports": "レポート",
+    "real_time": "リアルタイム",
+    "historical": "履歴",
+    "forecast": "予測",
+    "trend": "トレンド",
+    "analysis": "分析"
+  },
+  "units": {
+    "time": {
+      "seconds": "秒",
+      "minutes": "分",
+      "hours": "時間",
+      "days": "日",
+      "weeks": "週",
+      "months": "月",
+      "years": "年"
+    },
+    "carbon": {
+      "grams": "g CO₂",
+      "kilograms": "kg CO₂",
+      "tons": "t CO₂"
+    },
+    "energy": {
+      "watt_hours": "Wh",
+      "kilowatt_hours": "kWh",
+      "megawatt_hours": "MWh"
+    },
+    "data": {
+      "bytes": "B",
+      "kilobytes": "KB",
+      "megabytes": "MB",
+      "gigabytes": "GB",
+      "terabytes": "TB"
+    },
+    "percentage": "%",
+    "celsius": "°C",
+    "fahrenheit": "°F",
+    "watts": "W",
+    "kilowatts": "kW"
+  },
+  "messages": {
+    "welcome": "カーボン意識トレーナーへようこそ",
+    "initialization": "カーボン意識トレーニングを初期化中...",
+    "monitoring_started": "{regions}でカーボン監視を開始",
+    "monitoring_stopped": "カーボン監視を停止",
+    "config_loaded": "設定の読み込み成功",
+    "config_saved": "設定の保存成功",
+    "export_complete": "エクスポート完了: {filename}",
+    "import_complete": "インポート完了: {records}件のレコード",
+    "optimization_complete": "トレーニング最適化完了",
+    "migration_started": "{region}への移行を開始",
+    "migration_complete": "{region}への移行完了",
+    "cleanup_complete": "リソースのクリーンアップ完了"
+  },
+  "errors": {
+    "network": {
+      "timeout": "ネットワークタイムアウト",
+      "connection": "接続エラー",
+      "rate_limit": "レート制限を超過",
+      "unauthorized": "認証されていないアクセス",
+      "not_found": "リソースが見つかりません",
+      "server_error": "サーバーエラー"
+    },
+    "config": {
+      "invalid": "無効な設定",
+      "missing_key": "必要な設定キーが不足: {key}",
+      "invalid_region": "無効な地域コード: {region}",
+      "invalid_threshold": "無効なカーボン閾値: {threshold}"
+    },
+    "training": {
+      "initialization_failed": "トレーニング初期化失敗",
+      "step_failed": "トレーニングステップ失敗",
+      "checkpoint_save_failed": "チェックポイント保存失敗",
+      "checkpoint_load_failed": "チェックポイント読み込み失敗",
+      "model_not_found": "モデルが見つかりません",
+      "optimizer_not_found": "オプティマイザーが見つかりません"
+    },
+    "monitoring": {
+      "provider_unavailable": "カーボンデータプロバイダーが利用できません",
+      "forecast_failed": "カーボン予測失敗",
+      "region_not_supported": "サポートされていない地域: {region}",
+      "api_key_missing": "{provider}のAPIキーが不足",
+      "data_invalid": "無効なカーボンデータを受信"
+    },
+    "general": {
+      "unexpected": "予期しないエラーが発生しました",
+      "permission_denied": "アクセス許可が拒否されました",
+      "file_not_found": "ファイルが見つかりません: {filename}",
+      "disk_full": "ディスク容量がフル",
+      "memory_exceeded": "メモリ制限を超過",
+      "timeout": "操作がタイムアウト"
+    }
+  },
+  "warnings": {
+    "high_carbon": "高いカーボン強度を検出",
+    "low_performance": "低いトレーニング性能を検出",
+    "memory_usage": "高いメモリ使用量を検出",
+    "disk_space": "ディスク容量不足の警告",
+    "api_limit": "APIレート制限に近づいています",
+    "configuration": "設定の調整が必要な可能性があります",
+    "migration_recommended": "よりクリーンな地域への移行を推奨",
+    "pause_recommended": "トレーニングの一時停止を推奨"
+  },
+  "tips": {
+    "carbon_savings": "ヒント: 低カーボンの時期にトレーニングをスケジュールして排出量を削減",
+    "regional_differences": "ヒント: 地域によってカーボン強度が異なります",
+    "renewable_energy": "ヒント: 再生可能エネルギーの割合が高い地域を選択",
+    "batch_size": "ヒント: カーボン強度に基づいてバッチサイズを調整",
+    "monitoring": "ヒント: より良い最適化のためにリアルタイム監視を有効化",
+    "forecasting": "ヒント: カーボン予測を使用してトレーニングスケジュールを計画",
+    "checkpointing": "ヒント: カーボン意識トレーニング中は頻繁にチェックポイントを保存",
+    "migration": "ヒント: 最大限のカーボン削減のために地域間移行を有効化"
+  },
+  "reports": {
+    "summary": "トレーニング要約",
+    "carbon_impact": "カーボン影響分析",
+    "performance": "パフォーマンスレポート",
+    "comparison": "比較レポート",
+    "generated_on": "{date}に生成",
+    "session_id": "セッションID: {id}",
+    "duration": "期間: {duration}",
+    "total_steps": "総ステップ数: {steps}",
+    "total_epochs": "総エポック数: {epochs}",
+    "final_loss": "最終損失: {loss}",
+    "final_accuracy": "最終精度: {accuracy}",
+    "carbon_saved": "カーボン削減量: {amount}",
+    "energy_used": "使用エネルギー: {amount}",
+    "regions_used": "使用地域: {regions}",
+    "migrations": "移行回数: {count}",
+    "pause_time": "総一時停止時間: {duration}",
+    "efficiency": "カーボン効率: {ratio} g CO₂/パラメータ"
+  }
+}

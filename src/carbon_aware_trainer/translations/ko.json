@@ -1,0 +1,247 @@
+{
+  "app": {
+    "name": "탄소 인식 트레이너",
+    "description": "탄소 감축을 위한 지능형 ML 훈련 스케줄러"
+  },
+  "actions": {
+    "start": "시작",
+    "stop": "중지",
+    "pause": "일시정지",
+    "resume": "재개",
+    "monitor": "모니터",
+    "optimize": "최적화",
+    "migrate": "마이그레이션",
+    "save": "저장",
+    "load": "로드",
+    "export": "내보내기",
+    "import": "가져오기",
+    "configure": "구성",
+    "analyze": "분석"
+  },
+  "status": {
+    "running": "실행 중",
+    "paused": "일시정지됨",
+    "stopped": "중지됨",
+    "waiting": "대기 중",
+    "migrating": "마이그레이션 중",
+    "error": "오류",
+    "healthy": "정상",
+    "warning": "경고",
+    "critical": "심각",
+    "unknown": "알 수 없음"
+  },
+  "training": {
+    "epoch": "에포크",
+    "step": "단계",
+    "loss": "손실",
+    "accuracy": "정확도",
+    "learning_rate": "학습률",
+    "batch_size": "배치 크기",
+    "progress": "진행률",
+    "eta": "예상 시간",
+    "started": "훈련 시작됨",
+    "completed": "훈련 완료됨",
+    "paused_high_carbon": "높은 탄소 강도로 인해 훈련 일시정지",
+    "resumed_low_carbon": "훈련 재개됨 - 탄소 강도 감소",
+    "migrated_region": "더 깨끗한 지역으로 훈련 마이그레이션",
+    "checkpoint_saved": "체크포인트 저장됨",
+    "checkpoint_loaded": "체크포인트 로드됨"
+  },
+  "carbon": {
+    "intensity": "탄소 강도",
+    "threshold": "탄소 임계값",
+    "emissions": "탄소 배출량",
+    "savings": "탄소 절약량",
+    "footprint": "탄소 발자국",
+    "current": "현재",
+    "average": "평균",
+    "peak": "최고",
+    "minimum": "최소",
+    "baseline": "기준선",
+    "reduced_by": "{percentage}% 감소",
+    "increased_by": "{percentage}% 증가",
+    "intensity_unit": "gCO₂/kWh",
+    "high_intensity_warning": "높은 탄소 강도 감지됨: {intensity} gCO₂/kWh",
+    "low_intensity_opportunity": "낮은 탄소 강도 기회: {intensity} gCO₂/kWh",
+    "optimal_window_found": "최적 훈련 창 발견: {start_time} - {end_time}",
+    "no_optimal_window": "탄소 임계값 내에서 적합한 훈련 창을 찾을 수 없음"
+  },
+  "energy": {
+    "consumption": "에너지 소비",
+    "efficiency": "에너지 효율",
+    "power": "전력",
+    "estimated": "추정",
+    "measured": "측정",
+    "total": "총계",
+    "per_step": "단계당",
+    "per_epoch": "에포크당"
+  },
+  "regions": {
+    "current": "현재 지역",
+    "available": "사용 가능한 지역",
+    "cleanest": "가장 깨끗한 지역",
+    "migration": "지역 마이그레이션",
+    "compare": "지역 비교",
+    "us_ca": "캘리포니아, 미국",
+    "us_wa": "워싱턴, 미국",
+    "us_tx": "텍사스, 미국",
+    "eu_fr": "프랑스",
+    "eu_de": "독일",
+    "eu_gb": "영국",
+    "eu_no": "노르웨이",
+    "eu_se": "스웨덴",
+    "jp": "일본",
+    "au_nsw": "뉴사우스웨일스, 호주",
+    "ca_bc": "브리티시컬럼비아, 캐나다"
+  },
+  "performance": {
+    "utilization": "사용률",
+    "throughput": "처리량",
+    "latency": "지연시간",
+    "memory_usage": "메모리 사용량",
+    "gpu_usage": "GPU 사용량",
+    "cpu_usage": "CPU 사용량",
+    "network_usage": "네트워크 사용량",
+    "disk_usage": "디스크 사용량",
+    "cache_hit_rate": "캐시 적중률",
+    "requests_per_second": "초당 요청 수",
+    "steps_per_second": "초당 단계 수"
+  },
+  "monitoring": {
+    "dashboard": "대시보드",
+    "metrics": "메트릭",
+    "alerts": "알림",
+    "logs": "로그",
+    "reports": "보고서",
+    "real_time": "실시간",
+    "historical": "과거",
+    "forecast": "예측",
+    "trend": "추세",
+    "analysis": "분석"
+  },
+  "units": {
+    "time": {
+      "seconds": "초",
+      "minutes": "분",
+      "hours": "시간",
+      "days": "일",
+      "weeks": "주",
+      "months": "월",
+      "years": "년"
+    },
+    "carbon": {
+      "grams": "g CO₂",
+      "kilograms": "kg CO₂",
+      "tons": "t CO₂"
+    },
+    "energy": {
+      "watt_hours": "Wh",
+      "kilowatt_hours": "kWh",
+      "megawatt_hours": "MWh"
+    },
+    "data": {
+      "bytes": "B",
+      "kilobytes": "KB",
+      "megabytes": "MB",
+      "gigabytes": "GB",
+      "terabytes": "TB"
+    },
+    "percentage": "%",
+    "celsius": "°C",
+    "fahrenheit": "°F",
+    "watts": "W",
+    "kilowatts": "kW"
+  },
+  "messages": {
+    "welcome": "탄소 인식 트레이너에 오신 것을 환영합니다",
+    "initialization": "탄소 인식 훈련을 초기화하는 중...",
+    "monitoring_started": "{regions}에 대한 탄소 모니터링 시작됨",
+    "monitoring_stopped": "탄소 모니터링 중지됨",
+    "config_loaded": "구성이 성공적으로 로드됨",
+    "config_saved": "구성이 성공적으로 저장됨",
+    "export_complete": "내보내기 완료: {filename}",
+    "import_complete": "가져오기 완료: {records}개 레코드",
+    "optimization_complete": "훈련 최적화 완료",
+    "migration_started": "{region}으로 마이그레이션 시작",
+    "migration_complete": "{region}으로 마이그레이션 완료",
+    "cleanup_complete": "리소스 정리 완료"
+  },
+  "errors": {
+    "network": {
+      "timeout": "네트워크 타임아웃 발생",
+      "connection": "연결 오류",
+      "rate_limit": "속도 제한 초과",
+      "unauthorized": "권한 없는 접근",
+      "not_found": "리소스를 찾을 수 없음",
+      "server_error": "서버 오류"
+    },
+    "config": {
+      "invalid": "잘못된 구성",
+      "missing_key": "필수 구성 키 누락: {key}",
+      "invalid_region": "잘못된 지역 코드: {region}",
+      "invalid_threshold": "잘못된 탄소 임계값: {threshold}"
+    },
+    "training": {
+      "initialization_failed": "훈련 초기화 실패",
+      "step_failed": "훈련 단계 실패",
+      "checkpoint_save_failed": "체크포인트 저장 실패",
+      "checkpoint_load_failed": "체크포인트 로드 실패",
+      "model_not_found": "모델을 찾을 수 없음",
+      "optimizer_not_found": "옵티마이저를 찾을 수 없음"
+    },
+    "monitoring": {
+      "provider_unavailable": "탄소 데이터 제공자 사용 불가",
+      "forecast_failed": "탄소 예측 실패",
+      "region_not_supported": "지원되지 않는 지역: {region}",
+      "api_key_missing": "{provider}에 대한 API 키 누락",
+      "data_invalid": "잘못된 탄소 데이터 수신"
+    },
+    "general": {
+      "unexpected": "예상치 못한 오류가 발생했습니다",
+      "permission_denied": "권한이 거부됨",
+      "file_not_found": "파일을 찾을 수 없음: {filename}",
+      "disk_full": "디스크 공간 부족",
+      "memory_exceeded": "메모리 한계 초과",
+      "timeout": "작업 시간 초과"
+    }
+  },
+  "warnings": {
+    "high_carbon": "높은 탄소 강도 감지됨",
+    "low_performance": "낮은 훈련 성능 감지됨",
+    "memory_usage": "높은 메모리 사용량 감지됨",
+    "disk_space": "디스크 공간 부족 경고",
+    "api_limit": "API 속도 제한에 근접",
+    "configuration": "구성 조정이 필요할 수 있음",
+    "migration_recommended": "더 깨끗한 지역으로의 마이그레이션 권장",
+    "pause_recommended": "훈련 일시정지 권장"
+  },
+  "tips": {
+    "carbon_savings": "팁: 배출량을 줄이기 위해 저탄소 기간에 훈련을 예약하세요",
+    "regional_differences": "팁: 지역마다 탄소 강도가 다릅니다",
+    "renewable_energy": "팁: 재생 에너지 비율이 높은 지역을 선택하세요",
+    "batch_size": "팁: 탄소 강도에 따라 배치 크기를 조정하세요",
+    "monitoring": "팁: 더 나은 최적화를 위해 실시간 모니터링을 활성화하세요",
+    "forecasting": "팁: 탄소 예측을 사용하여 훈련 일정을 계획하세요",
+    "checkpointing": "팁: 탄소 인식 훈련 중에는 체크포인트를 자주 저장하세요",
+    "migration": "팁: 최대 탄소 절약을 위해 지역 간 마이그레이션을 활성화하세요"
+  },
+  "reports": {
+    "summary": "훈련 요약",
+    "carbon_impact": "탄소 영향 분석",
+    "performance": "성능 보고서",
+    "comparison": "비교 보고서",
+    "generated_on": "{date}에 생성됨",
+    "session_id": "세션 ID: {id}",
+    "duration": "지속 시간: {duration}",
+    "total_steps": "총 단계 수: {steps}",
+    "total_epochs": "총 에포크 수: {epochs}",
+    "final_loss": "최종 손실: {loss}",
+    "final_accuracy": "최종 정확도: {accuracy}",
+    "carbon_saved": "절약된 탄소: {amount}",
+    "energy_used": "사용된 에너지: {amount}",
+    "regions_used": "사용된 지역: {regions}",
+    "migrations": "마이그레이션 수: {count}",
+    "pause_time": "총 일시정지 시간: {duration}",
+    "efficiency": "탄소 효율성: {ratio} g CO₂/매개변수"
+  }
+}
