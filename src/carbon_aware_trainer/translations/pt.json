@@ -1,0 +1,247 @@
+{
+  "app": {
+    "name": "Treinador Consciente de Carbono",
+    "description": "Agendador inteligente de treinamento ML para redução de carbono"
+  },
+  "actions": {
+    "start": "Iniciar",
+    "stop": "Parar",
+    "pause": "Pausar",
+    "resume": "Retomar",
+    "monitor": "Monitorar",
+    "optimize": "Otimizar",
+    "migrate": "Migrar",
+    "save": "Salvar",
+    "load": "Carregar",
+    "export": "Exportar",
+    "import": "Importar",
+    "configure": "Configurar",
+    "analyze": "Analisar"
+  },
+  "status": {
+    "running": "Executando",
+    "paused": "Pausado",
+    "stopped": "Parado",
+    "waiting": "Aguardando",
+    "migrating": "Migrando",
+    "error": "Erro",
+    "healthy": "Saudável",
+    "warning": "Aviso",
+    "critical": "Crítico",
+    "unknown": "Desconhecido"
+  },
+  "training": {
+    "epoch": "Época",
+    "step": "Passo",
+    "loss": "Perda",
+    "accuracy": "Precisão",
+    "learning_rate": "Taxa de Aprendizado",
+    "batch_size": "Tamanho do Lote",
+    "progress": "Progresso",
+    "eta": "Tempo Estimado",
+    "started": "Treinamento iniciado",
+    "completed": "Treinamento concluído",
+    "paused_high_carbon": "Treinamento pausado devido à alta intensidade de carbono",
+    "resumed_low_carbon": "Treinamento retomado - intensidade de carbono diminuiu",
+    "migrated_region": "Treinamento migrado para região mais limpa",
+    "checkpoint_saved": "Checkpoint salvo",
+    "checkpoint_loaded": "Checkpoint carregado"
+  },
+  "carbon": {
+    "intensity": "Intensidade de Carbono",
+    "threshold": "Limiar de Carbono",
+    "emissions": "Emissões de Carbono",
+    "savings": "Economia de Carbono",
+    "footprint": "Pegada de Carbono",
+    "current": "Atual",
+    "average": "Média",
+    "peak": "Pico",
+    "minimum": "Mínimo",
+    "baseline": "Linha Base",
+    "reduced_by": "Reduzido em {percentage}%",
+    "increased_by": "Aumentado em {percentage}%",
+    "intensity_unit": "gCO₂/kWh",
+    "high_intensity_warning": "Alta intensidade de carbono detectada: {intensity} gCO₂/kWh",
+    "low_intensity_opportunity": "Oportunidade de baixa intensidade de carbono: {intensity} gCO₂/kWh",
+    "optimal_window_found": "Janela ótima de treinamento encontrada: {start_time} - {end_time}",
+    "no_optimal_window": "Nenhuma janela de treinamento adequada encontrada dentro do limiar de carbono"
+  },
+  "energy": {
+    "consumption": "Consumo de Energia",
+    "efficiency": "Eficiência Energética",
+    "power": "Potência",
+    "estimated": "Estimado",
+    "measured": "Medido",
+    "total": "Total",
+    "per_step": "Por Passo",
+    "per_epoch": "Por Época"
+  },
+  "regions": {
+    "current": "Região Atual",
+    "available": "Regiões Disponíveis",
+    "cleanest": "Região Mais Limpa",
+    "migration": "Migração de Região",
+    "compare": "Comparar Regiões",
+    "us_ca": "Califórnia, EUA",
+    "us_wa": "Washington, EUA",
+    "us_tx": "Texas, EUA",
+    "eu_fr": "França",
+    "eu_de": "Alemanha",
+    "eu_gb": "Reino Unido",
+    "eu_no": "Noruega",
+    "eu_se": "Suécia",
+    "jp": "Japão",
+    "au_nsw": "Nova Gales do Sul, Austrália",
+    "ca_bc": "Colúmbia Britânica, Canadá"
+  },
+  "performance": {
+    "utilization": "Utilização",
+    "throughput": "Taxa de Transferência",
+    "latency": "Latência",
+    "memory_usage": "Uso de Memória",
+    "gpu_usage": "Uso de GPU",
+    "cpu_usage": "Uso de CPU",
+    "network_usage": "Uso de Rede",
+    "disk_usage": "Uso de Disco",
+    "cache_hit_rate": "Taxa de Acerto do Cache",
+    "requests_per_second": "Requisições por Segundo",
+    "steps_per_second": "Passos por Segundo"
+  },
+  "monitoring": {
+    "dashboard": "Painel",
+    "metrics": "Métricas",
+    "alerts": "Alertas",
+    "logs": "Logs",
+    "reports": "Relatórios",
+    "real_time": "Tempo Real",
+    "historical": "Histórico",
+    "forecast": "Previsão",
+    "trend": "Tendência",
+    "analysis": "Análise"
+  },
+  "units": {
+    "time": {
+      "seconds": "segundos",
+      "minutes": "minutos",
+      "hours": "horas",
+      "days": "dias",
+      "weeks": "semanas",
+      "months": "meses",
+      "years": "anos"
+    },
+    "carbon": {
+      "grams": "g CO₂",
+      "kilograms": "kg CO₂",
+      "tons": "t CO₂"
+    },
+    "energy": {
+      "watt_hours": "Wh",
+      "kilowatt_hours": "kWh",
+      "megawatt_hours": "MWh"
+    },
+    "data": {
+      "bytes": "B",
+      "kilobytes": "KB",
+      "megabytes": "MB",
+      "gigabytes": "GB",
+      "terabytes": "TB"
+    },
+    "percentage": "%",
+    "celsius": "°C",
+    "fahrenheit": "°F",
+    "watts": "W",
+    "kilowatts": "kW"
+  },
+  "messages": {
+    "welcome": "Bem-vindo ao Treinador Consciente de Carbono",
+    "initialization": "Inicializando treinamento consciente de carbono...",
+    "monitoring_started": "Monitoramento de carbono iniciado para {regions}",
+    "monitoring_stopped": "Monitoramento de carbono parado",
+    "config_loaded": "Configuração carregada com sucesso",
+    "config_saved": "Configuração salva com sucesso",
+    "export_complete": "Exportação concluída: {filename}",
+    "import_complete": "Importação concluída: {records} registros",
+    "optimization_complete": "Otimização de treinamento concluída",
+    "migration_started": "Iniciando migração para {region}",
+    "migration_complete": "Migração para {region} concluída",
+    "cleanup_complete": "Limpeza de recursos concluída"
+  },
+  "errors": {
+    "network": {
+      "timeout": "Timeout de rede ocorreu",
+      "connection": "Erro de conexão",
+      "rate_limit": "Limite de taxa excedido",
+      "unauthorized": "Acesso não autorizado",
+      "not_found": "Recurso não encontrado",
+      "server_error": "Erro do servidor"
+    },
+    "config": {
+      "invalid": "Configuração inválida",
+      "missing_key": "Chave de configuração obrigatória ausente: {key}",
+      "invalid_region": "Código de região inválido: {region}",
+      "invalid_threshold": "Limiar de carbono inválido: {threshold}"
+    },
+    "training": {
+      "initialization_failed": "Inicialização do treinamento falhou",
+      "step_failed": "Passo do treinamento falhou",
+      "checkpoint_save_failed": "Falha ao salvar checkpoint",
+      "checkpoint_load_failed": "Falha ao carregar checkpoint",
+      "model_not_found": "Modelo não encontrado",
+      "optimizer_not_found": "Otimizador não encontrado"
+    },
+    "monitoring": {
+      "provider_unavailable": "Provedor de dados de carbono indisponível",
+      "forecast_failed": "Previsão de carbono falhou",
+      "region_not_supported": "Região não suportada: {region}",
+      "api_key_missing": "Chave API ausente para {provider}",
+      "data_invalid": "Dados de carbono inválidos recebidos"
+    },
+    "general": {
+      "unexpected": "Ocorreu um erro inesperado",
+      "permission_denied": "Permissão negada",
+      "file_not_found": "Arquivo não encontrado: {filename}",
+      "disk_full": "Espaço em disco cheio",
+      "memory_exceeded": "Limite de memória excedido",
+      "timeout": "Operação expirou"
+    }
+  },
+  "warnings": {
+    "high_carbon": "Alta intensidade de carbono detectada",
+    "low_performance": "Baixo desempenho de treinamento detectado",
+    "memory_usage": "Alto uso de memória detectado",
+    "disk_space": "Aviso de pouco espaço em disco",
+    "api_limit": "Aproximando-se do limite de taxa da API",
+    "configuration": "A configuração pode precisar de ajuste",
+    "migration_recommended": "Migração para região mais limpa recomendada",
+    "pause_recommended": "Pausa de treinamento recomendada"
+  },
+  "tips": {
+    "carbon_savings": "Dica: Agende o treinamento durante períodos de baixo carbono para reduzir emissões",
+    "regional_differences": "Dica: Diferentes regiões têm intensidades de carbono variáveis",
+    "renewable_energy": "Dica: Escolha regiões com altas porcentagens de energia renovável",
+    "batch_size": "Dica: Ajuste o tamanho do lote com base na intensidade de carbono",
+    "monitoring": "Dica: Habilite monitoramento em tempo real para melhor otimização",
+    "forecasting": "Dica: Use previsões de carbono para planejar cronogramas de treinamento",
+    "checkpointing": "Dica: Salve checkpoints frequentemente durante treinamento consciente de carbono",
+    "migration": "Dica: Habilite migração entre regiões para máxima economia de carbono"
+  },
+  "reports": {
+    "summary": "Resumo de Treinamento",
+    "carbon_impact": "Análise de Impacto de Carbono",
+    "performance": "Relatório de Performance",
+    "comparison": "Relatório de Comparação",
+    "generated_on": "Gerado em {date}",
+    "session_id": "ID da Sessão: {id}",
+    "duration": "Duração: {duration}",
+    "total_steps": "Passos Totais: {steps}",
+    "total_epochs": "Épocas Totais: {epochs}",
+    "final_loss": "Perda Final: {loss}",
+    "final_accuracy": "Precisão Final: {accuracy}",
+    "carbon_saved": "Carbono Economizado: {amount}",
+    "energy_used": "Energia Usada: {amount}",
+    "regions_used": "Regiões Usadas: {regions}",
+    "migrations": "Migrações: {count}",
+    "pause_time": "Tempo Total de Pausa: {duration}",
+    "efficiency": "Eficiência de Carbono: {ratio} g CO₂/parâmetro"
+  }
+}

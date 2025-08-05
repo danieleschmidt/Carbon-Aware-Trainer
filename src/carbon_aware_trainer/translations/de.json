@@ -1,0 +1,247 @@
+{
+  "app": {
+    "name": "Kohlenstoff-bewusster Trainer",
+    "description": "Intelligenter ML-Trainingsplaner für Kohlenstoffreduktion"
+  },
+  "actions": {
+    "start": "Starten",
+    "stop": "Stoppen",
+    "pause": "Pausieren",
+    "resume": "Fortsetzen",
+    "monitor": "Überwachen",
+    "optimize": "Optimieren",
+    "migrate": "Migrieren",
+    "save": "Speichern",
+    "load": "Laden",
+    "export": "Exportieren",
+    "import": "Importieren",
+    "configure": "Konfigurieren",
+    "analyze": "Analysieren"
+  },
+  "status": {
+    "running": "Laufend",
+    "paused": "Pausiert",
+    "stopped": "Gestoppt",
+    "waiting": "Wartend",
+    "migrating": "Migrierend",
+    "error": "Fehler",
+    "healthy": "Gesund",
+    "warning": "Warnung",
+    "critical": "Kritisch",
+    "unknown": "Unbekannt"
+  },
+  "training": {
+    "epoch": "Epoche",
+    "step": "Schritt",
+    "loss": "Verlust",
+    "accuracy": "Genauigkeit",
+    "learning_rate": "Lernrate",
+    "batch_size": "Batch-Größe",
+    "progress": "Fortschritt",
+    "eta": "Geschätzte Zeit",
+    "started": "Training gestartet",
+    "completed": "Training abgeschlossen",
+    "paused_high_carbon": "Training wegen hoher Kohlenstoffintensität pausiert",
+    "resumed_low_carbon": "Training fortgesetzt - Kohlenstoffintensität gesunken",
+    "migrated_region": "Training zu saubererer Region migriert",
+    "checkpoint_saved": "Checkpoint gespeichert",
+    "checkpoint_loaded": "Checkpoint geladen"
+  },
+  "carbon": {
+    "intensity": "Kohlenstoffintensität",
+    "threshold": "Kohlenstoffschwellenwert",
+    "emissions": "Kohlenstoffemissionen",
+    "savings": "Kohlenstoffeinsparungen",
+    "footprint": "CO₂-Fußabdruck",
+    "current": "Aktuell",
+    "average": "Durchschnitt",
+    "peak": "Spitze",
+    "minimum": "Minimum",
+    "baseline": "Baseline",
+    "reduced_by": "Reduziert um {percentage}%",
+    "increased_by": "Erhöht um {percentage}%",
+    "intensity_unit": "gCO₂/kWh",
+    "high_intensity_warning": "Hohe Kohlenstoffintensität erkannt: {intensity} gCO₂/kWh",
+    "low_intensity_opportunity": "Niedrige Kohlenstoffintensität erkannt: {intensity} gCO₂/kWh",
+    "optimal_window_found": "Optimales Trainingsfenster gefunden: {start_time} - {end_time}",
+    "no_optimal_window": "Kein geeignetes Trainingsfenster innerhalb des Kohlenstoffschwellenwerts gefunden"
+  },
+  "energy": {
+    "consumption": "Energieverbrauch",
+    "efficiency": "Energieeffizienz",
+    "power": "Leistung",
+    "estimated": "Geschätzt",
+    "measured": "Gemessen",
+    "total": "Gesamt",
+    "per_step": "Pro Schritt",
+    "per_epoch": "Pro Epoche"
+  },
+  "regions": {
+    "current": "Aktuelle Region",
+    "available": "Verfügbare Regionen",
+    "cleanest": "Sauberste Region",
+    "migration": "Regionsmigration",
+    "compare": "Regionen Vergleichen",
+    "us_ca": "Kalifornien, USA",
+    "us_wa": "Washington, USA",
+    "us_tx": "Texas, USA",
+    "eu_fr": "Frankreich",
+    "eu_de": "Deutschland",
+    "eu_gb": "Vereinigtes Königreich",
+    "eu_no": "Norwegen",
+    "eu_se": "Schweden",
+    "jp": "Japan",
+    "au_nsw": "New South Wales, Australien",
+    "ca_bc": "British Columbia, Kanada"
+  },
+  "performance": {
+    "utilization": "Auslastung",
+    "throughput": "Durchsatz",
+    "latency": "Latenz",
+    "memory_usage": "Speicherverbrauch",
+    "gpu_usage": "GPU-Nutzung",
+    "cpu_usage": "CPU-Nutzung",
+    "network_usage": "Netzwerknutzung",
+    "disk_usage": "Festplattennutzung",
+    "cache_hit_rate": "Cache-Trefferrate",
+    "requests_per_second": "Anfragen pro Sekunde",
+    "steps_per_second": "Schritte pro Sekunde"
+  },
+  "monitoring": {
+    "dashboard": "Dashboard",
+    "metrics": "Metriken",
+    "alerts": "Warnungen",
+    "logs": "Protokolle",
+    "reports": "Berichte",
+    "real_time": "Echtzeit",
+    "historical": "Historisch",
+    "forecast": "Vorhersage",
+    "trend": "Trend",
+    "analysis": "Analyse"
+  },
+  "units": {
+    "time": {
+      "seconds": "Sekunden",
+      "minutes": "Minuten",
+      "hours": "Stunden",
+      "days": "Tage",
+      "weeks": "Wochen",
+      "months": "Monate",
+      "years": "Jahre"
+    },
+    "carbon": {
+      "grams": "g CO₂",
+      "kilograms": "kg CO₂",
+      "tons": "t CO₂"
+    },
+    "energy": {
+      "watt_hours": "Wh",
+      "kilowatt_hours": "kWh",
+      "megawatt_hours": "MWh"
+    },
+    "data": {
+      "bytes": "B",
+      "kilobytes": "KB",
+      "megabytes": "MB",
+      "gigabytes": "GB",
+      "terabytes": "TB"
+    },
+    "percentage": "%",
+    "celsius": "°C",
+    "fahrenheit": "°F",
+    "watts": "W",
+    "kilowatts": "kW"
+  },
+  "messages": {
+    "welcome": "Willkommen beim Kohlenstoff-bewussten Trainer",
+    "initialization": "Kohlenstoff-bewusstes Training wird initialisiert...",
+    "monitoring_started": "Kohlenstoff-Überwachung für {regions} gestartet",
+    "monitoring_stopped": "Kohlenstoff-Überwachung gestoppt",
+    "config_loaded": "Konfiguration erfolgreich geladen",
+    "config_saved": "Konfiguration erfolgreich gespeichert",
+    "export_complete": "Export abgeschlossen: {filename}",
+    "import_complete": "Import abgeschlossen: {records} Datensätze",
+    "optimization_complete": "Trainingsoptimierung abgeschlossen",
+    "migration_started": "Migration zu {region} wird gestartet",
+    "migration_complete": "Migration zu {region} abgeschlossen",
+    "cleanup_complete": "Ressourcen-Bereinigung abgeschlossen"
+  },
+  "errors": {
+    "network": {
+      "timeout": "Netzwerk-Zeitüberschreitung",
+      "connection": "Verbindungsfehler",
+      "rate_limit": "Rate-Limit überschritten",
+      "unauthorized": "Nicht autorisierter Zugriff",
+      "not_found": "Ressource nicht gefunden",
+      "server_error": "Server-Fehler"
+    },
+    "config": {
+      "invalid": "Ungültige Konfiguration",
+      "missing_key": "Erforderlicher Konfigurationsschlüssel fehlt: {key}",
+      "invalid_region": "Ungültiger Regionscode: {region}",
+      "invalid_threshold": "Ungültiger Kohlenstoffschwellenwert: {threshold}"
+    },
+    "training": {
+      "initialization_failed": "Training-Initialisierung fehlgeschlagen",
+      "step_failed": "Trainingsschritt fehlgeschlagen",
+      "checkpoint_save_failed": "Checkpoint-Speicherung fehlgeschlagen",
+      "checkpoint_load_failed": "Checkpoint-Laden fehlgeschlagen",
+      "model_not_found": "Modell nicht gefunden",
+      "optimizer_not_found": "Optimierer nicht gefunden"
+    },
+    "monitoring": {
+      "provider_unavailable": "Kohlenstoff-Datenanbieter nicht verfügbar",
+      "forecast_failed": "Kohlenstoff-Vorhersage fehlgeschlagen",
+      "region_not_supported": "Region nicht unterstützt: {region}",
+      "api_key_missing": "API-Schlüssel fehlt für {provider}",
+      "data_invalid": "Ungültige Kohlenstoffdaten empfangen"
+    },
+    "general": {
+      "unexpected": "Ein unerwarteter Fehler ist aufgetreten",
+      "permission_denied": "Zugriff verweigert",
+      "file_not_found": "Datei nicht gefunden: {filename}",
+      "disk_full": "Festplattenspeicher voll",
+      "memory_exceeded": "Speicherlimit überschritten",
+      "timeout": "Vorgang zeitüberschritten"
+    }
+  },
+  "warnings": {
+    "high_carbon": "Hohe Kohlenstoffintensität erkannt",
+    "low_performance": "Niedrige Trainingsleistung erkannt",
+    "memory_usage": "Hoher Speicherverbrauch erkannt",
+    "disk_space": "Warnung vor niedrigem Festplattenspeicher",
+    "api_limit": "API-Rate-Limit wird erreicht",
+    "configuration": "Konfiguration benötigt möglicherweise Anpassung",
+    "migration_recommended": "Migration zu saubererer Region empfohlen",
+    "pause_recommended": "Trainingspause empfohlen"
+  },
+  "tips": {
+    "carbon_savings": "Tipp: Planen Sie Training während kohlenstoffarmer Zeiten, um Emissionen zu reduzieren",
+    "regional_differences": "Tipp: Verschiedene Regionen haben unterschiedliche Kohlenstoffintensitäten",
+    "renewable_energy": "Tipp: Wählen Sie Regionen mit hohen Anteilen erneuerbarer Energie",
+    "batch_size": "Tipp: Passen Sie die Batch-Größe basierend auf der Kohlenstoffintensität an",
+    "monitoring": "Tipp: Aktivieren Sie Echtzeit-Überwachung für bessere Optimierung",
+    "forecasting": "Tipp: Nutzen Sie Kohlenstoff-Vorhersagen zur Planung von Trainingsplänen",
+    "checkpointing": "Tipp: Speichern Sie häufig Checkpoints während kohlenstoff-bewusstem Training",
+    "migration": "Tipp: Aktivieren Sie regions-übergreifende Migration für maximale Kohlenstoffeinsparungen"
+  },
+  "reports": {
+    "summary": "Trainings-Zusammenfassung",
+    "carbon_impact": "Kohlenstoff-Auswirkungsanalyse",
+    "performance": "Leistungsbericht",
+    "comparison": "Vergleichsbericht",
+    "generated_on": "Erstellt am {date}",
+    "session_id": "Sitzungs-ID: {id}",
+    "duration": "Dauer: {duration}",
+    "total_steps": "Gesamte Schritte: {steps}",
+    "total_epochs": "Gesamte Epochen: {epochs}",
+    "final_loss": "Endverlust: {loss}",
+    "final_accuracy": "Endgenauigkeit: {accuracy}",
+    "carbon_saved": "Kohlenstoff Eingespart: {amount}",
+    "energy_used": "Energie Verbraucht: {amount}",
+    "regions_used": "Verwendete Regionen: {regions}",
+    "migrations": "Migrationen: {count}",
+    "pause_time": "Gesamte Pausenzeit: {duration}",
+    "efficiency": "Kohlenstoff-Effizienz: {ratio} g CO₂/Parameter"
+  }
+}

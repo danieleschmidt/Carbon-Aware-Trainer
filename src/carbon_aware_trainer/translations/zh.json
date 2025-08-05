@@ -1,0 +1,247 @@
+{
+  "app": {
+    "name": "碳感知训练器",
+    "description": "用于碳减排的智能机器学习训练调度器"
+  },
+  "actions": {
+    "start": "开始",
+    "stop": "停止",
+    "pause": "暂停",
+    "resume": "恢复",
+    "monitor": "监控",
+    "optimize": "优化",
+    "migrate": "迁移",
+    "save": "保存",
+    "load": "加载",
+    "export": "导出",
+    "import": "导入",
+    "configure": "配置",
+    "analyze": "分析"
+  },
+  "status": {
+    "running": "运行中",
+    "paused": "已暂停",
+    "stopped": "已停止",
+    "waiting": "等待中",
+    "migrating": "迁移中",
+    "error": "错误",
+    "healthy": "健康",
+    "warning": "警告",
+    "critical": "严重",
+    "unknown": "未知"
+  },
+  "training": {
+    "epoch": "轮次",
+    "step": "步骤",
+    "loss": "损失",
+    "accuracy": "准确率",
+    "learning_rate": "学习率",
+    "batch_size": "批次大小",
+    "progress": "进度",
+    "eta": "预计时间",
+    "started": "训练已开始",
+    "completed": "训练完成",
+    "paused_high_carbon": "由于高碳强度训练已暂停",
+    "resumed_low_carbon": "训练已恢复 - 碳强度降低",
+    "migrated_region": "训练已迁移到更清洁的地区",
+    "checkpoint_saved": "检查点已保存",
+    "checkpoint_loaded": "检查点已加载"
+  },
+  "carbon": {
+    "intensity": "碳强度",
+    "threshold": "碳阈值",
+    "emissions": "碳排放",
+    "savings": "碳节约",
+    "footprint": "碳足迹",
+    "current": "当前",
+    "average": "平均",
+    "peak": "峰值",
+    "minimum": "最小值",
+    "baseline": "基线",
+    "reduced_by": "减少了{percentage}%",
+    "increased_by": "增加了{percentage}%",
+    "intensity_unit": "gCO₂/kWh",
+    "high_intensity_warning": "检测到高碳强度: {intensity} gCO₂/kWh",
+    "low_intensity_opportunity": "低碳强度机会: {intensity} gCO₂/kWh",
+    "optimal_window_found": "找到最佳训练窗口: {start_time} - {end_time}",
+    "no_optimal_window": "在碳阈值内未找到合适的训练窗口"
+  },
+  "energy": {
+    "consumption": "能耗",
+    "efficiency": "能效",
+    "power": "功率",
+    "estimated": "估计",
+    "measured": "测量",
+    "total": "总计",
+    "per_step": "每步",
+    "per_epoch": "每轮次"
+  },
+  "regions": {
+    "current": "当前地区",
+    "available": "可用地区",
+    "cleanest": "最清洁地区",
+    "migration": "地区迁移",
+    "compare": "比较地区",
+    "us_ca": "加利福尼亚，美国",
+    "us_wa": "华盛顿，美国",
+    "us_tx": "德克萨斯，美国",
+    "eu_fr": "法国",
+    "eu_de": "德国",
+    "eu_gb": "英国",
+    "eu_no": "挪威",
+    "eu_se": "瑞典",
+    "jp": "日本",
+    "au_nsw": "新南威尔士，澳大利亚",
+    "ca_bc": "不列颠哥伦比亚，加拿大"
+  },
+  "performance": {
+    "utilization": "利用率",
+    "throughput": "吞吐量",
+    "latency": "延迟",
+    "memory_usage": "内存使用",
+    "gpu_usage": "GPU使用",
+    "cpu_usage": "CPU使用",
+    "network_usage": "网络使用",
+    "disk_usage": "磁盘使用",
+    "cache_hit_rate": "缓存命中率",
+    "requests_per_second": "每秒请求数",
+    "steps_per_second": "每秒步数"
+  },
+  "monitoring": {
+    "dashboard": "仪表板",
+    "metrics": "指标",
+    "alerts": "警报",
+    "logs": "日志",
+    "reports": "报告",
+    "real_time": "实时",
+    "historical": "历史",
+    "forecast": "预测",
+    "trend": "趋势",
+    "analysis": "分析"
+  },
+  "units": {
+    "time": {
+      "seconds": "秒",
+      "minutes": "分钟",
+      "hours": "小时",
+      "days": "天",
+      "weeks": "周",
+      "months": "月",
+      "years": "年"
+    },
+    "carbon": {
+      "grams": "g CO₂",
+      "kilograms": "kg CO₂",
+      "tons": "t CO₂"
+    },
+    "energy": {
+      "watt_hours": "Wh",
+      "kilowatt_hours": "kWh",
+      "megawatt_hours": "MWh"
+    },
+    "data": {
+      "bytes": "B",
+      "kilobytes": "KB",
+      "megabytes": "MB",
+      "gigabytes": "GB",
+      "terabytes": "TB"
+    },
+    "percentage": "%",
+    "celsius": "°C",
+    "fahrenheit": "°F",
+    "watts": "W",
+    "kilowatts": "kW"
+  },
+  "messages": {
+    "welcome": "欢迎使用碳感知训练器",
+    "initialization": "正在初始化碳感知训练...",
+    "monitoring_started": "已开始对{regions}进行碳监控",
+    "monitoring_stopped": "碳监控已停止",
+    "config_loaded": "配置加载成功",
+    "config_saved": "配置保存成功",
+    "export_complete": "导出完成: {filename}",
+    "import_complete": "导入完成: {records}条记录",
+    "optimization_complete": "训练优化完成",
+    "migration_started": "开始迁移到{region}",
+    "migration_complete": "迁移到{region}完成",
+    "cleanup_complete": "资源清理完成"
+  },
+  "errors": {
+    "network": {
+      "timeout": "网络超时",
+      "connection": "连接错误",
+      "rate_limit": "速率限制超出",
+      "unauthorized": "未授权访问",
+      "not_found": "未找到资源",
+      "server_error": "服务器错误"
+    },
+    "config": {
+      "invalid": "无效配置",
+      "missing_key": "缺少必需的配置键: {key}",
+      "invalid_region": "无效的地区代码: {region}",
+      "invalid_threshold": "无效的碳阈值: {threshold}"
+    },
+    "training": {
+      "initialization_failed": "训练初始化失败",
+      "step_failed": "训练步骤失败",
+      "checkpoint_save_failed": "检查点保存失败",
+      "checkpoint_load_failed": "检查点加载失败",
+      "model_not_found": "未找到模型",
+      "optimizer_not_found": "未找到优化器"
+    },
+    "monitoring": {
+      "provider_unavailable": "碳数据提供商不可用",
+      "forecast_failed": "碳预测失败",
+      "region_not_supported": "不支持的地区: {region}",
+      "api_key_missing": "{provider}缺少API密钥",
+      "data_invalid": "收到无效的碳数据"
+    },
+    "general": {
+      "unexpected": "发生意外错误",
+      "permission_denied": "权限被拒绝",
+      "file_not_found": "文件未找到: {filename}",
+      "disk_full": "磁盘空间已满",
+      "memory_exceeded": "内存限制超出",
+      "timeout": "操作超时"
+    }
+  },
+  "warnings": {
+    "high_carbon": "检测到高碳强度",
+    "low_performance": "检测到低训练性能",
+    "memory_usage": "检测到高内存使用",
+    "disk_space": "磁盘空间不足警告",
+    "api_limit": "接近API速率限制",
+    "configuration": "配置可能需要调整",
+    "migration_recommended": "建议迁移到更清洁的地区",
+    "pause_recommended": "建议暂停训练"
+  },
+  "tips": {
+    "carbon_savings": "提示: 在低碳时段安排训练以减少排放",
+    "regional_differences": "提示: 不同地区有不同的碳强度",
+    "renewable_energy": "提示: 选择可再生能源比例高的地区",
+    "batch_size": "提示: 根据碳强度调整批次大小",
+    "monitoring": "提示: 启用实时监控以获得更好的优化",
+    "forecasting": "提示: 使用碳预测来规划训练计划",
+    "checkpointing": "提示: 在碳感知训练期间频繁保存检查点",
+    "migration": "提示: 启用跨地区迁移以实现最大碳节约"
+  },
+  "reports": {
+    "summary": "训练摘要",
+    "carbon_impact": "碳影响分析",
+    "performance": "性能报告",
+    "comparison": "比较报告",
+    "generated_on": "生成于{date}",
+    "session_id": "会话ID: {id}",
+    "duration": "持续时间: {duration}",
+    "total_steps": "总步数: {steps}",
+    "total_epochs": "总轮次: {epochs}",
+    "final_loss": "最终损失: {loss}",
+    "final_accuracy": "最终准确率: {accuracy}",
+    "carbon_saved": "节约碳量: {amount}",
+    "energy_used": "能耗: {amount}",
+    "regions_used": "使用地区: {regions}",
+    "migrations": "迁移次数: {count}",
+    "pause_time": "总暂停时间: {duration}",
+    "efficiency": "碳效率: {ratio} g CO₂/参数"
+  }
+}
