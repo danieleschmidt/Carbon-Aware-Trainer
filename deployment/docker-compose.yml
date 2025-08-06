@@ -1,0 +1,348 @@
+# Carbon-Aware-Trainer Docker Compose Configuration
+# Production-ready multi-service deployment
+
+version: '3.8'
+
+services:
+  # Main carbon-aware-trainer application
+  carbon-trainer:
+    build:
+      context: ..
+      dockerfile: deployment/docker/Dockerfile
+      target: production
+      args:
+        BUILD_DATE: ${BUILD_DATE:-$(date -u +'%Y-%m-%dT%H:%M:%SZ')}
+        VCS_REF: ${VCS_REF:-$(git rev-parse HEAD)}
+        VERSION: ${VERSION:-latest}
+    
+    image: carbon-aware-trainer:${VERSION:-latest}
+    container_name: carbon-trainer-app
+    
+    restart: unless-stopped
+    
+    environment:
+      - CARBON_AWARE_ENVIRONMENT=production
+      - CARBON_AWARE_LOG_LEVEL=info
+      - CARBON_AWARE_WORKERS=2
+      - CARBON_AWARE_CONFIG_PATH=/app/config/production.yaml
+      - CARBON_AWARE_DATA_DIR=/app/data
+      - CARBON_AWARE_REDIS_URL=redis://redis:6379/0
+      - CARBON_AWARE_DB_URL=postgresql://carbonuser:${POSTGRES_PASSWORD}@postgres:5432/carbondb
+      - ELECTRICITYMAP_API_KEY=${ELECTRICITYMAP_API_KEY}
+      - WATTTIME_API_KEY=${WATTTIME_API_KEY}
+      - PROMETHEUS_METRICS_PORT=8081
+      
+    ports:
+      - "8080:8080"  # Main application port
+      - "8081:8081"  # Metrics port
+    
+    volumes:
+      - carbon_data:/app/data
+      - carbon_logs:/app/logs
+      - ./config:/app/config:ro
+      - carbon_tmp:/app/tmp
+    
+    networks:
+      - carbon-network
+    
+    depends_on:
+      - postgres
+      - redis
+    
+    healthcheck:
+      test: ["CMD", "/app/healthcheck.sh"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+    
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # PostgreSQL database for metrics and state storage
+  postgres:
+    image: postgres:15-alpine
+    container_name: carbon-trainer-db
+    
+    restart: unless-stopped
+    
+    environment:
+      - POSTGRES_DB=carbondb
+      - POSTGRES_USER=carbonuser
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_INITDB_ARGS=--auth-host=scram-sha-256
+      - POSTGRES_HOST_AUTH_METHOD=scram-sha-256
+    
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init:/docker-entrypoint-initdb.d:ro
+    
+    networks:
+      - carbon-network
+    
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U carbonuser -d carbondb"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+
+  # Redis for caching and session storage
+  redis:
+    image: redis:7-alpine
+    container_name: carbon-trainer-cache
+    
+    restart: unless-stopped
+    
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
+    
+    volumes:
+      - redis_data:/data
+      - ./config/redis.conf:/usr/local/etc/redis/redis.conf:ro
+    
+    networks:
+      - carbon-network
+    
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.1'
+          memory: 128M
+
+  # Prometheus for metrics collection
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: carbon-trainer-prometheus
+    
+    restart: unless-stopped
+    
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=30d'
+      - '--web.enable-lifecycle'
+    
+    ports:
+      - "9090:9090"
+    
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    
+    networks:
+      - carbon-network
+    
+    depends_on:
+      - carbon-trainer
+    
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+
+  # Grafana for visualization
+  grafana:
+    image: grafana/grafana:latest
+    container_name: carbon-trainer-grafana
+    
+    restart: unless-stopped
+    
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_INSTALL_PLUGINS=grafana-piechart-panel
+    
+    ports:
+      - "3000:3000"
+    
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+    
+    networks:
+      - carbon-network
+    
+    depends_on:
+      - prometheus
+    
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.1'
+          memory: 128M
+
+  # Nginx reverse proxy and load balancer
+  nginx:
+    image: nginx:alpine
+    container_name: carbon-trainer-proxy
+    
+    restart: unless-stopped
+    
+    ports:
+      - "80:80"
+      - "443:443"
+    
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+      - nginx_logs:/var/log/nginx
+    
+    networks:
+      - carbon-network
+    
+    depends_on:
+      - carbon-trainer
+    
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+        reservations:
+          cpus: '0.1'
+          memory: 64M
+
+  # Background worker for async tasks
+  carbon-worker:
+    build:
+      context: ..
+      dockerfile: deployment/docker/Dockerfile
+      target: production
+    
+    image: carbon-aware-trainer:${VERSION:-latest}
+    container_name: carbon-trainer-worker
+    
+    restart: unless-stopped
+    
+    command: ["python", "-m", "carbon_aware_trainer.worker", "--worker-type", "background"]
+    
+    environment:
+      - CARBON_AWARE_ENVIRONMENT=production
+      - CARBON_AWARE_LOG_LEVEL=info
+      - CARBON_AWARE_REDIS_URL=redis://redis:6379/0
+      - CARBON_AWARE_DB_URL=postgresql://carbonuser:${POSTGRES_PASSWORD}@postgres:5432/carbondb
+      - ELECTRICITYMAP_API_KEY=${ELECTRICITYMAP_API_KEY}
+      - WATTTIME_API_KEY=${WATTTIME_API_KEY}
+    
+    volumes:
+      - carbon_data:/app/data
+      - carbon_logs:/app/logs
+      - ./config:/app/config:ro
+    
+    networks:
+      - carbon-network
+    
+    depends_on:
+      - postgres
+      - redis
+    
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+
+# Development override
+  carbon-trainer-dev:
+    build:
+      context: ..
+      dockerfile: deployment/docker/Dockerfile
+      target: development
+    
+    image: carbon-aware-trainer:dev
+    container_name: carbon-trainer-dev
+    
+    profiles:
+      - development
+    
+    restart: "no"
+    
+    environment:
+      - CARBON_AWARE_ENVIRONMENT=development
+      - CARBON_AWARE_LOG_LEVEL=debug
+      - CARBON_AWARE_AUTO_RELOAD=true
+    
+    ports:
+      - "8080:8080"
+      - "8888:8888"  # Jupyter port
+    
+    volumes:
+      - ../:/app  # Mount entire source directory
+      - carbon_data_dev:/app/data
+    
+    networks:
+      - carbon-network
+    
+    command: ["python", "-m", "carbon_aware_trainer.cli", "--serve", "--dev", "--reload"]
+
+volumes:
+  carbon_data:
+    driver: local
+  carbon_data_dev:
+    driver: local
+  carbon_logs:
+    driver: local
+  carbon_tmp:
+    driver: local
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
+  nginx_logs:
+    driver: local
+
+networks:
+  carbon-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

@@ -1,0 +1,427 @@
+# Carbon-Aware-Trainer Kubernetes Deployment
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: carbon-aware-training
+  labels:
+    name: carbon-aware-training
+    purpose: carbon-optimized-ml
+
+---
+# ConfigMap for application configuration
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: carbon-trainer-config
+  namespace: carbon-aware-training
+data:
+  config.yaml: |
+    carbon_aware:
+      mode: adaptive
+      threshold: 100
+      check_interval: 300
+      
+      data_sources:
+        primary: electricitymap
+        fallback: watttime
+        cache_duration: 3600
+      
+      scheduling:
+        algorithm: predictive
+        flexibility: 0.3
+        min_batch_hours: 2
+        
+      regions:
+        preferred:
+          - US-WA  # Hydro power
+          - EU-NO  # Hydro power
+          - BR-RS  # Wind power
+        avoid:
+          - US-WV  # Coal heavy
+          - PL     # Coal heavy
+          
+      reporting:
+        mlflow_tracking: true
+        carbon_labels: true
+        esg_reports: quarterly
+        
+      monitoring:
+        metrics_enabled: true
+        dashboard_port: 8080
+        alert_webhooks: []
+        
+      security:
+        api_key_rotation_days: 90
+        encrypt_storage: true
+        audit_logging: true
+
+---
+# Secret for API keys
+apiVersion: v1
+kind: Secret
+metadata:
+  name: carbon-trainer-secrets
+  namespace: carbon-aware-training
+type: Opaque
+stringData:
+  ELECTRICITYMAP_API_KEY: ""  # Set via kubectl or CI/CD
+  WATTTIME_API_KEY: ""        # Set via kubectl or CI/CD
+  WEBHOOK_SECRET: ""          # For notifications
+
+---
+# Service Account with minimal permissions
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: carbon-trainer-sa
+  namespace: carbon-aware-training
+automountServiceAccountToken: true
+
+---
+# Role for carbon-trainer operations
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: carbon-aware-training
+  name: carbon-trainer-role
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services", "endpoints"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: [""]
+  resources: ["configmaps", "secrets"]
+  verbs: ["get", "list"]
+- apiGroups: ["apps"]
+  resources: ["deployments", "replicasets"]
+  verbs: ["get", "list", "watch", "patch"]
+- apiGroups: ["metrics.k8s.io"]
+  resources: ["pods", "nodes"]
+  verbs: ["get", "list"]
+
+---
+# RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: carbon-trainer-binding
+  namespace: carbon-aware-training
+subjects:
+- kind: ServiceAccount
+  name: carbon-trainer-sa
+  namespace: carbon-aware-training
+roleRef:
+  kind: Role
+  name: carbon-trainer-role
+  apiGroup: rbac.authorization.k8s.io
+
+---
+# PersistentVolumeClaim for data storage
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: carbon-trainer-data
+  namespace: carbon-aware-training
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: fast-ssd  # Adjust based on your cluster
+
+---
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: carbon-trainer
+  namespace: carbon-aware-training
+  labels:
+    app: carbon-trainer
+    version: v1
+    component: scheduler
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: carbon-trainer
+  template:
+    metadata:
+      labels:
+        app: carbon-trainer
+        version: v1
+        component: scheduler
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: carbon-trainer-sa
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        fsGroup: 1001
+      
+      containers:
+      - name: carbon-trainer
+        image: carbon-aware-trainer:latest
+        imagePullPolicy: IfNotPresent
+        
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        
+        env:
+        - name: CARBON_AWARE_ENVIRONMENT
+          value: "production"
+        - name: CARBON_AWARE_LOG_LEVEL
+          value: "info"
+        - name: CARBON_AWARE_CONFIG_PATH
+          value: "/app/config/config.yaml"
+        - name: CARBON_AWARE_DATA_DIR
+          value: "/app/data"
+        - name: ELECTRICITYMAP_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: carbon-trainer-secrets
+              key: ELECTRICITYMAP_API_KEY
+        - name: WATTTIME_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: carbon-trainer-secrets
+              key: WATTTIME_API_KEY
+        
+        volumeMounts:
+        - name: config-volume
+          mountPath: /app/config
+          readOnly: true
+        - name: data-volume
+          mountPath: /app/data
+        - name: tmp-volume
+          mountPath: /tmp
+        
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "2"
+        
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+        
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 5
+          failureThreshold: 3
+        
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          runAsUser: 1001
+      
+      volumes:
+      - name: config-volume
+        configMap:
+          name: carbon-trainer-config
+      - name: data-volume
+        persistentVolumeClaim:
+          claimName: carbon-trainer-data
+      - name: tmp-volume
+        emptyDir: {}
+      
+      # Node scheduling preferences (optional)
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            preference:
+              matchExpressions:
+              - key: node.kubernetes.io/instance-type
+                operator: In
+                values: ["c5.large", "c5.xlarge"]  # CPU optimized instances
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values: ["carbon-trainer"]
+              topologyKey: kubernetes.io/hostname
+      
+      tolerations:
+      - key: "carbon-aware.io/scheduler"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
+
+---
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: carbon-trainer-service
+  namespace: carbon-aware-training
+  labels:
+    app: carbon-trainer
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    app: carbon-trainer
+
+---
+# HorizontalPodAutoscaler
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: carbon-trainer-hpa
+  namespace: carbon-aware-training
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: carbon-trainer
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 60
+      policies:
+      - type: Percent
+        value: 100
+        periodSeconds: 15
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+      - type: Percent
+        value: 10
+        periodSeconds: 60
+
+---
+# PodDisruptionBudget
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: carbon-trainer-pdb
+  namespace: carbon-aware-training
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: carbon-trainer
+
+---
+# ServiceMonitor for Prometheus (if using Prometheus Operator)
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: carbon-trainer-metrics
+  namespace: carbon-aware-training
+  labels:
+    app: carbon-trainer
+spec:
+  selector:
+    matchLabels:
+      app: carbon-trainer
+  endpoints:
+  - port: http
+    path: /metrics
+    interval: 30s
+    scrapeTimeout: 10s
+
+---
+# NetworkPolicy for security
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: carbon-trainer-netpol
+  namespace: carbon-aware-training
+spec:
+  podSelector:
+    matchLabels:
+      app: carbon-trainer
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: monitoring  # Allow Prometheus
+    - namespaceSelector:
+        matchLabels:
+          name: ingress-nginx  # Allow ingress controller
+    ports:
+    - protocol: TCP
+      port: 8080
+  egress:
+  - {} # Allow all outbound (for API calls to carbon data providers)
+
+---
+# Optional: Ingress for external access
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: carbon-trainer-ingress
+  namespace: carbon-aware-training
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"  # If using cert-manager
+spec:
+  tls:
+  - hosts:
+    - carbon-trainer.yourdomain.com
+    secretName: carbon-trainer-tls
+  rules:
+  - host: carbon-trainer.yourdomain.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: carbon-trainer-service
+            port:
+              number: 8080
