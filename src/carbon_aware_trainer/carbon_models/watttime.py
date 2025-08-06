@@ -3,7 +3,12 @@
 import os
 from datetime import datetime, timedelta
 from typing import List, Optional, Dict
-import aiohttp
+try:
+    import aiohttp
+    HAS_AIOHTTP = True
+except ImportError:
+    HAS_AIOHTTP = False
+    aiohttp = None
 from .base import CarbonDataProvider
 from ..core.types import CarbonIntensity, CarbonForecast, EnergyMix, CarbonIntensityUnit
 

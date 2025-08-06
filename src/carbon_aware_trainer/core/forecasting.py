@@ -4,7 +4,24 @@ import asyncio
 from datetime import datetime, timedelta
 from typing import List, Optional, Dict, Tuple
 import logging
-import numpy as np
+try:
+    import numpy as np
+    HAS_NUMPY = True
+except ImportError:
+    HAS_NUMPY = False
+    # Fallback for basic numpy functions
+    class np:
+        @staticmethod
+        def sin(x):
+            import math
+            return math.sin(x)
+        
+        @staticmethod
+        def var(x):
+            if not x:
+                return 0.0
+            mean = sum(x) / len(x)
+            return sum((val - mean) ** 2 for val in x) / len(x)
 from dataclasses import dataclass
 
 from ..core.types import CarbonIntensity, CarbonForecast, OptimalWindow

@@ -4,7 +4,24 @@ import json
 from datetime import datetime, timedelta
 from typing import Dict, Any, Optional, List, Tuple
 import logging
-import numpy as np
+try:
+    import numpy as np
+    HAS_NUMPY = True
+except ImportError:
+    HAS_NUMPY = False
+    # Fallback for basic numpy functions
+    class np:
+        @staticmethod
+        def mean(x):
+            return sum(x) / len(x) if x else 0.0
+        
+        @staticmethod
+        def std(x):
+            if not x or len(x) < 2:
+                return 0.0
+            mean_val = sum(x) / len(x)
+            variance = sum((val - mean_val) ** 2 for val in x) / len(x)
+            return variance ** 0.5
 from pathlib import Path
 
 from ..core.types import TrainingState, CarbonIntensity, OptimalWindow

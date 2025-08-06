@@ -4,7 +4,12 @@ from abc import ABC, abstractmethod
 from datetime import datetime, timedelta
 from typing import List, Optional, Dict, Any
 import asyncio
-import aiohttp
+try:
+    import aiohttp
+    HAS_AIOHTTP = True
+except ImportError:
+    HAS_AIOHTTP = False
+    aiohttp = None
 from ..core.types import CarbonIntensity, CarbonForecast, EnergyMix
 
 
@@ -21,11 +26,12 @@ class CarbonDataProvider(ABC):
         self.api_key = api_key
         self.cache_duration = cache_duration
         self._cache: Dict[str, Any] = {}
-        self._session: Optional[aiohttp.ClientSession] = None
+        self._session = None
     
     async def __aenter__(self):
         """Async context manager entry."""
-        self._session = aiohttp.ClientSession()
+        if HAS_AIOHTTP:
+            self._session = aiohttp.ClientSession()
         return self
     
     async def __aexit__(self, exc_type, exc_val, exc_tb):

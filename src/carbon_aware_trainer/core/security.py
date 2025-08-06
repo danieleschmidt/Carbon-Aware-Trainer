@@ -8,6 +8,14 @@ from typing import Any, Dict, List, Optional, Union
 from pathlib import Path
 import logging
 
+# Optional dependency handling
+try:
+    import yaml
+    HAS_YAML = True
+except ImportError:
+    yaml = None
+    HAS_YAML = False
+
 logger = logging.getLogger(__name__)
 
 
@@ -277,11 +285,287 @@ class SecurityValidator:
         return sanitized
 
 
+class APIKeyManager:
+    """Secure API key management with encryption and rotation."""
+    
+    def __init__(self, encryption_key: Optional[str] = None):
+        """Initialize API key manager.
+        
+        Args:
+            encryption_key: Optional encryption key for storing API keys
+        """
+        self.validator = SecurityValidator()
+        self._encryption_key = encryption_key or self._generate_encryption_key()
+        self._api_keys: Dict[str, Dict[str, Any]] = {}
+        self._key_metadata: Dict[str, Dict[str, Any]] = {}
+        
+        # Load API keys from environment and secure storage
+        self._load_api_keys_from_environment()
+    
+    def _generate_encryption_key(self) -> str:
+        """Generate encryption key for API key storage.
+        
+        Returns:
+            Base64 encoded encryption key
+        """
+        try:
+            from cryptography.fernet import Fernet
+            return Fernet.generate_key().decode()
+        except ImportError:
+            logger.warning("Cryptography not available, using basic encoding")
+            return secrets.token_urlsafe(32)
+    
+    def _encrypt_api_key(self, api_key: str) -> str:
+        """Encrypt API key for secure storage.
+        
+        Args:
+            api_key: API key to encrypt
+            
+        Returns:
+            Encrypted API key
+        """
+        try:
+            from cryptography.fernet import Fernet
+            f = Fernet(self._encryption_key.encode())
+            return f.encrypt(api_key.encode()).decode()
+        except ImportError:
+            # Fallback to base64 encoding (not secure, but better than plain text)
+            import base64
+            return base64.b64encode(api_key.encode()).decode()
+    
+    def _decrypt_api_key(self, encrypted_key: str) -> str:
+        """Decrypt API key from secure storage.
+        
+        Args:
+            encrypted_key: Encrypted API key
+            
+        Returns:
+            Decrypted API key
+        """
+        try:
+            from cryptography.fernet import Fernet
+            f = Fernet(self._encryption_key.encode())
+            return f.decrypt(encrypted_key.encode()).decode()
+        except ImportError:
+            import base64
+            return base64.b64decode(encrypted_key.encode()).decode()
+    
+    def store_api_key(
+        self, 
+        provider: str, 
+        api_key: str, 
+        metadata: Optional[Dict[str, Any]] = None
+    ) -> bool:
+        """Store API key securely.
+        
+        Args:
+            provider: API provider name
+            api_key: API key to store
+            metadata: Optional metadata (creation date, etc.)
+            
+        Returns:
+            True if stored successfully
+        """
+        try:
+            # Validate API key
+            if not self.validator.validate_api_key(api_key):
+                raise ValueError(f"Invalid API key format for {provider}")
+            
+            # Encrypt and store
+            encrypted_key = self._encrypt_api_key(api_key)
+            
+            self._api_keys[provider] = {
+                'encrypted_key': encrypted_key,
+                'created_at': datetime.now().isoformat(),
+                'last_used': None,
+                'usage_count': 0
+            }
+            
+            # Store metadata
+            self._key_metadata[provider] = metadata or {}
+            
+            logger.info(f"API key stored for provider: {provider}")
+            return True
+            
+        except Exception as e:
+            logger.error(f"Failed to store API key for {provider}: {e}")
+            return False
+    
+    def get_api_key(self, provider: str) -> Optional[str]:
+        """Retrieve API key for provider.
+        
+        Args:
+            provider: API provider name
+            
+        Returns:
+            Decrypted API key or None if not found
+        """
+        try:
+            if provider not in self._api_keys:
+                return None
+            
+            key_data = self._api_keys[provider]
+            decrypted_key = self._decrypt_api_key(key_data['encrypted_key'])
+            
+            # Update usage statistics
+            key_data['last_used'] = datetime.now().isoformat()
+            key_data['usage_count'] += 1
+            
+            return decrypted_key
+            
+        except Exception as e:
+            logger.error(f"Failed to retrieve API key for {provider}: {e}")
+            return None
+    
+    def remove_api_key(self, provider: str) -> bool:
+        """Remove API key for provider.
+        
+        Args:
+            provider: API provider name
+            
+        Returns:
+            True if removed successfully
+        """
+        try:
+            if provider in self._api_keys:
+                del self._api_keys[provider]
+            
+            if provider in self._key_metadata:
+                del self._key_metadata[provider]
+            
+            logger.info(f"API key removed for provider: {provider}")
+            return True
+            
+        except Exception as e:
+            logger.error(f"Failed to remove API key for {provider}: {e}")
+            return False
+    
+    def list_providers(self) -> List[str]:
+        """List available API key providers.
+        
+        Returns:
+            List of provider names
+        """
+        return list(self._api_keys.keys())
+    
+    def get_key_metadata(self, provider: str) -> Optional[Dict[str, Any]]:
+        """Get metadata for API key.
+        
+        Args:
+            provider: API provider name
+            
+        Returns:
+            Key metadata or None if not found
+        """
+        key_data = self._api_keys.get(provider, {})
+        metadata = self._key_metadata.get(provider, {})
+        
+        if not key_data:
+            return None
+        
+        return {
+            'provider': provider,
+            'created_at': key_data.get('created_at'),
+            'last_used': key_data.get('last_used'),
+            'usage_count': key_data.get('usage_count', 0),
+            'metadata': metadata
+        }
+    
+    def check_key_expiration(self, provider: str, max_age_days: int = 90) -> bool:
+        """Check if API key needs rotation.
+        
+        Args:
+            provider: API provider name
+            max_age_days: Maximum key age in days
+            
+        Returns:
+            True if key needs rotation
+        """
+        key_data = self._api_keys.get(provider)
+        if not key_data or not key_data.get('created_at'):
+            return True
+        
+        try:
+            created_at = datetime.fromisoformat(key_data['created_at'])
+            age = datetime.now() - created_at
+            return age.days > max_age_days
+        except Exception:
+            return True
+    
+    def _load_api_keys_from_environment(self) -> None:
+        """Load API keys from environment variables."""
+        env_key_mappings = {
+            'ELECTRICITYMAP_API_KEY': 'electricitymap',
+            'WATTTIME_API_KEY': 'watttime',
+            'CARBON_AWARE_API_KEY': 'custom'
+        }
+        
+        for env_var, provider in env_key_mappings.items():
+            api_key = os.getenv(env_var)
+            if api_key:
+                self.store_api_key(provider, api_key, {
+                    'source': 'environment',
+                    'env_var': env_var
+                })
+                logger.info(f"Loaded API key for {provider} from environment")
+    
+    def validate_all_keys(self) -> Dict[str, bool]:
+        """Validate all stored API keys.
+        
+        Returns:
+            Dictionary mapping provider to validation status
+        """
+        results = {}
+        
+        for provider in self.list_providers():
+            api_key = self.get_api_key(provider)
+            if api_key:
+                results[provider] = self.validator.validate_api_key(api_key)
+            else:
+                results[provider] = False
+        
+        return results
+    
+    def get_key_status_summary(self) -> Dict[str, Any]:
+        """Get summary of all API key statuses.
+        
+        Returns:
+            Summary of key statuses
+        """
+        providers = self.list_providers()
+        validation_results = self.validate_all_keys()
+        
+        summary = {
+            'total_keys': len(providers),
+            'valid_keys': sum(validation_results.values()),
+            'invalid_keys': len(providers) - sum(validation_results.values()),
+            'providers': {},
+            'expiration_warnings': []
+        }
+        
+        for provider in providers:
+            metadata = self.get_key_metadata(provider)
+            needs_rotation = self.check_key_expiration(provider)
+            
+            summary['providers'][provider] = {
+                'valid': validation_results.get(provider, False),
+                'needs_rotation': needs_rotation,
+                'last_used': metadata.get('last_used') if metadata else None,
+                'usage_count': metadata.get('usage_count', 0) if metadata else 0
+            }
+            
+            if needs_rotation:
+                summary['expiration_warnings'].append(provider)
+        
+        return summary
+
+
 class SecureConfigManager:
-    """Secure configuration management."""
+    """Secure configuration management with encryption support."""
     
     def __init__(self):
         self.validator = SecurityValidator()
+        self.api_key_manager = APIKeyManager()
     
     def load_config(self, config_path: Union[str, Path]) -> Optional[Dict[str, Any]]:
         """Securely load configuration file.
@@ -317,7 +601,9 @@ class SecureConfigManager:
                 import json
                 config = json.loads(sanitized_content)
             elif path.suffix.lower() in ['.yml', '.yaml']:
-                import yaml
+                if not HAS_YAML:
+                    logger.error(f"YAML support not available (install PyYAML), cannot load {path.suffix} file")
+                    return None
                 config = yaml.safe_load(sanitized_content)
             else:
                 logger.error(f"Unsupported config file format: {path.suffix}")
@@ -369,12 +655,18 @@ class SecureConfigManager:
         
         return errors
     
-    def save_config(self, config: Dict[str, Any], config_path: Union[str, Path]) -> bool:
-        """Securely save configuration file.
+    def save_config(
+        self, 
+        config: Dict[str, Any], 
+        config_path: Union[str, Path],
+        encrypt_sensitive: bool = True
+    ) -> bool:
+        """Securely save configuration file with optional encryption.
         
         Args:
             config: Configuration to save
             config_path: Path to save configuration
+            encrypt_sensitive: Whether to encrypt sensitive fields
             
         Returns:
             True if saved successfully
@@ -391,13 +683,25 @@ class SecureConfigManager:
             # Create directory if needed
             path.parent.mkdir(parents=True, exist_ok=True)
             
+            # Prepare config for saving
+            config_to_save = config.copy()
+            
+            # Handle sensitive fields
+            if encrypt_sensitive:
+                config_to_save = self._encrypt_sensitive_config_fields(config_to_save)
+            else:
+                # Remove sensitive fields for plain text storage
+                config_to_save = self._remove_sensitive_config_fields(config_to_save)
+            
             # Write with secure permissions
             if path.suffix.lower() == '.json':
                 import json
-                content = json.dumps(config, indent=2)
+                content = json.dumps(config_to_save, indent=2)
             elif path.suffix.lower() in ['.yml', '.yaml']:
-                import yaml
-                content = yaml.dump(config, default_flow_style=False)
+                if not HAS_YAML:
+                    logger.error(f"YAML support not available (install PyYAML), cannot save {path.suffix} file")
+                    return False
+                content = yaml.dump(config_to_save, default_flow_style=False)
             else:
                 logger.error(f"Unsupported config file format: {path.suffix}")
                 return False
@@ -415,3 +719,68 @@ class SecureConfigManager:
         except Exception as e:
             logger.error(f"Failed to save config to {config_path}: {e}")
             return False
+    
+    def _encrypt_sensitive_config_fields(self, config: Dict[str, Any]) -> Dict[str, Any]:
+        """Encrypt sensitive configuration fields.
+        
+        Args:
+            config: Configuration dictionary
+            
+        Returns:
+            Configuration with encrypted sensitive fields
+        """
+        try:
+            from cryptography.fernet import Fernet
+            
+            # Generate or get encryption key
+            key = Fernet.generate_key()
+            f = Fernet(key)
+            
+            encrypted_config = config.copy()
+            
+            # Encrypt API keys
+            if 'api_keys' in encrypted_config:
+                api_keys = encrypted_config['api_keys']
+                encrypted_api_keys = {}
+                
+                for provider, api_key in api_keys.items():
+                    if isinstance(api_key, str) and api_key:
+                        encrypted_api_keys[provider] = f.encrypt(api_key.encode()).decode()
+                    else:
+                        encrypted_api_keys[provider] = api_key
+                
+                encrypted_config['api_keys'] = encrypted_api_keys
+                encrypted_config['_encryption_key'] = key.decode()
+                encrypted_config['_encrypted_fields'] = ['api_keys']
+            
+            return encrypted_config
+            
+        except ImportError:
+            logger.warning("Cryptography not available, cannot encrypt sensitive fields")
+            return self._remove_sensitive_config_fields(config)
+    
+    def _remove_sensitive_config_fields(self, config: Dict[str, Any]) -> Dict[str, Any]:
+        """Remove sensitive fields from configuration.
+        
+        Args:
+            config: Configuration dictionary
+            
+        Returns:
+            Configuration with sensitive fields removed
+        """
+        safe_config = config.copy()
+        
+        # Remove API keys
+        if 'api_keys' in safe_config:
+            safe_config['api_keys'] = {
+                provider: '[REMOVED_FOR_SECURITY]' 
+                for provider in safe_config['api_keys']
+            }
+        
+        # Remove other sensitive fields
+        sensitive_fields = ['password', 'secret', 'token', 'credential']
+        for field in sensitive_fields:
+            if field in safe_config:
+                safe_config[field] = '[REMOVED_FOR_SECURITY]'
+        
+        return safe_config
