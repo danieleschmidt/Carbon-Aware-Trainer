@@ -5,7 +5,12 @@ import csv
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import List, Optional, Dict, Union
-import pandas as pd
+try:
+    import pandas as pd
+    HAS_PANDAS = True
+except ImportError:
+    HAS_PANDAS = False
+    pd = None
 from .base import CarbonDataProvider
 from ..core.types import CarbonIntensity, CarbonForecast, EnergyMix, CarbonIntensityUnit
 
@@ -51,6 +56,8 @@ class CachedProvider(CarbonDataProvider):
     
     def _load_csv_data(self, file_path: Path) -> Dict:
         """Load carbon data from CSV file."""
+        if not HAS_PANDAS:
+            raise ImportError("pandas required for CSV loading. pip install pandas")
         df = pd.read_csv(file_path)
         
         # Expected columns: region, timestamp, carbon_intensity
@@ -76,6 +83,8 @@ class CachedProvider(CarbonDataProvider):
     
     def _load_parquet_data(self, file_path: Path) -> Dict:
         """Load carbon data from Parquet file."""
+        if not HAS_PANDAS:
+            raise ImportError("pandas required for Parquet loading. pip install pandas")
         df = pd.read_parquet(file_path)
         
         required_cols = ["region", "timestamp", "carbon_intensity"]

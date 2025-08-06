@@ -1,7 +1,12 @@
 """Health monitoring and system checks for carbon-aware trainer."""
 
 import asyncio
-import psutil
+try:
+    import psutil
+    HAS_PSUTIL = True
+except ImportError:
+    HAS_PSUTIL = False
+    psutil = None
 import logging
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional, Any, Callable

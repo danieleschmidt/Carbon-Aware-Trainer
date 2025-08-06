@@ -45,6 +45,7 @@ class CarbonAwareTrainer:
         self.optimizer = optimizer
         self.region = region
         self.api_key = api_key
+        self._carbon_model_str = carbon_model
         
         # Training configuration
         if config:
@@ -98,8 +99,13 @@ class CarbonAwareTrainer:
             'cached': CarbonDataSource.CACHED
         }
         
+        # Fix: Use self.carbon_model if it exists, otherwise fall back to 'electricitymap'
+        carbon_model_str = getattr(self, 'carbon_model', 'electricitymap')
+        if hasattr(self, '_carbon_model_str'):
+            carbon_model_str = self._carbon_model_str
+        
         data_source = data_source_map.get(
-            getattr(self, 'carbon_model', 'electricitymap').lower(),
+            carbon_model_str.lower(),
             CarbonDataSource.ELECTRICITYMAP
         )
         

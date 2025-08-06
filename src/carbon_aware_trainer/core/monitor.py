@@ -8,10 +8,10 @@ from ..core.types import (
     CarbonIntensity, CarbonForecast, OptimalWindow, 
     TrainingMetrics, CarbonDataSource
 )
-from ..carbon_models import (
-    CarbonDataProvider, ElectricityMapProvider, 
-    WattTimeProvider, CachedProvider
-)
+from ..carbon_models.base import CarbonDataProvider
+from ..carbon_models.electricitymap import ElectricityMapProvider
+from ..carbon_models.watttime import WattTimeProvider  
+from ..carbon_models.cached import CachedProvider
 
 
 logger = logging.getLogger(__name__)

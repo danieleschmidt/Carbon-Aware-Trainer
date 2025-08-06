@@ -263,7 +263,7 @@ class AsyncBatchProcessor:
             raise
 
 
-class ParallelCarbon Forecaster:
+class ParallelCarbonForecaster:
     """Parallel carbon intensity forecasting for multiple regions."""
     
     def __init__(self, max_workers: int = None):

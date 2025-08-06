@@ -3,8 +3,21 @@
 from datetime import datetime, timedelta
 from enum import Enum
 from typing import Dict, List, Optional, Union
-from dataclasses import dataclass
-from pydantic import BaseModel, Field
+from dataclasses import dataclass, field
+
+try:
+    from pydantic import BaseModel, Field
+    HAS_PYDANTIC = True
+except ImportError:
+    HAS_PYDANTIC = False
+    # Fallback BaseModel for when pydantic is not available
+    class BaseModel:
+        def __init__(self, **kwargs):
+            for key, value in kwargs.items():
+                setattr(self, key, value)
+    
+    def Field(default=None, **kwargs):
+        return default
 
 
 class CarbonIntensityUnit(str, Enum):
@@ -61,7 +74,8 @@ class EnergyMix:
     other: float = 0.0
 
 
-class CarbonForecast(BaseModel):
+@dataclass
+class CarbonForecast:
     """Carbon intensity forecast for a region."""
     region: str
     forecast_start: datetime
@@ -71,7 +85,8 @@ class CarbonForecast(BaseModel):
     model_name: Optional[str] = None
 
 
-class TrainingMetrics(BaseModel):
+@dataclass
+class TrainingMetrics:
     """Metrics for a carbon-aware training session."""
     session_id: str
     start_time: datetime
@@ -81,13 +96,14 @@ class TrainingMetrics(BaseModel):
     avg_carbon_intensity: float = 0.0
     peak_carbon_intensity: float = 0.0
     min_carbon_intensity: float = float('inf')
-    paused_duration: timedelta = timedelta(0)
+    paused_duration: timedelta = field(default_factory=lambda: timedelta(0))
     migrations: int = 0
     training_efficiency: Optional[float] = None
     carbon_saved_kg: float = 0.0
 
 
-class OptimalWindow(BaseModel):
+@dataclass
+class OptimalWindow:
     """Optimal training window based on carbon forecast."""
     start_time: datetime
     end_time: datetime
@@ -98,21 +114,23 @@ class OptimalWindow(BaseModel):
     region: str
 
 
-class TrainingConfig(BaseModel):
+@dataclass
+class TrainingConfig:
     """Configuration for carbon-aware training."""
-    carbon_threshold: float = Field(100.0, description="Max carbon intensity (gCO2/kWh)")
-    pause_threshold: float = Field(150.0, description="Carbon intensity to pause training")
-    resume_threshold: float = Field(80.0, description="Carbon intensity to resume training")
-    check_interval: int = Field(300, description="Check interval in seconds")
-    max_pause_duration: timedelta = Field(timedelta(hours=6), description="Max pause time")
-    migration_enabled: bool = Field(False, description="Enable cross-region migration")
-    preferred_regions: List[str] = Field(default_factory=list)
-    excluded_regions: List[str] = Field(default_factory=list)
+    carbon_threshold: float = 100.0  # Max carbon intensity (gCO2/kWh)
+    pause_threshold: float = 150.0   # Carbon intensity to pause training
+    resume_threshold: float = 80.0   # Carbon intensity to resume training
+    check_interval: int = 300        # Check interval in seconds
+    max_pause_duration: timedelta = field(default_factory=lambda: timedelta(hours=6))  # Max pause time
+    migration_enabled: bool = False  # Enable cross-region migration
+    preferred_regions: List[str] = field(default_factory=list)
+    excluded_regions: List[str] = field(default_factory=list)
     carbon_data_source: CarbonDataSource = CarbonDataSource.ELECTRICITYMAP
-    forecast_horizon: timedelta = Field(timedelta(hours=24), description="Forecast window")
+    forecast_horizon: timedelta = field(default_factory=lambda: timedelta(hours=24))  # Forecast window
 
 
-class RegionInfo(BaseModel):
+@dataclass  
+class RegionInfo:
     """Information about a compute region."""
     region_code: str
     display_name: str

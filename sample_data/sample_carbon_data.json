@@ -1,0 +1,88 @@
+{
+  "regions": {
+    "US-CA": {
+      "historical": [
+        {
+          "timestamp": "2025-01-05T08:00:00",
+          "carbon_intensity": 120.5,
+          "renewable_percentage": 65.2,
+          "confidence": 0.9
+        },
+        {
+          "timestamp": "2025-01-05T09:00:00",
+          "carbon_intensity": 135.2,
+          "renewable_percentage": 58.1,
+          "confidence": 0.85
+        },
+        {
+          "timestamp": "2025-01-05T10:00:00",
+          "carbon_intensity": 142.8,
+          "renewable_percentage": 55.3,
+          "confidence": 0.88
+        }
+      ],
+      "forecast": [
+        {
+          "timestamp": "2025-01-06T08:00:00",
+          "carbon_intensity": 95.3,
+          "renewable_percentage": 72.1,
+          "confidence": 0.8
+        },
+        {
+          "timestamp": "2025-01-06T09:00:00",
+          "carbon_intensity": 88.7,
+          "renewable_percentage": 75.4,
+          "confidence": 0.82
+        },
+        {
+          "timestamp": "2025-01-06T10:00:00",
+          "carbon_intensity": 112.1,
+          "renewable_percentage": 68.2,
+          "confidence": 0.79
+        }
+      ]
+    },
+    "US-WA": {
+      "historical": [
+        {
+          "timestamp": "2025-01-05T08:00:00",
+          "carbon_intensity": 45.2,
+          "renewable_percentage": 95.1,
+          "confidence": 0.92
+        },
+        {
+          "timestamp": "2025-01-05T09:00:00",
+          "carbon_intensity": 38.7,
+          "renewable_percentage": 97.2,
+          "confidence": 0.94
+        },
+        {
+          "timestamp": "2025-01-05T10:00:00",
+          "carbon_intensity": 41.3,
+          "renewable_percentage": 96.8,
+          "confidence": 0.91
+        }
+      ],
+      "forecast": [
+        {
+          "timestamp": "2025-01-06T08:00:00",
+          "carbon_intensity": 42.1,
+          "renewable_percentage": 96.5,
+          "confidence": 0.89
+        },
+        {
+          "timestamp": "2025-01-06T09:00:00",
+          "carbon_intensity": 39.8,
+          "renewable_percentage": 97.1,
+          "confidence": 0.87
+        },
+        {
+          "timestamp": "2025-01-06T10:00:00",
+          "carbon_intensity": 44.6,
+          "renewable_percentage": 95.9,
+          "confidence": 0.88
+        }
+      ]
+    }
+  }
+}

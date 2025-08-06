@@ -5,7 +5,7 @@ import random
 import time
 import logging
 from datetime import datetime, timedelta
-from typing import Any, Callable, Optional, Type, Union, List
+from typing import Any, Callable, Optional, Type, Union, List, Dict
 from dataclasses import dataclass
 from enum import Enum
 import functools
@@ -412,19 +412,28 @@ def with_circuit_breaker(
 
 # Rate limiting handler
 class RateLimiter:
-    """Token bucket rate limiter."""
+    """Token bucket rate limiter with burst capacity and adaptive rates."""
     
-    def __init__(self, rate: float, burst: int = 1):
+    def __init__(self, rate: float, burst: int = 1, adaptive: bool = True):
         """Initialize rate limiter.
         
         Args:
             rate: Requests per second
             burst: Burst capacity
+            adaptive: Enable adaptive rate adjustment
         """
+        self.base_rate = rate
         self.rate = rate
         self.burst = burst
         self.tokens = burst
         self.last_update = time.time()
+        self.adaptive = adaptive
+        
+        # Adaptive rate adjustment
+        self._success_count = 0
+        self._error_count = 0
+        self._last_adjustment = time.time()
+        self._adjustment_interval = 60  # seconds
     
     async def acquire(self) -> None:
         """Acquire permission to make request.
@@ -432,6 +441,8 @@ class RateLimiter:
         Raises:
             CarbonProviderRateLimitError: If rate limit exceeded
         """
+        await self._adjust_rate_if_needed()
+        
         now = time.time()
         
         # Add tokens based on elapsed time
@@ -444,7 +455,182 @@ class RateLimiter:
         else:
             # Calculate wait time
             wait_time = (1 - self.tokens) / self.rate
+            self._error_count += 1
+            logger.warning(f"Rate limit hit, waiting {wait_time:.2f}s")
             raise CarbonProviderRateLimitError(
                 provider="rate_limiter",
                 retry_after=int(wait_time) + 1
             )
+    
+    def record_success(self) -> None:
+        """Record successful request for adaptive rate adjustment."""
+        self._success_count += 1
+    
+    def record_error(self) -> None:
+        """Record error for adaptive rate adjustment."""
+        self._error_count += 1
+    
+    async def _adjust_rate_if_needed(self) -> None:
+        """Adjust rate based on recent success/error rates."""
+        if not self.adaptive:
+            return
+        
+        now = time.time()
+        if now - self._last_adjustment < self._adjustment_interval:
+            return
+        
+        total_requests = self._success_count + self._error_count
+        if total_requests < 10:  # Need minimum samples
+            return
+        
+        error_rate = self._error_count / total_requests
+        
+        # Adjust rate based on error rate
+        if error_rate > 0.1:  # >10% errors, reduce rate
+            self.rate = max(self.base_rate * 0.5, self.rate * 0.8)
+            logger.info(f"Reducing request rate to {self.rate:.2f} req/s due to high error rate")
+        elif error_rate < 0.05:  # <5% errors, can increase rate
+            self.rate = min(self.base_rate * 2, self.rate * 1.1)
+            logger.debug(f"Increasing request rate to {self.rate:.2f} req/s")
+        
+        # Reset counters
+        self._success_count = 0
+        self._error_count = 0
+        self._last_adjustment = now
+    
+    def get_status(self) -> Dict[str, Any]:
+        """Get current rate limiter status."""
+        return {
+            'current_rate': self.rate,
+            'base_rate': self.base_rate,
+            'burst_capacity': self.burst,
+            'available_tokens': self.tokens,
+            'success_count': self._success_count,
+            'error_count': self._error_count,
+            'adaptive_enabled': self.adaptive
+        }
+
+
+class BulkheadIsolation:
+    """Bulkhead pattern for isolating different types of requests."""
+    
+    def __init__(self, max_concurrent: Dict[str, int]):
+        """Initialize bulkhead isolation.
+        
+        Args:
+            max_concurrent: Max concurrent requests per category
+        """
+        self.max_concurrent = max_concurrent
+        self.semaphores = {
+            category: asyncio.Semaphore(max_count)
+            for category, max_count in max_concurrent.items()
+        }
+        self.active_requests = {category: 0 for category in max_concurrent}
+    
+    async def acquire(self, category: str) -> None:
+        """Acquire bulkhead slot for category.
+        
+        Args:
+            category: Request category
+            
+        Raises:
+            ValueError: If category not configured
+        """
+        if category not in self.semaphores:
+            raise ValueError(f"Unknown category: {category}")
+        
+        await self.semaphores[category].acquire()
+        self.active_requests[category] += 1
+    
+    def release(self, category: str) -> None:
+        """Release bulkhead slot for category.
+        
+        Args:
+            category: Request category
+        """
+        if category in self.semaphores:
+            self.semaphores[category].release()
+            self.active_requests[category] = max(0, self.active_requests[category] - 1)
+    
+    def get_status(self) -> Dict[str, Any]:
+        """Get bulkhead status.
+        
+        Returns:
+            Status information for all categories
+        """
+        return {
+            category: {
+                'max_concurrent': self.max_concurrent[category],
+                'active_requests': self.active_requests[category],
+                'available_slots': self.max_concurrent[category] - self.active_requests[category]
+            }
+            for category in self.max_concurrent
+        }
+
+
+class TimeoutManager:
+    """Manages different types of timeouts with escalation."""
+    
+    def __init__(self, timeouts: Dict[str, float]):
+        """Initialize timeout manager.
+        
+        Args:
+            timeouts: Timeout values for different operations
+        """
+        self.timeouts = timeouts
+        self._timeout_history: Dict[str, List[float]] = {}
+    
+    def get_timeout(self, operation: str, attempt: int = 0) -> float:
+        """Get timeout for operation with escalation.
+        
+        Args:
+            operation: Operation name
+            attempt: Current attempt number (for escalation)
+            
+        Returns:
+            Timeout value in seconds
+        """
+        base_timeout = self.timeouts.get(operation, 30.0)
+        
+        # Escalate timeout on retries
+        escalated_timeout = base_timeout * (1.5 ** attempt)
+        
+        # Cap at reasonable maximum
+        return min(escalated_timeout, base_timeout * 5)
+    
+    def record_timeout(self, operation: str, actual_time: float) -> None:
+        """Record actual operation time for analysis.
+        
+        Args:
+            operation: Operation name
+            actual_time: Actual time taken
+        """
+        if operation not in self._timeout_history:
+            self._timeout_history[operation] = []
+        
+        # Keep last 100 measurements
+        history = self._timeout_history[operation]
+        history.append(actual_time)
+        if len(history) > 100:
+            history.pop(0)
+    
+    def get_recommended_timeout(self, operation: str) -> float:
+        """Get recommended timeout based on historical data.
+        
+        Args:
+            operation: Operation name
+            
+        Returns:
+            Recommended timeout value
+        """
+        history = self._timeout_history.get(operation, [])
+        if not history:
+            return self.timeouts.get(operation, 30.0)
+        
+        # Use 95th percentile of historical times
+        sorted_times = sorted(history)
+        p95_index = int(len(sorted_times) * 0.95)
+        p95_time = sorted_times[p95_index]
+        
+        # Add buffer
+        return p95_time * 1.5
