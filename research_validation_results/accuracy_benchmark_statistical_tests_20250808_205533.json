@@ -1,0 +1,62 @@
+{
+  "baseline_naive_vs_baseline_moving_average": {
+    "effect_size": 0.2747098151779346,
+    "p_value": 0.01,
+    "mae_difference": 12.10137736871425
+  },
+  "baseline_naive_vs_baseline_linear_trend": {
+    "effect_size": 0.5868379309144338,
+    "p_value": 0.01,
+    "mae_difference": -62.56887710394624
+  },
+  "baseline_naive_vs_baseline_seasonal_naive": {
+    "effect_size": 0.28358207932490964,
+    "p_value": 0.01,
+    "mae_difference": 12.492213846427706
+  },
+  "baseline_moving_average_vs_baseline_naive": {
+    "effect_size": 0.2747098151779346,
+    "p_value": 0.01,
+    "mae_difference": -12.10137736871425
+  },
+  "baseline_moving_average_vs_baseline_linear_trend": {
+    "effect_size": 0.7003376065514627,
+    "p_value": 0.01,
+    "mae_difference": -74.67025447266049
+  },
+  "baseline_moving_average_vs_baseline_seasonal_naive": {
+    "effect_size": 0.01223270951771071,
+    "p_value": 0.5,
+    "mae_difference": 0.39083647771345653
+  },
+  "baseline_linear_trend_vs_baseline_naive": {
+    "effect_size": 0.5868379309144338,
+    "p_value": 0.01,
+    "mae_difference": 62.56887710394624
+  },
+  "baseline_linear_trend_vs_baseline_moving_average": {
+    "effect_size": 0.7003376065514627,
+    "p_value": 0.01,
+    "mae_difference": 74.67025447266049
+  },
+  "baseline_linear_trend_vs_baseline_seasonal_naive": {
+    "effect_size": 0.7040032895639007,
+    "p_value": 0.01,
+    "mae_difference": 75.06109095037395
+  },
+  "baseline_seasonal_naive_vs_baseline_naive": {
+    "effect_size": 0.28358207932490964,
+    "p_value": 0.01,
+    "mae_difference": -12.492213846427706
+  },
+  "baseline_seasonal_naive_vs_baseline_moving_average": {
+    "effect_size": 0.01223270951771071,
+    "p_value": 0.5,
+    "mae_difference": -0.39083647771345653
+  },
+  "baseline_seasonal_naive_vs_baseline_linear_trend": {
+    "effect_size": 0.7040032895639007,
+    "p_value": 0.01,
+    "mae_difference": -75.06109095037395
+  }
+}

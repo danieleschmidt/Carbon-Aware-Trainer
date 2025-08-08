@@ -1,0 +1,288 @@
+{
+  "transformer": {},
+  "ensemble": {},
+  "baseline_naive": {
+    "12h": {
+      "mae": 40.47567826109289,
+      "rmse": 47.12903368033272,
+      "mape": 0.279369499311629,
+      "r2": -1.471189431825714,
+      "mean_interval_score": 0.0,
+      "coverage_probability": 0.0,
+      "sharpness": 0.0,
+      "training_time_seconds": 0.0,
+      "prediction_time_ms": 0.0,
+      "memory_usage_mb": 0.0,
+      "carbon_savings_kg": 16.589440406550835,
+      "renewable_utilization_improvement": 0.0,
+      "schedule_efficiency": 1.0,
+      "p_value": 1.0,
+      "confidence_interval_95": [
+        0.0,
+        0.0
+      ],
+      "effect_size": 0.0,
+      "cross_region_accuracy_drop": 0.0,
+      "adaptation_time_hours": 0.0
+    },
+    "24h": {
+      "mae": 44.05149252084774,
+      "rmse": 52.44464798796191,
+      "mape": 0.2788696419431798,
+      "r2": -1.1276864086210472,
+      "mean_interval_score": 0.0,
+      "coverage_probability": 0.0,
+      "sharpness": 0.0,
+      "training_time_seconds": 0.0,
+      "prediction_time_ms": 0.0,
+      "memory_usage_mb": 0.0,
+      "carbon_savings_kg": 59.903374797676975,
+      "renewable_utilization_improvement": 0.0,
+      "schedule_efficiency": 1.0,
+      "p_value": 1.0,
+      "confidence_interval_95": [
+        0.0,
+        0.0
+      ],
+      "effect_size": 0.0,
+      "cross_region_accuracy_drop": 0.0,
+      "adaptation_time_hours": 0.0
+    },
+    "48h": {
+      "mae": 44.263526377324595,
+      "rmse": 52.74207442044549,
+      "mape": 0.3117237645651016,
+      "r2": -1.0556892519745444,
+      "mean_interval_score": 0.0,
+      "coverage_probability": 0.0,
+      "sharpness": 0.0,
+      "training_time_seconds": 0.0,
+      "prediction_time_ms": 0.0,
+      "memory_usage_mb": 0.0,
+      "carbon_savings_kg": 55.56732910920457,
+      "renewable_utilization_improvement": 0.0,
+      "schedule_efficiency": 1.0,
+      "p_value": 1.0,
+      "confidence_interval_95": [
+        0.0,
+        0.0
+      ],
+      "effect_size": 0.0,
+      "cross_region_accuracy_drop": 0.0,
+      "adaptation_time_hours": 0.0
+    }
+  },
+  "baseline_moving_average": {
+    "12h": {
+      "mae": 31.363021086877986,
+      "rmse": 37.18652095923342,
+      "mape": 0.2161131527333205,
+      "r2": -0.5135713594373862,
+      "mean_interval_score": 0.0,
+      "coverage_probability": 0.0,
+      "sharpness": 0.0,
+      "training_time_seconds": 0.0,
+      "prediction_time_ms": 0.0,
+      "memory_usage_mb": 0.0,
+      "carbon_savings_kg": 8.556524463872098,
+      "renewable_utilization_improvement": 0.0,
+      "schedule_efficiency": 1.0,
+      "p_value": 1.0,
+      "confidence_interval_95": [
+        0.0,
+        0.0
+      ],
+      "effect_size": 0.0,
+      "cross_region_accuracy_drop": 0.0,
+      "adaptation_time_hours": 0.0
+    },
+    "24h": {
+      "mae": 31.95011515213349,
+      "rmse": 38.0060345792353,
+      "mape": 0.22004751246366705,
+      "r2": -0.08723358032732514,
+      "mean_interval_score": 0.0,
+      "coverage_probability": 0.0,
+      "sharpness": 0.0,
+      "training_time_seconds": 0.0,
+      "prediction_time_ms": 0.0,
+      "memory_usage_mb": 0.0,
+      "carbon_savings_kg": 9.009101749362543,
+      "renewable_utilization_improvement": 0.0,
+      "schedule_efficiency": 1.0,
+      "p_value": 1.0,
+      "confidence_interval_95": [
+        0.0,
+        0.0
+      ],
+      "effect_size": 0.0,
+      "cross_region_accuracy_drop": 0.0,
+      "adaptation_time_hours": 0.0
+    },
+    "48h": {
+      "mae": 32.539130124835935,
+      "rmse": 39.33991493008455,
+      "mape": 0.22552212660905605,
+      "r2": -0.09232475334723933,
+      "mean_interval_score": 0.0,
+      "coverage_probability": 0.0,
+      "sharpness": 0.0,
+      "training_time_seconds": 0.0,
+      "prediction_time_ms": 0.0,
+      "memory_usage_mb": 0.0,
+      "carbon_savings_kg": 17.82135950396858,
+      "renewable_utilization_improvement": 0.0,
+      "schedule_efficiency": 1.0,
+      "p_value": 1.0,
+      "confidence_interval_95": [
+        0.0,
+        0.0
+      ],
+      "effect_size": 0.0,
+      "cross_region_accuracy_drop": 0.0,
+      "adaptation_time_hours": 0.0
+    }
+  },
+  "baseline_linear_trend": {
+    "12h": {
+      "mae": 72.88776326545266,
+      "rmse": 83.6480355515865,
+      "mape": 0.4945921935166678,
+      "r2": -7.182575624680048,
+      "mean_interval_score": 0.0,
+      "coverage_probability": 0.0,
+      "sharpness": 0.0,
+      "training_time_seconds": 0.0,
+      "prediction_time_ms": 0.0,
+      "memory_usage_mb": 0.0,
+      "carbon_savings_kg": 39.22280115031973,
+      "renewable_utilization_improvement": 0.0,
+      "schedule_efficiency": 1.0,
+      "p_value": 1.0,
+      "confidence_interval_95": [
+        0.0,
+        0.0
+      ],
+      "effect_size": 0.0,
+      "cross_region_accuracy_drop": 0.0,
+      "adaptation_time_hours": 0.0
+    },
+    "24h": {
+      "mae": 106.62036962479398,
+      "rmse": 121.09304196768389,
+      "mape": 0.7056282845851999,
+      "r2": -10.537521007557224,
+      "mean_interval_score": 0.0,
+      "coverage_probability": 0.0,
+      "sharpness": 0.0,
+      "training_time_seconds": 0.0,
+      "prediction_time_ms": 0.0,
+      "memory_usage_mb": 0.0,
+      "carbon_savings_kg": 114.43247419187905,
+      "renewable_utilization_improvement": 0.0,
+      "schedule_efficiency": 1.0,
+      "p_value": 1.0,
+      "confidence_interval_95": [
+        0.0,
+        0.0
+      ],
+      "effect_size": 0.0,
+      "cross_region_accuracy_drop": 0.0,
+      "adaptation_time_hours": 0.0
+    },
+    "48h": {
+      "mae": 190.0427810628837,
+      "rmse": 215.77907783030568,
+      "mape": 1.3394749434649964,
+      "r2": -33.31477837563644,
+      "mean_interval_score": 0.0,
+      "coverage_probability": 0.0,
+      "sharpness": 0.0,
+      "training_time_seconds": 0.0,
+      "prediction_time_ms": 0.0,
+      "memory_usage_mb": 0.0,
+      "carbon_savings_kg": 0.0,
+      "renewable_utilization_improvement": 0.0,
+      "schedule_efficiency": 1.0,
+      "p_value": 1.0,
+      "confidence_interval_95": [
+        0.0,
+        0.0
+      ],
+      "effect_size": 0.0,
+      "cross_region_accuracy_drop": 0.0,
+      "adaptation_time_hours": 0.0
+    }
+  },
+  "baseline_seasonal_naive": {
+    "12h": {
+      "mae": 42.256124227356736,
+      "rmse": 50.16980603817989,
+      "mape": 0.279794707112519,
+      "r2": -2.3406925577855726,
+      "mean_interval_score": 0.0,
+      "coverage_probability": 0.0,
+      "sharpness": 0.0,
+      "training_time_seconds": 0.0,
+      "prediction_time_ms": 0.0,
+      "memory_usage_mb": 0.0,
+      "carbon_savings_kg": 15.466998003646538,
+      "renewable_utilization_improvement": 0.0,
+      "schedule_efficiency": 1.0,
+      "p_value": 1.0,
+      "confidence_interval_95": [
+        0.0,
+        0.0
+      ],
+      "effect_size": 0.0,
+      "cross_region_accuracy_drop": 0.0,
+      "adaptation_time_hours": 0.0
+    },
+    "24h": {
+      "mae": 31.55927867442003,
+      "rmse": 39.4889947360853,
+      "mape": 0.20265164454545426,
+      "r2": -0.26519684794766435,
+      "mean_interval_score": 0.0,
+      "coverage_probability": 0.0,
+      "sharpness": 0.0,
+      "training_time_seconds": 0.0,
+      "prediction_time_ms": 0.0,
+      "memory_usage_mb": 0.0,
+      "carbon_savings_kg": 13.537008964480941,
+      "renewable_utilization_improvement": 0.0,
+      "schedule_efficiency": 1.0,
+      "p_value": 1.0,
+      "confidence_interval_95": [
+        0.0,
+        0.0
+      ],
+      "effect_size": 0.0,
+      "cross_region_accuracy_drop": 0.0,
+      "adaptation_time_hours": 0.0
+    },
+    "48h": {
+      "mae": 32.180240086944806,
+      "rmse": 40.261594042771904,
+      "mape": 0.20434332689007775,
+      "r2": -0.14254801721321703,
+      "mean_interval_score": 0.0,
+      "coverage_probability": 0.0,
+      "sharpness": 0.0,
+      "training_time_seconds": 0.0,
+      "prediction_time_ms": 0.0,
+      "memory_usage_mb": 0.0,
+      "carbon_savings_kg": 34.435762960743,
+      "renewable_utilization_improvement": 0.0,
+      "schedule_efficiency": 1.0,
+      "p_value": 1.0,
+      "confidence_interval_95": [
+        0.0,
+        0.0
+      ],
+      "effect_size": 0.0,
+      "cross_region_accuracy_drop": 0.0,
+      "adaptation_time_hours": 0.0
+    }
+  }
+}
