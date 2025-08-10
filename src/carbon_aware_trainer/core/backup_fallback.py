@@ -10,7 +10,7 @@ from typing import Dict, List, Optional, Any, Union
 from dataclasses import dataclass, field
 from enum import Enum
 import aiofiles
-import shutil
+# import shutil
 
 from .exceptions import CarbonDataError, CarbonProviderError
 from .types import CarbonIntensity, CarbonForecast, CarbonDataSource
