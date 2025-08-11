@@ -11,6 +11,10 @@ class CarbonAwareTrainerError(Exception):
         self.error_code = error_code
 
 
+# Alias for backward compatibility and new modules
+CarbonAwareException = CarbonAwareTrainerError
+
+
 class CarbonDataError(CarbonAwareTrainerError):
     """Raised when carbon data cannot be retrieved or is invalid."""
     pass

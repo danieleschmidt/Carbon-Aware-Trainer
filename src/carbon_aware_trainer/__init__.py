@@ -10,6 +10,9 @@ from .core.scheduler import CarbonAwareTrainer
 from .core.monitor import CarbonMonitor
 from .core.forecasting import CarbonForecaster
 from .core.types import CarbonIntensity, CarbonForecast, TrainingConfig, TrainingMetrics
+from .core.multi_region import MultiRegionOrchestrator, PlacementPlan, RegionConfig
+from .core.real_time_optimizer import RealTimeOptimizer, OptimizationMode, OptimizationAction
+from .core.federated_carbon import CarbonAwareFederated, FederatedClient, ClientSelection
 from .strategies.threshold import ThresholdScheduler
 from .strategies.adaptive import AdaptiveScheduler
 from .integrations.pytorch import CarbonAwarePyTorchTrainer
@@ -25,11 +28,21 @@ __all__ = [
     "CarbonAwareTrainer",
     "CarbonMonitor", 
     "CarbonForecaster",
+    # Advanced orchestration
+    "MultiRegionOrchestrator",
+    "RealTimeOptimizer",
+    "CarbonAwareFederated",
     # Data types
     "CarbonIntensity",
     "CarbonForecast", 
     "TrainingConfig",
     "TrainingMetrics",
+    "PlacementPlan",
+    "RegionConfig",
+    "FederatedClient",
+    "ClientSelection",
+    "OptimizationMode",
+    "OptimizationAction",
     # Strategies
     "ThresholdScheduler",
     "AdaptiveScheduler",
