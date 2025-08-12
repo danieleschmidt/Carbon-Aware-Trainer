@@ -1,0 +1,1442 @@
+[
+  {
+    "scenario": "small_model_training",
+    "algorithm": "quantum_optimizer",
+    "carbon_emissions": 63.43229763232638,
+    "completion_time": 31515.249713648333,
+    "reliability_score": 0.9291537205301102,
+    "convergence_iterations": 370
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "quantum_optimizer",
+    "carbon_emissions": 64.96542002619292,
+    "completion_time": 31441.659838742744,
+    "reliability_score": 0.951340755543571,
+    "convergence_iterations": 492
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "quantum_optimizer",
+    "carbon_emissions": 27.704886252295072,
+    "completion_time": 33230.16545988984,
+    "reliability_score": 1.0032458158885826,
+    "convergence_iterations": 273
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "quantum_optimizer",
+    "carbon_emissions": 56.50908736945661,
+    "completion_time": 31847.563806266084,
+    "reliability_score": 0.9171583545009769,
+    "convergence_iterations": 409
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "quantum_optimizer",
+    "carbon_emissions": 51.89185882720656,
+    "completion_time": 32069.190776294086,
+    "reliability_score": 1.0155750941055297,
+    "convergence_iterations": 201
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "quantum_optimizer",
+    "carbon_emissions": 27.882093038780127,
+    "completion_time": 33221.659534138555,
+    "reliability_score": 0.9937819498240352,
+    "convergence_iterations": 249
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "quantum_optimizer",
+    "carbon_emissions": 48.67045630784293,
+    "completion_time": 32223.818097223542,
+    "reliability_score": 0.9302379395385326,
+    "convergence_iterations": 196
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "quantum_optimizer",
+    "carbon_emissions": 66.01833075974331,
+    "completion_time": 31391.120123532324,
+    "reliability_score": 0.8823901308549114,
+    "convergence_iterations": 329
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "quantum_optimizer",
+    "carbon_emissions": 61.07370490816866,
+    "completion_time": 31628.4621644079,
+    "reliability_score": 0.9705352622634259,
+    "convergence_iterations": 28
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "quantum_optimizer",
+    "carbon_emissions": 46.490112717411975,
+    "completion_time": 32328.474589564226,
+    "reliability_score": 0.910905326169336,
+    "convergence_iterations": 321
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "neural_transformer",
+    "carbon_emissions": 51.40624899926422,
+    "completion_time": 32092.500048035316,
+    "reliability_score": 0.8542137932868464,
+    "convergence_iterations": 207
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "neural_transformer",
+    "carbon_emissions": 55.441008677198695,
+    "completion_time": 31898.83158349446,
+    "reliability_score": 0.8574292553907495,
+    "convergence_iterations": 32
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "neural_transformer",
+    "carbon_emissions": 68.95790320030736,
+    "completion_time": 31250.02064638525,
+    "reliability_score": 0.8085604483601396,
+    "convergence_iterations": 155
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "neural_transformer",
+    "carbon_emissions": 82.06593031001718,
+    "completion_time": 30620.835345119172,
+    "reliability_score": 0.9283456969281623,
+    "convergence_iterations": 336
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "neural_transformer",
+    "carbon_emissions": 45.97284049199315,
+    "completion_time": 32353.303656384327,
+    "reliability_score": 0.9479531775163712,
+    "convergence_iterations": 208
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "neural_transformer",
+    "carbon_emissions": 59.3510395225215,
+    "completion_time": 31711.150102918968,
+    "reliability_score": 0.8586033441481117,
+    "convergence_iterations": 11
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "neural_transformer",
+    "carbon_emissions": 55.932395458197355,
+    "completion_time": 31875.245018006528,
+    "reliability_score": 0.9936901382324774,
+    "convergence_iterations": 163
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "neural_transformer",
+    "carbon_emissions": 53.736049654318094,
+    "completion_time": 31980.66961659273,
+    "reliability_score": 0.8893094527326797,
+    "convergence_iterations": 124
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "neural_transformer",
+    "carbon_emissions": 72.83565075780034,
+    "completion_time": 31063.888763625586,
+    "reliability_score": 0.8100021812831585,
+    "convergence_iterations": 295
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "neural_transformer",
+    "carbon_emissions": 59.187112212765975,
+    "completion_time": 31719.018613787233,
+    "reliability_score": 0.9685456323331678,
+    "convergence_iterations": 215
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "neural_lstm",
+    "carbon_emissions": 95.56194976934766,
+    "completion_time": 29973.026411071314,
+    "reliability_score": 0.8716692041574332,
+    "convergence_iterations": 497
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "neural_lstm",
+    "carbon_emissions": 92.82205740134506,
+    "completion_time": 30104.541244735436,
+    "reliability_score": 0.8113202032662701,
+    "convergence_iterations": 148
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "neural_lstm",
+    "carbon_emissions": 90.50921972334605,
+    "completion_time": 30215.55745327939,
+    "reliability_score": 0.7511524569695557,
+    "convergence_iterations": 372
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "neural_lstm",
+    "carbon_emissions": 92.69254708983034,
+    "completion_time": 30110.757739688142,
+    "reliability_score": 0.8836219414922559,
+    "convergence_iterations": 13
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "neural_lstm",
+    "carbon_emissions": 76.6722458558471,
+    "completion_time": 30879.73219891934,
+    "reliability_score": 0.8222070595985062,
+    "convergence_iterations": 154
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "neural_lstm",
+    "carbon_emissions": 78.35678157056036,
+    "completion_time": 30798.874484613105,
+    "reliability_score": 0.8787927197520766,
+    "convergence_iterations": 232
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "neural_lstm",
+    "carbon_emissions": 99.14669815721594,
+    "completion_time": 29800.958488453634,
+    "reliability_score": 0.8604553011741572,
+    "convergence_iterations": 181
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "neural_lstm",
+    "carbon_emissions": 68.07099913532501,
+    "completion_time": 31292.5920415044,
+    "reliability_score": 0.7548289248462079,
+    "convergence_iterations": 71
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "neural_lstm",
+    "carbon_emissions": 92.33210758906023,
+    "completion_time": 30128.058835725107,
+    "reliability_score": 0.9327662324146055,
+    "convergence_iterations": 323
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "neural_lstm",
+    "carbon_emissions": 69.97438218084224,
+    "completion_time": 31201.229655319574,
+    "reliability_score": 0.812987024250479,
+    "convergence_iterations": 475
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "adaptive_scheduler",
+    "carbon_emissions": 79.25509818426411,
+    "completion_time": 30755.755287155323,
+    "reliability_score": 0.7967131639400193,
+    "convergence_iterations": 206
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "adaptive_scheduler",
+    "carbon_emissions": 88.81737235083104,
+    "completion_time": 30296.76612716011,
+    "reliability_score": 0.7968274539573221,
+    "convergence_iterations": 424
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "adaptive_scheduler",
+    "carbon_emissions": 107.37715744705201,
+    "completion_time": 29405.896442541507,
+    "reliability_score": 0.7863305200521672,
+    "convergence_iterations": 81
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "adaptive_scheduler",
+    "carbon_emissions": 88.79909774568266,
+    "completion_time": 30297.64330820723,
+    "reliability_score": 0.7363932805371985,
+    "convergence_iterations": 412
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "adaptive_scheduler",
+    "carbon_emissions": 70.88570678502091,
+    "completion_time": 31157.486074318997,
+    "reliability_score": 0.8393848158789057,
+    "convergence_iterations": 262
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "adaptive_scheduler",
+    "carbon_emissions": 95.85985278346263,
+    "completion_time": 29958.727066393792,
+    "reliability_score": 0.8013145383674427,
+    "convergence_iterations": 298
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "adaptive_scheduler",
+    "carbon_emissions": 101.46651423128836,
+    "completion_time": 29689.60731689816,
+    "reliability_score": 0.7251524900326013,
+    "convergence_iterations": 62
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "adaptive_scheduler",
+    "carbon_emissions": 102.22051197194217,
+    "completion_time": 29653.41542534678,
+    "reliability_score": 0.7546076315670796,
+    "convergence_iterations": 442
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "adaptive_scheduler",
+    "carbon_emissions": 87.19835276182845,
+    "completion_time": 30374.479067432236,
+    "reliability_score": 0.841733639396806,
+    "convergence_iterations": 132
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "adaptive_scheduler",
+    "carbon_emissions": 93.22648333944797,
+    "completion_time": 30085.128799706497,
+    "reliability_score": 0.7256905816242775,
+    "convergence_iterations": 215
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "threshold_scheduler",
+    "carbon_emissions": 101.6661292567697,
+    "completion_time": 29680.025795675054,
+    "reliability_score": 0.685371296208737,
+    "convergence_iterations": 226
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "threshold_scheduler",
+    "carbon_emissions": 108.8198165051957,
+    "completion_time": 29336.648807750604,
+    "reliability_score": 0.7361701310879092,
+    "convergence_iterations": 258
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "threshold_scheduler",
+    "carbon_emissions": 110.16366605746634,
+    "completion_time": 29272.14402924162,
+    "reliability_score": 0.603097999090696,
+    "convergence_iterations": 487
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "threshold_scheduler",
+    "carbon_emissions": 99.6354997017799,
+    "completion_time": 29777.496014314565,
+    "reliability_score": 0.615079833917673,
+    "convergence_iterations": 208
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "threshold_scheduler",
+    "carbon_emissions": 109.01021768804507,
+    "completion_time": 29327.509550973835,
+    "reliability_score": 0.7041990295693216,
+    "convergence_iterations": 185
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "threshold_scheduler",
+    "carbon_emissions": 92.991839006368,
+    "completion_time": 30096.39172769434,
+    "reliability_score": 0.641712779585639,
+    "convergence_iterations": 413
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "threshold_scheduler",
+    "carbon_emissions": 99.05494518867229,
+    "completion_time": 29805.36263094373,
+    "reliability_score": 0.7223645733660619,
+    "convergence_iterations": 99
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "threshold_scheduler",
+    "carbon_emissions": 103.8784961741071,
+    "completion_time": 29573.832183642862,
+    "reliability_score": 0.7300011115540288,
+    "convergence_iterations": 44
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "threshold_scheduler",
+    "carbon_emissions": 110.10690031372688,
+    "completion_time": 29274.86878494111,
+    "reliability_score": 0.6357577640626392,
+    "convergence_iterations": 394
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "threshold_scheduler",
+    "carbon_emissions": 111.63761444699365,
+    "completion_time": 29201.394506544304,
+    "reliability_score": 0.7127493147685902,
+    "convergence_iterations": 340
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "greedy_scheduler",
+    "carbon_emissions": 124.00923320655241,
+    "completion_time": 28800,
+    "reliability_score": 0.6250123008361456,
+    "convergence_iterations": 354
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "greedy_scheduler",
+    "carbon_emissions": 127.17586358019496,
+    "completion_time": 28800,
+    "reliability_score": 0.5946548189202957,
+    "convergence_iterations": 306
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "greedy_scheduler",
+    "carbon_emissions": 105.89767470511897,
+    "completion_time": 29476.91161415429,
+    "reliability_score": 0.5683469587937435,
+    "convergence_iterations": 417
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "greedy_scheduler",
+    "carbon_emissions": 117.72752763843093,
+    "completion_time": 28909.078673355314,
+    "reliability_score": 0.6928884734851959,
+    "convergence_iterations": 416
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "greedy_scheduler",
+    "carbon_emissions": 125.13580541262559,
+    "completion_time": 28800,
+    "reliability_score": 0.6601769143508176,
+    "convergence_iterations": 35
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "greedy_scheduler",
+    "carbon_emissions": 113.43807216027234,
+    "completion_time": 29114.972536306926,
+    "reliability_score": 0.7353087216150754,
+    "convergence_iterations": 37
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "greedy_scheduler",
+    "carbon_emissions": 126.07028692215842,
+    "completion_time": 28800,
+    "reliability_score": 0.6240458541470115,
+    "convergence_iterations": 216
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "greedy_scheduler",
+    "carbon_emissions": 119.2848939181802,
+    "completion_time": 28834.32509192735,
+    "reliability_score": 0.6451584770273302,
+    "convergence_iterations": 391
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "greedy_scheduler",
+    "carbon_emissions": 129.50057851932038,
+    "completion_time": 28800,
+    "reliability_score": 0.7130680720504865,
+    "convergence_iterations": 203
+  },
+  {
+    "scenario": "small_model_training",
+    "algorithm": "greedy_scheduler",
+    "carbon_emissions": 114.316284117663,
+    "completion_time": 29072.81836235218,
+    "reliability_score": 0.5644118793765167,
+    "convergence_iterations": 69
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "quantum_optimizer",
+    "carbon_emissions": 353.28080479443764,
+    "completion_time": 288147.4038493205,
+    "reliability_score": 0.9470410796075942,
+    "convergence_iterations": 221
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "quantum_optimizer",
+    "carbon_emissions": 357.8803836771671,
+    "completion_time": 287849.3511377196,
+    "reliability_score": 1.0293950117612705,
+    "convergence_iterations": 333
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "quantum_optimizer",
+    "carbon_emissions": 339.0790641581039,
+    "completion_time": 289067.67664255487,
+    "reliability_score": 0.8684657774987132,
+    "convergence_iterations": 160
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "quantum_optimizer",
+    "carbon_emissions": 431.17394772042275,
+    "completion_time": 283099.92818771664,
+    "reliability_score": 0.9722032398595111,
+    "convergence_iterations": 141
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "quantum_optimizer",
+    "carbon_emissions": 323.33321984873936,
+    "completion_time": 290088.0073538017,
+    "reliability_score": 1.018924780199604,
+    "convergence_iterations": 298
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "quantum_optimizer",
+    "carbon_emissions": 382.1087441416575,
+    "completion_time": 286279.3533796206,
+    "reliability_score": 1.0323988716775774,
+    "convergence_iterations": 272
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "quantum_optimizer",
+    "carbon_emissions": 385.49261769471394,
+    "completion_time": 286060.07837338257,
+    "reliability_score": 0.9167875030219237,
+    "convergence_iterations": 406
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "quantum_optimizer",
+    "carbon_emissions": 483.48355068216364,
+    "completion_time": 279710.2659157958,
+    "reliability_score": 1.0313851280689608,
+    "convergence_iterations": 64
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "quantum_optimizer",
+    "carbon_emissions": 382.6827312847045,
+    "completion_time": 286242.1590127512,
+    "reliability_score": 0.984740749171332,
+    "convergence_iterations": 180
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "quantum_optimizer",
+    "carbon_emissions": 336.93882014192064,
+    "completion_time": 289206.3644548035,
+    "reliability_score": 1.0489465691806565,
+    "convergence_iterations": 175
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "neural_transformer",
+    "carbon_emissions": 433.0539279185432,
+    "completion_time": 282978.1054708784,
+    "reliability_score": 0.9426836116664736,
+    "convergence_iterations": 186
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "neural_transformer",
+    "carbon_emissions": 419.2215196325309,
+    "completion_time": 283874.445527812,
+    "reliability_score": 0.9388096953563414,
+    "convergence_iterations": 303
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "neural_transformer",
+    "carbon_emissions": 441.6278994953315,
+    "completion_time": 282422.51211270253,
+    "reliability_score": 0.9608216977274908,
+    "convergence_iterations": 332
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "neural_transformer",
+    "carbon_emissions": 366.01570775157546,
+    "completion_time": 287322.1821376979,
+    "reliability_score": 0.9775807117528978,
+    "convergence_iterations": 270
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "neural_transformer",
+    "carbon_emissions": 454.7088593747983,
+    "completion_time": 281574.86591251305,
+    "reliability_score": 0.9472234382495719,
+    "convergence_iterations": 161
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "neural_transformer",
+    "carbon_emissions": 362.605755434982,
+    "completion_time": 287543.14704781317,
+    "reliability_score": 0.8198161376651864,
+    "convergence_iterations": 135
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "neural_transformer",
+    "carbon_emissions": 470.7327480289049,
+    "completion_time": 280536.51792772696,
+    "reliability_score": 0.8506375926879843,
+    "convergence_iterations": 170
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "neural_transformer",
+    "carbon_emissions": 535.5961345073408,
+    "completion_time": 276333.37048392434,
+    "reliability_score": 0.9172702123079854,
+    "convergence_iterations": 274
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "neural_transformer",
+    "carbon_emissions": 569.1934176231763,
+    "completion_time": 274156.2665380182,
+    "reliability_score": 0.850124215249992,
+    "convergence_iterations": 249
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "neural_transformer",
+    "carbon_emissions": 424.37674366454814,
+    "completion_time": 283540.38701053726,
+    "reliability_score": 0.9530515726300659,
+    "convergence_iterations": 134
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "neural_lstm",
+    "carbon_emissions": 478.21365938667856,
+    "completion_time": 280051.75487174327,
+    "reliability_score": 0.88856187481165,
+    "convergence_iterations": 110
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "neural_lstm",
+    "carbon_emissions": 402.5795602101848,
+    "completion_time": 284952.84449838003,
+    "reliability_score": 0.822366830043609,
+    "convergence_iterations": 295
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "neural_lstm",
+    "carbon_emissions": 402.331503743954,
+    "completion_time": 284968.9185573918,
+    "reliability_score": 0.7982217443356076,
+    "convergence_iterations": 289
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "neural_lstm",
+    "carbon_emissions": 566.8287840042657,
+    "completion_time": 274309.4947965236,
+    "reliability_score": 0.8859250631031004,
+    "convergence_iterations": 243
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "neural_lstm",
+    "carbon_emissions": 409.4351082041977,
+    "completion_time": 284508.604988368,
+    "reliability_score": 0.7868927285568353,
+    "convergence_iterations": 74
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "neural_lstm",
+    "carbon_emissions": 537.1366266156396,
+    "completion_time": 276233.54659530654,
+    "reliability_score": 0.8418106516321695,
+    "convergence_iterations": 476
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "neural_lstm",
+    "carbon_emissions": 545.554545522861,
+    "completion_time": 275688.0654501186,
+    "reliability_score": 0.8947582817744142,
+    "convergence_iterations": 252
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "neural_lstm",
+    "carbon_emissions": 561.8291969116573,
+    "completion_time": 274633.46804012463,
+    "reliability_score": 0.7857584769131097,
+    "convergence_iterations": 434
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "neural_lstm",
+    "carbon_emissions": 417.91632536562446,
+    "completion_time": 283959.0221163075,
+    "reliability_score": 0.9290556585707337,
+    "convergence_iterations": 352
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "neural_lstm",
+    "carbon_emissions": 439.91995258771794,
+    "completion_time": 282533.1870723159,
+    "reliability_score": 0.9060006360112828,
+    "convergence_iterations": 78
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "adaptive_scheduler",
+    "carbon_emissions": 562.5170070532789,
+    "completion_time": 274588.8979429475,
+    "reliability_score": 0.8121891394604668,
+    "convergence_iterations": 360
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "adaptive_scheduler",
+    "carbon_emissions": 649.7395873450839,
+    "completion_time": 268936.87474003853,
+    "reliability_score": 0.881640020782286,
+    "convergence_iterations": 224
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "adaptive_scheduler",
+    "carbon_emissions": 729.0371249459048,
+    "completion_time": 263798.3943035053,
+    "reliability_score": 0.7862869392790324,
+    "convergence_iterations": 385
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "adaptive_scheduler",
+    "carbon_emissions": 530.3057446754124,
+    "completion_time": 276676.1877450333,
+    "reliability_score": 0.8463364066144761,
+    "convergence_iterations": 199
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "adaptive_scheduler",
+    "carbon_emissions": 739.159780041462,
+    "completion_time": 263142.4462533133,
+    "reliability_score": 0.8637794649286317,
+    "convergence_iterations": 230
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "adaptive_scheduler",
+    "carbon_emissions": 668.1024556986794,
+    "completion_time": 267746.96087072557,
+    "reliability_score": 0.856482868619763,
+    "convergence_iterations": 75
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "adaptive_scheduler",
+    "carbon_emissions": 543.0962057705744,
+    "completion_time": 275847.3658660668,
+    "reliability_score": 0.8124603781848596,
+    "convergence_iterations": 414
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "adaptive_scheduler",
+    "carbon_emissions": 642.4993257603745,
+    "completion_time": 269406.04369072773,
+    "reliability_score": 0.8773832887687494,
+    "convergence_iterations": 127
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "adaptive_scheduler",
+    "carbon_emissions": 548.1914166462394,
+    "completion_time": 275517.19620132365,
+    "reliability_score": 0.816151724452419,
+    "convergence_iterations": 403
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "adaptive_scheduler",
+    "carbon_emissions": 542.460910031326,
+    "completion_time": 275888.5330299701,
+    "reliability_score": 0.8394513464700293,
+    "convergence_iterations": 148
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "threshold_scheduler",
+    "carbon_emissions": 688.6115375512337,
+    "completion_time": 266417.97236668004,
+    "reliability_score": 0.7204352623068992,
+    "convergence_iterations": 90
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "threshold_scheduler",
+    "carbon_emissions": 689.6836337300651,
+    "completion_time": 266348.5005342917,
+    "reliability_score": 0.6559628607559854,
+    "convergence_iterations": 447
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "threshold_scheduler",
+    "carbon_emissions": 709.63851765699,
+    "completion_time": 265055.424055827,
+    "reliability_score": 0.7937869818769344,
+    "convergence_iterations": 294
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "threshold_scheduler",
+    "carbon_emissions": 747.3174716479876,
+    "completion_time": 262613.82783721044,
+    "reliability_score": 0.6550626266052015,
+    "convergence_iterations": 218
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "threshold_scheduler",
+    "carbon_emissions": 791.0205001583984,
+    "completion_time": 259781.87158973582,
+    "reliability_score": 0.6794854247659124,
+    "convergence_iterations": 85
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "threshold_scheduler",
+    "carbon_emissions": 701.4821987347054,
+    "completion_time": 265583.9535219911,
+    "reliability_score": 0.7236657349506495,
+    "convergence_iterations": 342
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "threshold_scheduler",
+    "carbon_emissions": 755.7281317686111,
+    "completion_time": 262068.81706139402,
+    "reliability_score": 0.6087300744168571,
+    "convergence_iterations": 299
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "threshold_scheduler",
+    "carbon_emissions": 628.7526413779916,
+    "completion_time": 270296.8288387062,
+    "reliability_score": 0.7404490265132738,
+    "convergence_iterations": 313
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "threshold_scheduler",
+    "carbon_emissions": 683.5018572960502,
+    "completion_time": 266749.07964721596,
+    "reliability_score": 0.676144808284202,
+    "convergence_iterations": 63
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "threshold_scheduler",
+    "carbon_emissions": 670.8450481971331,
+    "completion_time": 267569.24087682576,
+    "reliability_score": 0.7742789918156946,
+    "convergence_iterations": 490
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "greedy_scheduler",
+    "carbon_emissions": 882.4518392169794,
+    "completion_time": 259200,
+    "reliability_score": 0.7223850685735795,
+    "convergence_iterations": 280
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "greedy_scheduler",
+    "carbon_emissions": 787.167000355981,
+    "completion_time": 260031.57837693242,
+    "reliability_score": 0.5967320054859708,
+    "convergence_iterations": 184
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "greedy_scheduler",
+    "carbon_emissions": 764.6657884481646,
+    "completion_time": 261489.65690855894,
+    "reliability_score": 0.6084754987487354,
+    "convergence_iterations": 207
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "greedy_scheduler",
+    "carbon_emissions": 817.2523038365453,
+    "completion_time": 259200,
+    "reliability_score": 0.6669740202093994,
+    "convergence_iterations": 407
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "greedy_scheduler",
+    "carbon_emissions": 782.0778211585364,
+    "completion_time": 260361.35718892686,
+    "reliability_score": 0.6191128389586631,
+    "convergence_iterations": 185
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "greedy_scheduler",
+    "carbon_emissions": 737.5123512596135,
+    "completion_time": 263249.19963837706,
+    "reliability_score": 0.6220119367430385,
+    "convergence_iterations": 223
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "greedy_scheduler",
+    "carbon_emissions": 852.9174945345362,
+    "completion_time": 259200,
+    "reliability_score": 0.6343449615639238,
+    "convergence_iterations": 62
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "greedy_scheduler",
+    "carbon_emissions": 792.4426579729017,
+    "completion_time": 259689.71576335598,
+    "reliability_score": 0.6674404714528547,
+    "convergence_iterations": 440
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "greedy_scheduler",
+    "carbon_emissions": 831.7648435677041,
+    "completion_time": 259200,
+    "reliability_score": 0.5777771345523102,
+    "convergence_iterations": 86
+  },
+  {
+    "scenario": "medium_model_training",
+    "algorithm": "greedy_scheduler",
+    "carbon_emissions": 885.9371455431825,
+    "completion_time": 259200,
+    "reliability_score": 0.5527438225341152,
+    "convergence_iterations": 185
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "quantum_optimizer",
+    "carbon_emissions": 5638.319272554221,
+    "completion_time": 1360585.1867722457,
+    "reliability_score": 0.8922460409710168,
+    "convergence_iterations": 388
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "quantum_optimizer",
+    "carbon_emissions": 8739.32768318568,
+    "completion_time": 1310572.1231255813,
+    "reliability_score": 0.9161789528089878,
+    "convergence_iterations": 412
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "quantum_optimizer",
+    "carbon_emissions": 5190.522497190017,
+    "completion_time": 1367807.2531653196,
+    "reliability_score": 0.9453911731643115,
+    "convergence_iterations": 164
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "quantum_optimizer",
+    "carbon_emissions": 4153.428346077309,
+    "completion_time": 1384533.5076344651,
+    "reliability_score": 1.00524706709996,
+    "convergence_iterations": 347
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "quantum_optimizer",
+    "carbon_emissions": 6023.846418263617,
+    "completion_time": 1354367.4049662442,
+    "reliability_score": 0.996775956742106,
+    "convergence_iterations": 258
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "quantum_optimizer",
+    "carbon_emissions": 3147.798932351842,
+    "completion_time": 1400752.2988190295,
+    "reliability_score": 0.8601679186028977,
+    "convergence_iterations": 399
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "quantum_optimizer",
+    "carbon_emissions": 4657.805167920832,
+    "completion_time": 1376398.9182517729,
+    "reliability_score": 0.8778385880785394,
+    "convergence_iterations": 91
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "quantum_optimizer",
+    "carbon_emissions": 4439.156762682847,
+    "completion_time": 1379925.279731451,
+    "reliability_score": 0.923744859668778,
+    "convergence_iterations": 210
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "quantum_optimizer",
+    "carbon_emissions": 4115.662161349464,
+    "completion_time": 1385142.6006617558,
+    "reliability_score": 0.9158270798407626,
+    "convergence_iterations": 47
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "quantum_optimizer",
+    "carbon_emissions": 8058.931832938139,
+    "completion_time": 1321545.5473983735,
+    "reliability_score": 0.8752118675070468,
+    "convergence_iterations": 23
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "neural_transformer",
+    "carbon_emissions": 10580.37907025819,
+    "completion_time": 1280879.646354876,
+    "reliability_score": 0.8921290221508518,
+    "convergence_iterations": 327
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "neural_transformer",
+    "carbon_emissions": 9289.78936423893,
+    "completion_time": 1301694.2771335545,
+    "reliability_score": 0.980344219680409,
+    "convergence_iterations": 498
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "neural_transformer",
+    "carbon_emissions": 7744.285075855471,
+    "completion_time": 1326620.170296603,
+    "reliability_score": 0.8059942542938825,
+    "convergence_iterations": 319
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "neural_transformer",
+    "carbon_emissions": 6453.841689473719,
+    "completion_time": 1347432.4412321679,
+    "reliability_score": 0.8454247248666549,
+    "convergence_iterations": 222
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "neural_transformer",
+    "carbon_emissions": 9621.437443410172,
+    "completion_time": 1296345.4569126808,
+    "reliability_score": 0.8261042474935658,
+    "convergence_iterations": 110
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "neural_transformer",
+    "carbon_emissions": 7273.916696841468,
+    "completion_time": 1334206.2715133408,
+    "reliability_score": 0.9261607435224997,
+    "convergence_iterations": 365
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "neural_transformer",
+    "carbon_emissions": 8694.581041371286,
+    "completion_time": 1311293.796964764,
+    "reliability_score": 0.9280302620697398,
+    "convergence_iterations": 248
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "neural_transformer",
+    "carbon_emissions": 7274.240820882337,
+    "completion_time": 1334201.0440408099,
+    "reliability_score": 0.80573120979427,
+    "convergence_iterations": 103
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "neural_transformer",
+    "carbon_emissions": 9709.39582579928,
+    "completion_time": 1294926.8641215093,
+    "reliability_score": 0.9451844271857337,
+    "convergence_iterations": 324
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "neural_transformer",
+    "carbon_emissions": 7924.314362074262,
+    "completion_time": 1323716.6579684664,
+    "reliability_score": 0.9271435200229725,
+    "convergence_iterations": 171
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "neural_lstm",
+    "carbon_emissions": 7358.6463997681985,
+    "completion_time": 1332839.7508645384,
+    "reliability_score": 0.9329770210004523,
+    "convergence_iterations": 328
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "neural_lstm",
+    "carbon_emissions": 11156.93566330757,
+    "completion_time": 1271580.9416221755,
+    "reliability_score": 0.9396251950161562,
+    "convergence_iterations": 475
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "neural_lstm",
+    "carbon_emissions": 7539.617390423734,
+    "completion_time": 1329921.050727246,
+    "reliability_score": 0.7925439226373846,
+    "convergence_iterations": 485
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "neural_lstm",
+    "carbon_emissions": 11248.598272298586,
+    "completion_time": 1270102.6070643684,
+    "reliability_score": 0.8740715543926124,
+    "convergence_iterations": 45
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "neural_lstm",
+    "carbon_emissions": 11433.800023277938,
+    "completion_time": 1267115.6732245735,
+    "reliability_score": 0.8561431532196044,
+    "convergence_iterations": 190
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "neural_lstm",
+    "carbon_emissions": 8388.746448224496,
+    "completion_time": 1316226.2972830352,
+    "reliability_score": 0.9295595893832722,
+    "convergence_iterations": 496
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "neural_lstm",
+    "carbon_emissions": 9935.658321251956,
+    "completion_time": 1291277.7025948486,
+    "reliability_score": 0.9192694806085828,
+    "convergence_iterations": 188
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "neural_lstm",
+    "carbon_emissions": 10248.75037409093,
+    "completion_time": 1286228.1539666615,
+    "reliability_score": 0.9427350427146863,
+    "convergence_iterations": 83
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "neural_lstm",
+    "carbon_emissions": 9471.553840267201,
+    "completion_time": 1298762.7796641707,
+    "reliability_score": 0.794406373401892,
+    "convergence_iterations": 158
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "neural_lstm",
+    "carbon_emissions": 8269.986603722562,
+    "completion_time": 1318141.6560551627,
+    "reliability_score": 0.7526303033177734,
+    "convergence_iterations": 66
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "adaptive_scheduler",
+    "carbon_emissions": 9845.157988940979,
+    "completion_time": 1292737.2919543597,
+    "reliability_score": 0.8061043958918775,
+    "convergence_iterations": 279
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "adaptive_scheduler",
+    "carbon_emissions": 10594.510366505563,
+    "completion_time": 1280651.7368089983,
+    "reliability_score": 0.8110246205088543,
+    "convergence_iterations": 213
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "adaptive_scheduler",
+    "carbon_emissions": 9240.402405442179,
+    "completion_time": 1302490.7900050285,
+    "reliability_score": 0.8914659143684258,
+    "convergence_iterations": 93
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "adaptive_scheduler",
+    "carbon_emissions": 10870.493491437275,
+    "completion_time": 1276200.6809700998,
+    "reliability_score": 0.88057684372151,
+    "convergence_iterations": 218
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "adaptive_scheduler",
+    "carbon_emissions": 10590.380968225165,
+    "completion_time": 1280718.3357444645,
+    "reliability_score": 0.7514746170246445,
+    "convergence_iterations": 451
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "adaptive_scheduler",
+    "carbon_emissions": 13084.363725015413,
+    "completion_time": 1240495.3818429515,
+    "reliability_score": 0.7839817852603918,
+    "convergence_iterations": 83
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "adaptive_scheduler",
+    "carbon_emissions": 11776.230100628069,
+    "completion_time": 1261592.9609370707,
+    "reliability_score": 0.7622529566622714,
+    "convergence_iterations": 328
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "adaptive_scheduler",
+    "carbon_emissions": 9383.051587929851,
+    "completion_time": 1300190.1439898673,
+    "reliability_score": 0.8771340490776879,
+    "convergence_iterations": 493
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "adaptive_scheduler",
+    "carbon_emissions": 12370.567538897618,
+    "completion_time": 1252007.4867326592,
+    "reliability_score": 0.7479030044677302,
+    "convergence_iterations": 152
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "adaptive_scheduler",
+    "carbon_emissions": 9351.892075987758,
+    "completion_time": 1300692.6845984694,
+    "reliability_score": 0.7075842026580215,
+    "convergence_iterations": 474
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "threshold_scheduler",
+    "carbon_emissions": 12981.292107058616,
+    "completion_time": 1242157.7208973586,
+    "reliability_score": 0.6842865476416968,
+    "convergence_iterations": 249
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "threshold_scheduler",
+    "carbon_emissions": 12929.271126358935,
+    "completion_time": 1242996.7152740832,
+    "reliability_score": 0.7537924298710665,
+    "convergence_iterations": 373
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "threshold_scheduler",
+    "carbon_emissions": 13212.173040320951,
+    "completion_time": 1238434.0732057036,
+    "reliability_score": 0.6804958824970345,
+    "convergence_iterations": 240
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "threshold_scheduler",
+    "carbon_emissions": 13091.80970001027,
+    "completion_time": 1240375.2931582343,
+    "reliability_score": 0.6636070338323312,
+    "convergence_iterations": 360
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "threshold_scheduler",
+    "carbon_emissions": 14390.017924721555,
+    "completion_time": 1219437.7909100908,
+    "reliability_score": 0.6433185893544295,
+    "convergence_iterations": 374
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "threshold_scheduler",
+    "carbon_emissions": 14490.963736141071,
+    "completion_time": 1217809.7368635167,
+    "reliability_score": 0.681195995182904,
+    "convergence_iterations": 413
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "threshold_scheduler",
+    "carbon_emissions": 14871.13320542347,
+    "completion_time": 1211678.3636629304,
+    "reliability_score": 0.7630544717842211,
+    "convergence_iterations": 29
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "threshold_scheduler",
+    "carbon_emissions": 12690.837848897196,
+    "completion_time": 1246842.1671729858,
+    "reliability_score": 0.7599472090392434,
+    "convergence_iterations": 457
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "threshold_scheduler",
+    "carbon_emissions": 13693.658624607839,
+    "completion_time": 1230668.673702325,
+    "reliability_score": 0.7624448647586587,
+    "convergence_iterations": 75
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "threshold_scheduler",
+    "carbon_emissions": 13243.353909090012,
+    "completion_time": 1237931.1881541961,
+    "reliability_score": 0.6555403574432802,
+    "convergence_iterations": 109
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "greedy_scheduler",
+    "carbon_emissions": 16238.193380785911,
+    "completion_time": 1209600,
+    "reliability_score": 0.5910162984727432,
+    "convergence_iterations": 296
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "greedy_scheduler",
+    "carbon_emissions": 15070.232121637096,
+    "completion_time": 1209600,
+    "reliability_score": 0.6304603734188728,
+    "convergence_iterations": 362
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "greedy_scheduler",
+    "carbon_emissions": 16000.286846989851,
+    "completion_time": 1209600,
+    "reliability_score": 0.7201413554638025,
+    "convergence_iterations": 305
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "greedy_scheduler",
+    "carbon_emissions": 15160.1212897921,
+    "completion_time": 1209600,
+    "reliability_score": 0.5937023593804933,
+    "convergence_iterations": 408
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "greedy_scheduler",
+    "carbon_emissions": 16360.029958806463,
+    "completion_time": 1209600,
+    "reliability_score": 0.6551916997072289,
+    "convergence_iterations": 367
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "greedy_scheduler",
+    "carbon_emissions": 16752.156671855413,
+    "completion_time": 1209600,
+    "reliability_score": 0.6669704080072004,
+    "convergence_iterations": 109
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "greedy_scheduler",
+    "carbon_emissions": 16118.304768211092,
+    "completion_time": 1209600,
+    "reliability_score": 0.6251419334558173,
+    "convergence_iterations": 301
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "greedy_scheduler",
+    "carbon_emissions": 15507.019764383454,
+    "completion_time": 1209600,
+    "reliability_score": 0.5746283743616764,
+    "convergence_iterations": 178
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "greedy_scheduler",
+    "carbon_emissions": 14454.589173840415,
+    "completion_time": 1218396.3858043018,
+    "reliability_score": 0.5994412178239849,
+    "convergence_iterations": 408
+  },
+  {
+    "scenario": "large_model_training",
+    "algorithm": "greedy_scheduler",
+    "carbon_emissions": 13779.462506071915,
+    "completion_time": 1229284.8287020721,
+    "reliability_score": 0.6741395271223917,
+    "convergence_iterations": 53
+  }
+]
