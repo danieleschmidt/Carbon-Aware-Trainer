@@ -1,0 +1,173 @@
+{
+  "small_model_training": {
+    "quantum_optimizer": {
+      "mean_improvement": 0.5757763731195473,
+      "std_improvement": 0.10398177878574054,
+      "confidence_interval": [
+        0.5113277989202787,
+        0.640224947318816
+      ],
+      "p_value": 0.01,
+      "effect_size": 5.537281433759296,
+      "sample_size": 10
+    },
+    "neural_transformer": {
+      "mean_improvement": 0.49363514161227956,
+      "std_improvement": 0.10575812579258764,
+      "confidence_interval": [
+        0.42808557613154485,
+        0.5591847070930143
+      ],
+      "p_value": 0.01,
+      "effect_size": 4.667585945881781,
+      "sample_size": 10
+    },
+    "neural_lstm": {
+      "mean_improvement": 0.2871836778450214,
+      "std_improvement": 0.09164580514292671,
+      "confidence_interval": [
+        0.2303810193237036,
+        0.34398633636633924
+      ],
+      "p_value": 0.01,
+      "effect_size": 3.1336260006351906,
+      "sample_size": 10
+    },
+    "adaptive_scheduler": {
+      "mean_improvement": 0.23321104105487955,
+      "std_improvement": 0.12874215810044398,
+      "confidence_interval": [
+        0.15341582476023125,
+        0.31300625734952786
+      ],
+      "p_value": 0.01,
+      "effect_size": 1.8114582239092922,
+      "sample_size": 10
+    },
+    "threshold_scheduler": {
+      "mean_improvement": 0.12636417517061618,
+      "std_improvement": 0.07711870570405548,
+      "confidence_interval": [
+        0.07856550616572544,
+        0.17416284417550693
+      ],
+      "p_value": 0.01,
+      "effect_size": 1.6385671156819093,
+      "sample_size": 10
+    }
+  },
+  "medium_model_training": {
+    "quantum_optimizer": {
+      "mean_improvement": 0.5339967228342459,
+      "std_improvement": 0.06877051787134743,
+      "confidence_interval": [
+        0.49137231425506256,
+        0.5766211314134293
+      ],
+      "p_value": 0.01,
+      "effect_size": 7.764907686651732,
+      "sample_size": 10
+    },
+    "neural_transformer": {
+      "mean_improvement": 0.44870901807137475,
+      "std_improvement": 0.08049176575958798,
+      "confidence_interval": [
+        0.3988197047843207,
+        0.4985983313584288
+      ],
+      "p_value": 0.01,
+      "effect_size": 5.574595287318885,
+      "sample_size": 10
+    },
+    "neural_lstm": {
+      "mean_improvement": 0.41274722713156464,
+      "std_improvement": 0.09415205243429106,
+      "confidence_interval": [
+        0.35439118044546036,
+        0.4711032738176689
+      ],
+      "p_value": 0.01,
+      "effect_size": 4.383836745562418,
+      "sample_size": 10
+    },
+    "adaptive_scheduler": {
+      "mean_improvement": 0.23649260773642206,
+      "std_improvement": 0.139144640659171,
+      "confidence_interval": [
+        0.15024986595344603,
+        0.3227353495193981
+      ],
+      "p_value": 0.01,
+      "effect_size": 1.6996170791493208,
+      "sample_size": 10
+    },
+    "threshold_scheduler": {
+      "mean_improvement": 0.12800056611867403,
+      "std_improvement": 0.08241888314091601,
+      "confidence_interval": [
+        0.07691681310389481,
+        0.17908431913345324
+      ],
+      "p_value": 0.01,
+      "effect_size": 1.5530490251830342,
+      "sample_size": 10
+    }
+  },
+  "large_model_training": {
+    "quantum_optimizer": {
+      "mean_improvement": 0.6473560769684833,
+      "std_improvement": 0.1304001998419019,
+      "confidence_interval": [
+        0.5665331957555417,
+        0.7281789581814249
+      ],
+      "p_value": 0.01,
+      "effect_size": 4.964379485256481,
+      "sample_size": 10
+    },
+    "neural_transformer": {
+      "mean_improvement": 0.45446433549888166,
+      "std_improvement": 0.08900403302510353,
+      "confidence_interval": [
+        0.39929906430004763,
+        0.5096296066977156
+      ],
+      "p_value": 0.01,
+      "effect_size": 5.106109465519392,
+      "sample_size": 10
+    },
+    "neural_lstm": {
+      "mean_improvement": 0.3860893941569339,
+      "std_improvement": 0.10683480899799191,
+      "confidence_interval": [
+        0.31987249351168356,
+        0.4523062948021842
+      ],
+      "p_value": 0.01,
+      "effect_size": 3.6138913690966668,
+      "sample_size": 10
+    },
+    "adaptive_scheduler": {
+      "mean_improvement": 0.3097543793906414,
+      "std_improvement": 0.08638173526072458,
+      "confidence_interval": [
+        0.25621442518497395,
+        0.3632943335963088
+      ],
+      "p_value": 0.01,
+      "effect_size": 3.5858781773220323,
+      "sample_size": 10
+    },
+    "threshold_scheduler": {
+      "mean_improvement": 0.12592486129037742,
+      "std_improvement": 0.05455969515288102,
+      "confidence_interval": [
+        0.0921084118853771,
+        0.15974131069537773
+      ],
+      "p_value": 0.01,
+      "effect_size": 2.308019884230016,
+      "sample_size": 10
+    }
+  }
+}
