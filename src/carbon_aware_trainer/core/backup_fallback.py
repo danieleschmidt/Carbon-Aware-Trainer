@@ -205,7 +205,15 @@ class DataBackupManager:
                     continue
             
             # Clean up memory cache
-            for region in list(self.memory_cache.keys()):\n                entries = self.memory_cache[region]\n                self.memory_cache[region] = [\n                    entry for entry in entries if entry.timestamp >= cutoff_time\n                ]\n                \n                # Remove empty caches\n                if not self.memory_cache[region]:\n                    del self.memory_cache[region]
+            for region in list(self.memory_cache.keys()):
+                entries = self.memory_cache[region]
+                self.memory_cache[region] = [
+                    entry for entry in entries if entry.timestamp >= cutoff_time
+                ]
+                
+                # Remove empty caches
+                if not self.memory_cache[region]:
+                    del self.memory_cache[region]
             
             if cleaned_files > 0:
                 logger.info(f"Cleaned up {cleaned_files} old backup files")

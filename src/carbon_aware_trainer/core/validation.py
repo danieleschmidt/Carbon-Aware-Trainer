@@ -8,9 +8,19 @@ from pathlib import Path
 import logging
 
 try:
-    from pydantic import BaseModel, Field, validator, root_validator
+    from pydantic import BaseModel, Field, field_validator, model_validator
     from pydantic import ValidationError as PydanticValidationError
     HAS_PYDANTIC = True
+    
+    # Legacy compatibility
+    validator = field_validator
+    
+    def root_validator(*args, **kwargs):
+        mode = kwargs.get('mode', 'after')
+        def decorator(func):
+            return model_validator(mode=mode)(func)
+        return decorator
+        
 except ImportError:
     HAS_PYDANTIC = False
     PydanticValidationError = ValueError
@@ -123,23 +133,19 @@ class ThresholdConfigModel(BaseModel):
     pause_threshold: float = Field(150.0, ge=0.0, le=1000.0, description="Pause threshold")
     resume_threshold: float = Field(80.0, ge=0.0, le=1000.0, description="Resume threshold")
     
-    @root_validator
-    def validate_threshold_logic(cls, values):
+    @model_validator(mode='after')
+    def validate_threshold_logic(self):
         """Validate threshold relationships."""
         if not HAS_PYDANTIC:
-            return values  # Skip validation when pydantic is not available
+            return self  # Skip validation when pydantic is not available
             
-        carbon_threshold = values.get('carbon_threshold', 0)
-        pause_threshold = values.get('pause_threshold', 0)
-        resume_threshold = values.get('resume_threshold', 0)
-        
-        if pause_threshold <= resume_threshold:
+        if self.pause_threshold <= self.resume_threshold:
             raise ValueError("pause_threshold must be greater than resume_threshold")
         
-        if carbon_threshold > pause_threshold:
+        if self.carbon_threshold > self.pause_threshold:
             logger.warning("carbon_threshold is higher than pause_threshold")
         
-        return values
+        return self
 
 
 class TimeIntervalModel(BaseModel):

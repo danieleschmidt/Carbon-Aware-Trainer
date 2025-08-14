@@ -8,6 +8,7 @@ functionality works without external dependencies.
 
 import sys
 import asyncio
+import pytest
 from pathlib import Path
 
 # Add the source directory to Python path
@@ -38,6 +39,7 @@ def test_imports():
         print(f"✗ Import failed: {e}")
         return False
 
+@pytest.mark.asyncio
 async def test_cached_provider():
     """Test cached carbon data provider functionality."""
     print("\nTesting cached carbon data provider...")
@@ -69,6 +71,7 @@ async def test_cached_provider():
         print(f"✗ Cached provider test failed: {e}")
         return False
 
+@pytest.mark.asyncio
 async def test_carbon_monitor():
     """Test carbon monitor with cached data."""
     print("\nTesting carbon monitor...")
@@ -113,6 +116,7 @@ async def test_carbon_monitor():
         print(f"✗ Carbon monitor test failed: {e}")
         return False
 
+@pytest.mark.asyncio
 async def test_carbon_aware_trainer():
     """Test basic CarbonAwareTrainer functionality."""
     print("\nTesting CarbonAwareTrainer...")
