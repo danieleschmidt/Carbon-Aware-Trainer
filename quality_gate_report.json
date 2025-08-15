@@ -1,0 +1,17 @@
+{
+  "timestamp": "2025-08-15 07:51:49",
+  "total_time_seconds": 1.5181982517242432,
+  "overall_status": "FAILED",
+  "success_rate": 28.57142857142857,
+  "results": {
+    "basic_imports": false,
+    "core_functionality": false,
+    "robustness_features": false,
+    "unit_tests": false,
+    "code_structure": true,
+    "documentation": true,
+    "performance": false
+  },
+  "passed_count": 2,
+  "total_gates": 7
+}

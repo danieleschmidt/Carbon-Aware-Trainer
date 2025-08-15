@@ -1,0 +1,472 @@
+{
+  "timestamp": "20250815_080135",
+  "benchmark_suite": "Production Carbon-Aware Training",
+  "scenarios": [
+    {
+      "name": "small_language_model",
+      "description": "GPT-2 scale model training (117M parameters)",
+      "duration_hours": 24,
+      "model_size_gb": 0.5,
+      "dataset_size_gb": 10.0,
+      "target_accuracy": 0.85,
+      "carbon_budget_kg": 50.0,
+      "regions": [
+        "US-CA",
+        "US-WA"
+      ],
+      "training_type": "continuous",
+      "interruption_tolerance": 0.2
+    },
+    {
+      "name": "medium_language_model",
+      "description": "GPT-3 scale model training (1.3B parameters)",
+      "duration_hours": 168,
+      "model_size_gb": 5.0,
+      "dataset_size_gb": 100.0,
+      "target_accuracy": 0.9,
+      "carbon_budget_kg": 500.0,
+      "regions": [
+        "US-CA",
+        "US-WA",
+        "EU-FR",
+        "EU-NO"
+      ],
+      "training_type": "continuous",
+      "interruption_tolerance": 0.3
+    },
+    {
+      "name": "large_language_model",
+      "description": "GPT-4 scale model training (175B+ parameters)",
+      "duration_hours": 720,
+      "model_size_gb": 50.0,
+      "dataset_size_gb": 1000.0,
+      "target_accuracy": 0.95,
+      "carbon_budget_kg": 5000.0,
+      "regions": [
+        "US-CA",
+        "US-WA",
+        "EU-FR",
+        "EU-NO",
+        "IN-WE"
+      ],
+      "training_type": "continuous",
+      "interruption_tolerance": 0.4
+    },
+    {
+      "name": "computer_vision_model",
+      "description": "Large-scale computer vision model (ResNet/ViT scale)",
+      "duration_hours": 72,
+      "model_size_gb": 2.0,
+      "dataset_size_gb": 500.0,
+      "target_accuracy": 0.92,
+      "carbon_budget_kg": 200.0,
+      "regions": [
+        "US-CA",
+        "EU-FR"
+      ],
+      "training_type": "batch",
+      "interruption_tolerance": 0.1
+    },
+    {
+      "name": "federated_learning",
+      "description": "Multi-region federated learning across 5 locations",
+      "duration_hours": 336,
+      "model_size_gb": 1.0,
+      "dataset_size_gb": 200.0,
+      "target_accuracy": 0.88,
+      "carbon_budget_kg": 300.0,
+      "regions": [
+        "US-CA",
+        "US-WA",
+        "EU-FR",
+        "EU-NO",
+        "AP-SG"
+      ],
+      "training_type": "federated",
+      "interruption_tolerance": 0.5
+    }
+  ],
+  "algorithms": [
+    "threshold_scheduler",
+    "adaptive_scheduler",
+    "always_train",
+    "carbon_optimal"
+  ],
+  "results": [
+    {
+      "scenario_name": "small_language_model",
+      "algorithm_name": "threshold_scheduler",
+      "total_carbon_kg": 101.2004363585071,
+      "training_time_hours": 18,
+      "final_accuracy": 0.833,
+      "cost_usd": 90.0,
+      "interruptions": 6,
+      "migrations": 0,
+      "energy_efficiency": 0.0008231189804844912,
+      "carbon_efficiency": 0.008231189804844911,
+      "availability": 0.75
+    },
+    {
+      "scenario_name": "small_language_model",
+      "algorithm_name": "adaptive_scheduler",
+      "total_carbon_kg": 35.99826364868114,
+      "training_time_hours": 9,
+      "final_accuracy": 0.85,
+      "cost_usd": 45.0,
+      "interruptions": 15,
+      "migrations": 0,
+      "energy_efficiency": 0.0023612249976705233,
+      "carbon_efficiency": 0.023612249976705232,
+      "availability": 0.375
+    },
+    {
+      "scenario_name": "small_language_model",
+      "algorithm_name": "always_train",
+      "total_carbon_kg": 182.81395980899129,
+      "training_time_hours": 24,
+      "final_accuracy": 0.85,
+      "cost_usd": 120.0,
+      "interruptions": 0,
+      "migrations": 0,
+      "energy_efficiency": 0.00046495355217298604,
+      "carbon_efficiency": 0.0046495355217298605,
+      "availability": 1.0
+    },
+    {
+      "scenario_name": "small_language_model",
+      "algorithm_name": "carbon_optimal",
+      "total_carbon_kg": 23.61235299424272,
+      "training_time_hours": 14,
+      "final_accuracy": 0.8075,
+      "cost_usd": 70.0,
+      "interruptions": 10,
+      "migrations": 1,
+      "energy_efficiency": 0.0034198201263418715,
+      "carbon_efficiency": 0.034198201263418715,
+      "availability": 0.5833333333333334
+    },
+    {
+      "scenario_name": "medium_language_model",
+      "algorithm_name": "threshold_scheduler",
+      "total_carbon_kg": 667.5974842541943,
+      "training_time_hours": 112,
+      "final_accuracy": 0.882,
+      "cost_usd": 560.0,
+      "interruptions": 56,
+      "migrations": 0,
+      "energy_efficiency": 0.00013211553680213836,
+      "carbon_efficiency": 0.0013211553680213836,
+      "availability": 0.6666666666666666
+    },
+    {
+      "scenario_name": "medium_language_model",
+      "algorithm_name": "adaptive_scheduler",
+      "total_carbon_kg": 353.9792445892705,
+      "training_time_hours": 65,
+      "final_accuracy": 0.9,
+      "cost_usd": 325.0,
+      "interruptions": 103,
+      "migrations": 0,
+      "energy_efficiency": 0.00025425219522243143,
+      "carbon_efficiency": 0.0025425219522243144,
+      "availability": 0.3869047619047619
+    },
+    {
+      "scenario_name": "medium_language_model",
+      "algorithm_name": "always_train",
+      "total_carbon_kg": 1368.689478788318,
+      "training_time_hours": 168,
+      "final_accuracy": 0.9,
+      "cost_usd": 840.0,
+      "interruptions": 0,
+      "migrations": 0,
+      "energy_efficiency": 6.575633216650119e-05,
+      "carbon_efficiency": 0.0006575633216650118,
+      "availability": 1.0
+    },
+    {
+      "scenario_name": "medium_language_model",
+      "algorithm_name": "carbon_optimal",
+      "total_carbon_kg": 101.9758875975884,
+      "training_time_hours": 100,
+      "final_accuracy": 0.855,
+      "cost_usd": 500.0,
+      "interruptions": 68,
+      "migrations": 3,
+      "energy_efficiency": 0.000838433496528075,
+      "carbon_efficiency": 0.00838433496528075,
+      "availability": 0.5952380952380952
+    },
+    {
+      "scenario_name": "large_language_model",
+      "algorithm_name": "threshold_scheduler",
+      "total_carbon_kg": 2731.2545877809625,
+      "training_time_hours": 467,
+      "final_accuracy": 0.9309999999999999,
+      "cost_usd": 2335.0,
+      "interruptions": 253,
+      "migrations": 0,
+      "energy_efficiency": 3.408689926472219e-05,
+      "carbon_efficiency": 0.0003408689926472219,
+      "availability": 0.6486111111111111
+    },
+    {
+      "scenario_name": "large_language_model",
+      "algorithm_name": "adaptive_scheduler",
+      "total_carbon_kg": 3505.0628725094084,
+      "training_time_hours": 522,
+      "final_accuracy": 0.95,
+      "cost_usd": 2610.0,
+      "interruptions": 198,
+      "migrations": 0,
+      "energy_efficiency": 2.710365076332736e-05,
+      "carbon_efficiency": 0.0002710365076332735,
+      "availability": 0.725
+    },
+    {
+      "scenario_name": "large_language_model",
+      "algorithm_name": "always_train",
+      "total_carbon_kg": 5812.731772324252,
+      "training_time_hours": 720,
+      "final_accuracy": 0.95,
+      "cost_usd": 3600.0,
+      "interruptions": 0,
+      "migrations": 0,
+      "energy_efficiency": 1.634343433019166e-05,
+      "carbon_efficiency": 0.0001634343433019166,
+      "availability": 1.0
+    },
+    {
+      "scenario_name": "large_language_model",
+      "algorithm_name": "carbon_optimal",
+      "total_carbon_kg": 451.4515326042636,
+      "training_time_hours": 432,
+      "final_accuracy": 0.9025,
+      "cost_usd": 2160.0,
+      "interruptions": 288,
+      "migrations": 4,
+      "energy_efficiency": 0.00019991071794436002,
+      "carbon_efficiency": 0.0019991071794436,
+      "availability": 0.6
+    },
+    {
+      "scenario_name": "computer_vision_model",
+      "algorithm_name": "threshold_scheduler",
+      "total_carbon_kg": 249.76829664235737,
+      "training_time_hours": 45,
+      "final_accuracy": 0.9016000000000001,
+      "cost_usd": 225.0,
+      "interruptions": 27,
+      "migrations": 0,
+      "energy_efficiency": 0.0003609745560666568,
+      "carbon_efficiency": 0.0036097455606665684,
+      "availability": 0.625
+    },
+    {
+      "scenario_name": "computer_vision_model",
+      "algorithm_name": "adaptive_scheduler",
+      "total_carbon_kg": 121.96763817830474,
+      "training_time_hours": 27,
+      "final_accuracy": 0.92,
+      "cost_usd": 135.0,
+      "interruptions": 45,
+      "migrations": 0,
+      "energy_efficiency": 0.0007542984464904126,
+      "carbon_efficiency": 0.0075429844649041265,
+      "availability": 0.375
+    },
+    {
+      "scenario_name": "computer_vision_model",
+      "algorithm_name": "always_train",
+      "total_carbon_kg": 582.2358361693429,
+      "training_time_hours": 72,
+      "final_accuracy": 0.92,
+      "cost_usd": 360.0,
+      "interruptions": 0,
+      "migrations": 0,
+      "energy_efficiency": 0.00015801157243306796,
+      "carbon_efficiency": 0.0015801157243306794,
+      "availability": 1.0
+    },
+    {
+      "scenario_name": "computer_vision_model",
+      "algorithm_name": "carbon_optimal",
+      "total_carbon_kg": 153.52430195702044,
+      "training_time_hours": 43,
+      "final_accuracy": 0.874,
+      "cost_usd": 215.0,
+      "interruptions": 29,
+      "migrations": 1,
+      "energy_efficiency": 0.000569290977948676,
+      "carbon_efficiency": 0.00569290977948676,
+      "availability": 0.5972222222222222
+    },
+    {
+      "scenario_name": "federated_learning",
+      "algorithm_name": "threshold_scheduler",
+      "total_carbon_kg": 1305.5071944845138,
+      "training_time_hours": 223,
+      "final_accuracy": 0.8623999999999999,
+      "cost_usd": 1115.0,
+      "interruptions": 113,
+      "migrations": 0,
+      "energy_efficiency": 6.605861719057955e-05,
+      "carbon_efficiency": 0.0006605861719057956,
+      "availability": 0.6636904761904762
+    },
+    {
+      "scenario_name": "federated_learning",
+      "algorithm_name": "adaptive_scheduler",
+      "total_carbon_kg": 186.32856612019145,
+      "training_time_hours": 44,
+      "final_accuracy": 0.8128214285714286,
+      "cost_usd": 220.0,
+      "interruptions": 292,
+      "migrations": 0,
+      "energy_efficiency": 0.00043623017420051265,
+      "carbon_efficiency": 0.0043623017420051265,
+      "availability": 0.13095238095238096
+    },
+    {
+      "scenario_name": "federated_learning",
+      "algorithm_name": "always_train",
+      "total_carbon_kg": 2713.182824298194,
+      "training_time_hours": 336,
+      "final_accuracy": 0.88,
+      "cost_usd": 1680.0,
+      "interruptions": 0,
+      "migrations": 0,
+      "energy_efficiency": 3.243423156445881e-05,
+      "carbon_efficiency": 0.00032434231564458814,
+      "availability": 1.0
+    },
+    {
+      "scenario_name": "federated_learning",
+      "algorithm_name": "carbon_optimal",
+      "total_carbon_kg": 204.93583302460735,
+      "training_time_hours": 201,
+      "final_accuracy": 0.836,
+      "cost_usd": 1005.0,
+      "interruptions": 135,
+      "migrations": 4,
+      "energy_efficiency": 0.00040793256487244896,
+      "carbon_efficiency": 0.004079325648724489,
+      "availability": 0.5982142857142857
+    }
+  ],
+  "analysis": {
+    "summary_statistics": {
+      "threshold_scheduler": {
+        "avg_carbon_kg": 1011.065599904107,
+        "avg_accuracy": 0.882,
+        "avg_cost_usd": 865.0,
+        "avg_availability": 0.6707936507936508,
+        "carbon_efficiency": 0.0028327091796171763
+      },
+      "adaptive_scheduler": {
+        "avg_carbon_kg": 840.6673170091711,
+        "avg_accuracy": 0.8865642857142857,
+        "avg_cost_usd": 667.0,
+        "avg_availability": 0.3985714285714286,
+        "carbon_efficiency": 0.0076662189286944155
+      },
+      "always_train": {
+        "avg_carbon_kg": 2131.9307742778196,
+        "avg_accuracy": 0.9,
+        "avg_cost_usd": 1320.0,
+        "avg_availability": 1.0,
+        "carbon_efficiency": 0.0014749982453344114
+      },
+      "carbon_optimal": {
+        "avg_carbon_kg": 187.0999816355445,
+        "avg_accuracy": 0.8550000000000001,
+        "avg_cost_usd": 790.0,
+        "avg_availability": 0.5948015873015873,
+        "carbon_efficiency": 0.010870775767270862
+      }
+    },
+    "algorithm_rankings": {
+      "carbon_efficiency": {
+        "carbon_optimal": 0.010870775767270862,
+        "adaptive_scheduler": 0.007666218928694414,
+        "threshold_scheduler": 0.0028327091796171763,
+        "always_train": 0.0014749982453344111
+      },
+      "lowest_carbon": {
+        "carbon_optimal": 187.0999816355445,
+        "adaptive_scheduler": 840.6673170091711,
+        "threshold_scheduler": 1011.0655999041071,
+        "always_train": 2131.9307742778196
+      },
+      "highest_accuracy": {
+        "always_train": 0.9,
+        "adaptive_scheduler": 0.8865642857142857,
+        "threshold_scheduler": 0.882,
+        "carbon_optimal": 0.8550000000000001
+      }
+    },
+    "scenario_analysis": {
+      "small_language_model": {
+        "best_carbon_algorithm": "carbon_optimal",
+        "best_accuracy_algorithm": "adaptive_scheduler",
+        "carbon_range_kg": [
+          23.61235299424272,
+          182.81395980899129
+        ],
+        "accuracy_range": [
+          0.8075,
+          0.85
+        ]
+      },
+      "medium_language_model": {
+        "best_carbon_algorithm": "carbon_optimal",
+        "best_accuracy_algorithm": "adaptive_scheduler",
+        "carbon_range_kg": [
+          101.9758875975884,
+          1368.689478788318
+        ],
+        "accuracy_range": [
+          0.855,
+          0.9
+        ]
+      },
+      "large_language_model": {
+        "best_carbon_algorithm": "carbon_optimal",
+        "best_accuracy_algorithm": "adaptive_scheduler",
+        "carbon_range_kg": [
+          451.4515326042636,
+          5812.731772324252
+        ],
+        "accuracy_range": [
+          0.9025,
+          0.95
+        ]
+      },
+      "computer_vision_model": {
+        "best_carbon_algorithm": "adaptive_scheduler",
+        "best_accuracy_algorithm": "adaptive_scheduler",
+        "carbon_range_kg": [
+          121.96763817830474,
+          582.2358361693429
+        ],
+        "accuracy_range": [
+          0.874,
+          0.92
+        ]
+      },
+      "federated_learning": {
+        "best_carbon_algorithm": "adaptive_scheduler",
+        "best_accuracy_algorithm": "always_train",
+        "carbon_range_kg": [
+          186.32856612019145,
+          2713.182824298194
+        ],
+        "accuracy_range": [
+          0.8128214285714286,
+          0.88
+        ]
+      }
+    },
+    "efficiency_metrics": {}
+  }
+}

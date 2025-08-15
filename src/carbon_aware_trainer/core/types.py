@@ -141,3 +141,15 @@ class RegionInfo:
     available_gpus: int = 0
     cost_per_gpu_hour: float = 0.0
     network_latency_ms: float = 0.0
+
+
+@dataclass
+class RegionConfig:
+    """Configuration for a specific region in multi-region optimization."""
+    region_code: str
+    gpus: int
+    cost_per_hour: float
+    carbon_intensity: float = 0.0
+    renewable_percentage: float = 0.0
+    migration_bandwidth_gbps: float = 1.0
+    enabled: bool = True
