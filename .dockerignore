@@ -1,0 +1,17 @@
+
+.git
+.gitignore
+.pytest_cache
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.coverage
+.mypy_cache
+*.egg-info
+dist/
+build/
+carbon_venv/
+research_env/
+test_*.py
+*_test.py

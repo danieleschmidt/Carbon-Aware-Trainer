@@ -1,0 +1,10 @@
+
+# Production requirements for Carbon-Aware-Trainer
+requests>=2.25.0
+numpy>=1.21.0
+pandas>=1.3.0
+pydantic>=1.8.0
+python-dateutil>=2.8.0
+pytz>=2021.1
+aiohttp>=3.8.0
+psutil>=5.8.0

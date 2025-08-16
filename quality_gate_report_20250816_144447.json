@@ -1,0 +1,293 @@
+{
+  "timestamp": "2025-08-16T14:44:47.207967",
+  "total_runtime_seconds": 2.474961,
+  "overall_passed": false,
+  "overall_score": 67.1558936438457,
+  "summary": {
+    "total_gates": 10,
+    "passed_gates": 6,
+    "failed_gates": 4,
+    "pass_rate": 60.0
+  },
+  "gate_results": [
+    {
+      "gate_name": "Code Execution",
+      "passed": true,
+      "score": 100.0,
+      "details": {
+        "test_results": {
+          "generation1": true,
+          "generation2": true,
+          "generation3": true
+        },
+        "passed_tests": 3,
+        "total_tests": 3
+      },
+      "timestamp": "2025-08-16T14:44:45.111620",
+      "duration_seconds": 0.37890052795410156
+    },
+    {
+      "gate_name": "Test Coverage",
+      "passed": false,
+      "score": 84.89226977179041,
+      "details": {
+        "coverage_percentage": 84.89226977179041,
+        "threshold": 85.0,
+        "covered_lines": 19976,
+        "total_lines": 23531,
+        "test_files_count": 8
+      },
+      "timestamp": "2025-08-16T14:44:45.129453",
+      "duration_seconds": 0.017776966094970703
+    },
+    {
+      "gate_name": "Security Scan",
+      "passed": true,
+      "score": 0.0,
+      "details": {
+        "vulnerabilities_found": 25,
+        "critical": 0,
+        "high": 0,
+        "medium": 25,
+        "low": 0,
+        "details": [
+          {
+            "type": "potential_hardcoded_secret",
+            "file": "research_novel_algorithms.py",
+            "pattern": "key",
+            "severity": "medium"
+          },
+          {
+            "type": "potential_hardcoded_secret",
+            "file": "src/carbon_aware_trainer/carbon_models/base.py",
+            "pattern": "key",
+            "severity": "medium"
+          },
+          {
+            "type": "potential_hardcoded_secret",
+            "file": "src/carbon_aware_trainer/carbon_models/base.py",
+            "pattern": "api_key",
+            "severity": "medium"
+          },
+          {
+            "type": "potential_hardcoded_secret",
+            "file": "src/carbon_aware_trainer/carbon_models/electricitymap.py",
+            "pattern": "key",
+            "severity": "medium"
+          },
+          {
+            "type": "potential_hardcoded_secret",
+            "file": "src/carbon_aware_trainer/carbon_models/electricitymap.py",
+            "pattern": "api_key",
+            "severity": "medium"
+          }
+        ]
+      },
+      "timestamp": "2025-08-16T14:44:45.161286",
+      "duration_seconds": 0.03179454803466797
+    },
+    {
+      "gate_name": "Performance Benchmarks",
+      "passed": true,
+      "score": 100.0,
+      "details": {
+        "benchmarks": [
+          {
+            "operation": "generation1_execution",
+            "avg_duration_ms": 53.852081298828125,
+            "max_duration_ms": 53.852081298828125,
+            "throughput_per_sec": 18.569384430119715,
+            "memory_usage_mb": 50.0,
+            "passed": true
+          },
+          {
+            "operation": "carbon_monitor_batch",
+            "avg_duration_ms": 118.75512599945068,
+            "max_duration_ms": 178.13268899917603,
+            "throughput_per_sec": 8.420689141491254,
+            "memory_usage_mb": 30.0,
+            "passed": true
+          }
+        ],
+        "passed_count": 2,
+        "total_count": 2
+      },
+      "timestamp": "2025-08-16T14:44:46.402802",
+      "duration_seconds": 1.2414844036102295
+    },
+    {
+      "gate_name": "Documentation Coverage",
+      "passed": true,
+      "score": 100.0,
+      "details": {
+        "documentation_files": [
+          "README",
+          "RESEARCH_DOCUMENTATION.md",
+          "AUTONOMOUS_SDLC_COMPLETION_REPORT.md",
+          "AUTONOMOUS_SDLC_FINAL_REPORT.md",
+          "AUTONOMOUS_SDLC_IMPLEMENTATION_REPORT.md",
+          "IMPLEMENTATION_REPORT.md",
+          "OPTIONAL_DEPENDENCIES_REPORT.md",
+          "PRODUCTION_ROBUSTNESS_REPORT.md"
+        ],
+        "function_documentation_coverage": 72.83349561830575,
+        "file_documentation_coverage": 99.03846153846155,
+        "documented_functions": 748,
+        "total_functions": 1027,
+        "python_files_checked": 104
+      },
+      "timestamp": "2025-08-16T14:44:46.428034",
+      "duration_seconds": 0.025199413299560547
+    },
+    {
+      "gate_name": "Error Handling",
+      "passed": false,
+      "score": 60.0,
+      "details": {
+        "error_tests": [
+          {
+            "test": "robustness_error_handling",
+            "passed": false
+          },
+          {
+            "test": "error_handling_coverage",
+            "passed": true
+          },
+          {
+            "test": "handles_file_not_found",
+            "passed": true
+          },
+          {
+            "test": "handles_network_timeout",
+            "passed": false
+          },
+          {
+            "test": "handles_division_by_zero",
+            "passed": true
+          }
+        ],
+        "files_with_error_handling": 76,
+        "total_try_blocks": 386,
+        "passed_tests": 3,
+        "total_tests": 5
+      },
+      "timestamp": "2025-08-16T14:44:46.656694",
+      "duration_seconds": 0.22862648963928223
+    },
+    {
+      "gate_name": "Integration Tests",
+      "passed": false,
+      "score": 66.66666666666666,
+      "details": {
+        "integration_tests": [
+          {
+            "test": "end_to_end_workflow",
+            "passed": false
+          },
+          {
+            "test": "component_integration",
+            "passed": true
+          },
+          {
+            "test": "concurrency_handling",
+            "passed": true
+          }
+        ],
+        "passed_tests": 2,
+        "total_tests": 3
+      },
+      "timestamp": "2025-08-16T14:44:46.974144",
+      "duration_seconds": 0.3174147605895996
+    },
+    {
+      "gate_name": "Resource Usage",
+      "passed": true,
+      "score": 85.0,
+      "details": {
+        "note": "psutil not available, basic checks only"
+      },
+      "timestamp": "2025-08-16T14:44:46.974520",
+      "duration_seconds": 0.00034236907958984375
+    },
+    {
+      "gate_name": "API Compatibility",
+      "passed": false,
+      "score": 0.0,
+      "details": {
+        "api_tests": [
+          {
+            "test": "api_imports",
+            "passed": false
+          },
+          {
+            "test": "api_method_consistency",
+            "passed": false
+          },
+          {
+            "test": "backward_compatibility",
+            "passed": false
+          }
+        ],
+        "passed_tests": 0,
+        "total_tests": 3
+      },
+      "timestamp": "2025-08-16T14:44:47.121439",
+      "duration_seconds": 0.14689970016479492
+    },
+    {
+      "gate_name": "Research Validation",
+      "passed": true,
+      "score": 75.0,
+      "details": {
+        "research_tests": [
+          {
+            "test": "research_documentation_exists",
+            "passed": true
+          },
+          {
+            "test": "benchmark_data_exists",
+            "passed": true
+          },
+          {
+            "test": "statistical_significance",
+            "passed": true
+          },
+          {
+            "test": "reproducibility",
+            "passed": false
+          }
+        ],
+        "research_files_found": 8,
+        "benchmark_files_found": 5,
+        "passed_tests": 3,
+        "total_tests": 4
+      },
+      "timestamp": "2025-08-16T14:44:47.207628",
+      "duration_seconds": 0.08615469932556152
+    }
+  ],
+  "failed_gate_details": [
+    {
+      "gate": "Test Coverage",
+      "reason": "Unknown"
+    },
+    {
+      "gate": "Error Handling",
+      "reason": "Unknown"
+    },
+    {
+      "gate": "Integration Tests",
+      "reason": "Unknown"
+    },
+    {
+      "gate": "API Compatibility",
+      "reason": "Unknown"
+    }
+  ],
+  "recommendations": [
+    "Address issues in Test Coverage",
+    "Improve error handling and exception management",
+    "Address issues in Integration Tests",
+    "Address issues in API Compatibility"
+  ]
+}
