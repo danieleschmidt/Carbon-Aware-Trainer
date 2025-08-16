@@ -1,0 +1,67 @@
+
+{
+  "dashboard": {
+    "id": null,
+    "title": "Carbon-Aware-Trainer Monitoring",
+    "description": "Comprehensive monitoring dashboard for carbon-aware ML training",
+    "tags": ["carbon", "ml", "training"],
+    "timezone": "browser",
+    "panels": [
+      {
+        "id": 1,
+        "title": "Carbon Intensity by Region",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "carbon_intensity",
+            "legendFormat": "{{ region }}"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "gCO2/kWh",
+            "thresholds": {
+              "steps": [
+                {"color": "green", "value": 0},
+                {"color": "yellow", "value": 100},
+                {"color": "red", "value": 200}
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 2,
+        "title": "Training Sessions",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(training_sessions_total[5m])",
+            "legendFormat": "Sessions/sec"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Carbon Savings",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "sum(carbon_saved_kg)",
+            "legendFormat": "Total Saved"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "kg CO2"
+          }
+        }
+      }
+    ],
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    },
+    "refresh": "5s"
+  }
+}

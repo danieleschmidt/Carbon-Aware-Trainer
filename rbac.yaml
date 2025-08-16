@@ -1,0 +1,38 @@
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: carbon-trainer
+  name: carbon-trainer-role
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services", "endpoints"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["apps"]
+  resources: ["deployments", "replicasets"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["metrics.k8s.io"]
+  resources: ["pods", "nodes"]
+  verbs: ["get", "list"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: carbon-trainer-rolebinding
+  namespace: carbon-trainer
+subjects:
+- kind: ServiceAccount
+  name: carbon-trainer-service-account
+  namespace: carbon-trainer
+roleRef:
+  kind: Role
+  name: carbon-trainer-role
+  apiGroup: rbac.authorization.k8s.io
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: carbon-trainer-service-account
+  namespace: carbon-trainer

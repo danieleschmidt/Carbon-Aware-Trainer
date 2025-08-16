@@ -1,0 +1,39 @@
+
+groups:
+  - name: carbon_trainer_alerts
+    rules:
+      - alert: CarbonTrainerDown
+        expr: up{job="carbon-trainer"} == 0
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Carbon-Aware-Trainer instance is down"
+          description: "{{ $labels.instance }} has been down for more than 5 minutes."
+          
+      - alert: HighCarbonIntensity
+        expr: carbon_intensity > 200
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High carbon intensity detected"
+          description: "Carbon intensity in {{ $labels.region }} is {{ $value }} gCO2/kWh"
+          
+      - alert: TrainingPausedTooLong
+        expr: training_paused_duration_minutes > 60
+        for: 0m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Training paused for too long"
+          description: "Training in {{ $labels.region }} has been paused for {{ $value }} minutes"
+          
+      - alert: DatabaseConnectionFailure
+        expr: postgres_up == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Database connection failure"
+          description: "Unable to connect to PostgreSQL database"
