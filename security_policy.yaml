@@ -1,0 +1,64 @@
+
+# Carbon-Aware-Trainer Security Policy
+apiVersion: v1
+kind: SecurityContext
+metadata:
+  name: carbon-trainer-security
+spec:
+  runAsNonRoot: true
+  runAsUser: 1000
+  runAsGroup: 1000
+  fsGroup: 1000
+  capabilities:
+    drop:
+      - ALL
+  readOnlyRootFilesystem: true
+  allowPrivilegeEscalation: false
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: carbon-trainer-network-policy
+spec:
+  podSelector:
+    matchLabels:
+      app: carbon-trainer
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          role: frontend
+    ports:
+    - protocol: TCP
+      port: 8080
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          app: postgres
+    ports:
+    - protocol: TCP
+      port: 5432
+  - to: []
+    ports:
+    - protocol: TCP
+      port: 443  # HTTPS outbound
+    - protocol: TCP
+      port: 53   # DNS
+    - protocol: UDP
+      port: 53   # DNS
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: carbon-trainer-secrets
+type: Opaque
+data:
+  database-password: <base64-encoded-password>
+  api-key: <base64-encoded-api-key>
+  jwt-secret: <base64-encoded-jwt-secret>

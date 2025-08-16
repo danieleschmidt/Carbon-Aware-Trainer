@@ -1,0 +1,61 @@
+
+# Carbon Optimization Configuration
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: carbon-optimization-config
+data:
+  carbon_threshold: "100"
+  pause_threshold: "150"
+  resume_threshold: "75"
+  optimization_interval: "300"  # 5 minutes
+  
+  # Regional preferences (lower is better)
+  region_preferences: |
+    {
+      "EU-NO": 1,   # Norway - hydro power
+      "EU-IS": 2,   # Iceland - geothermal
+      "CA-QC": 3,   # Quebec - hydro power
+      "US-WA": 4,   # Washington - hydro power
+      "BR-RS": 5,   # Brazil RS - wind power
+      "US-CA": 6,   # California - solar
+      "EU-FR": 7,   # France - nuclear
+      "EU-DE": 8,   # Germany - renewables mix
+      "US-TX": 9,   # Texas - wind + gas
+      "US-VA": 10   # Virginia - mixed
+    }
+  
+  # Auto-scaling based on carbon intensity
+  carbon_scaling_rules: |
+    {
+      "scale_down_threshold": 200,  # Scale down above 200 gCO2/kWh
+      "scale_up_threshold": 50,     # Scale up below 50 gCO2/kWh
+      "max_replicas": 20,
+      "min_replicas": 1,
+      "migration_enabled": true
+    }
+
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: carbon-optimizer
+spec:
+  schedule: "*/5 * * * *"  # Every 5 minutes
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: carbon-optimizer
+            image: carbon-aware-trainer:latest
+            command:
+            - python
+            - -m
+            - carbon_aware_trainer.optimizer
+            env:
+            - name: OPTIMIZATION_MODE
+              value: "production"
+            - name: LOG_LEVEL
+              value: "INFO"
+          restartPolicy: OnFailure

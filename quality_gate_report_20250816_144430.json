@@ -1,0 +1,26 @@
+{
+  "timestamp": "2025-08-16T14:44:30.350021",
+  "total_runtime_seconds": 3.055945,
+  "overall_passed": false,
+  "overall_score": 67.1558936438457,
+  "summary": {
+    "total_gates": 10,
+    "passed_gates": 6,
+    "failed_gates": 4,
+    "pass_rate": 60.0
+  },
+  "gate_results": [
+    {
+      "gate_name": "Code Execution",
+      "passed": true,
+      "score": 100.0,
+      "details": {
+        "test_results": {
+          "generation1": true,
+          "generation2": true,
+          "generation3": true
+        },
+        "passed_tests": 3,
+        "total_tests": 3
+      },
+      "timestamp": 

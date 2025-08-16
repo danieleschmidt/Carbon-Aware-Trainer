@@ -1,0 +1,101 @@
+
+# Global Scaling Configuration for Carbon-Aware-Trainer
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: carbon-trainer-global
+  namespace: argocd
+spec:
+  generators:
+  - list:
+      elements:
+      - region: us-west-2
+        cluster: https://us-west-2.eks.carbon-trainer.com
+        carbon_priority: medium
+      - region: us-east-1
+        cluster: https://us-east-1.eks.carbon-trainer.com
+        carbon_priority: medium
+      - region: eu-west-1
+        cluster: https://eu-west-1.eks.carbon-trainer.com
+        carbon_priority: high
+      - region: eu-central-1
+        cluster: https://eu-central-1.eks.carbon-trainer.com
+        carbon_priority: high
+      - region: ap-southeast-1
+        cluster: https://ap-southeast-1.eks.carbon-trainer.com
+        carbon_priority: low
+      - region: ap-northeast-1
+        cluster: https://ap-northeast-1.eks.carbon-trainer.com
+        carbon_priority: low
+  
+  template:
+    metadata:
+      name: 'carbon-trainer-{{region}}'
+      labels:
+        region: '{{region}}'
+        carbon-priority: '{{carbon_priority}}'
+    spec:
+      project: carbon-trainer
+      source:
+        repoURL: https://github.com/terragonlabs/carbon-aware-trainer
+        targetRevision: main
+        path: deployments/{{region}}
+        helm:
+          valueFiles:
+          - values-{{region}}.yaml
+          parameters:
+          - name: global.region
+            value: '{{region}}'
+          - name: global.carbonPriority
+            value: '{{carbon_priority}}'
+      destination:
+        server: '{{cluster}}'
+        namespace: carbon-trainer
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+        - CreateNamespace=true
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: global-carbon-config
+data:
+  global_optimization: "true"
+  cross_region_migration: "true"
+  carbon_threshold_global: "80"  # Global low-carbon threshold
+  
+  # Regional scaling factors based on typical carbon intensity
+  scaling_factors: |
+    {
+      "us-west-2": 1.2,    # Clean energy state
+      "us-east-1": 1.0,    # Baseline
+      "eu-west-1": 1.1,    # Good renewable mix
+      "eu-central-1": 0.9, # Some coal dependency
+      "ap-southeast-1": 0.8, # Higher carbon intensity
+      "ap-northeast-1": 0.8  # Higher carbon intensity
+    }
+  
+  # Traffic routing preferences (lower = preferred)
+  routing_preferences: |
+    {
+      "carbon_aware": {
+        "eu-west-1": 1,      # Iceland/Nordic power
+        "us-west-2": 2,      # Hydro/solar heavy
+        "eu-central-1": 3,   # Nuclear/renewables
+        "us-east-1": 4,      # Mixed grid
+        "ap-southeast-1": 5, # Higher carbon
+        "ap-northeast-1": 6  # Higher carbon
+      },
+      "latency_optimized": {
+        "us-east-1": 1,      # Major population centers
+        "eu-west-1": 2,      # European hub
+        "us-west-2": 3,      # West coast
+        "ap-southeast-1": 4, # APAC hub
+        "eu-central-1": 5,   # Central Europe
+        "ap-northeast-1": 6  # East Asia
+      }
+    }

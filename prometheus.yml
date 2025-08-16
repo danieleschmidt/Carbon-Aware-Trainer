@@ -1,0 +1,33 @@
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  - "carbon_trainer_rules.yml"
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          - alertmanager:9093
+
+scrape_configs:
+  - job_name: 'carbon-trainer'
+    static_configs:
+      - targets: ['carbon-trainer:8080']
+    metrics_path: /metrics
+    scrape_interval: 10s
+    
+  - job_name: 'carbon-intensity'
+    static_configs:
+      - targets: ['carbon-monitor:8081']
+    scrape_interval: 60s
+    
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['node-exporter:9100']
+      
+  - job_name: 'postgres-exporter'
+    static_configs:
+      - targets: ['postgres-exporter:9187']
