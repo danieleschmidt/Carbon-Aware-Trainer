@@ -177,8 +177,8 @@ class SecurityManager:
         # Compliance frameworks
         self.compliance_frameworks = self._initialize_compliance_frameworks()
         
-        # Start security monitoring
-        asyncio.create_task(self._start_security_monitoring())
+        # Security monitoring will be started manually via start_monitoring()
+        self._monitoring_task = None
     
     def _generate_encryption_key(self) -> bytes:
         """Generate a strong encryption key."""
