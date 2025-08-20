@@ -1,0 +1,103 @@
+# Production requirements for Carbon-Aware Training Platform
+
+# Core dependencies (from requirements.txt)
+-r requirements.txt
+
+# Production-specific dependencies
+gunicorn==21.2.0                # WSGI HTTP Server
+uvicorn[standard]==0.24.0       # ASGI server for FastAPI
+uvloop==0.19.0                  # Ultra fast asyncio event loop
+httptools==0.6.1                # Fast HTTP parser
+
+# Database and caching
+psycopg2-binary==2.9.7          # PostgreSQL adapter
+redis==5.0.1                    # Redis client
+SQLAlchemy==2.0.23              # SQL toolkit and ORM
+alembic==1.12.1                 # Database migration tool
+
+# Monitoring and observability
+prometheus_client==0.18.0       # Prometheus metrics client
+opentelemetry-api==1.21.0       # OpenTelemetry API
+opentelemetry-sdk==1.21.0       # OpenTelemetry SDK
+opentelemetry-instrumentation-fastapi==0.42b0  # FastAPI instrumentation
+opentelemetry-instrumentation-requests==0.42b0  # Requests instrumentation
+opentelemetry-instrumentation-redis==0.42b0     # Redis instrumentation
+opentelemetry-instrumentation-psycopg2==0.42b0  # PostgreSQL instrumentation
+
+# Security
+cryptography==41.0.7            # Cryptographic library
+PyJWT==2.8.0                    # JSON Web Tokens
+bcrypt==4.1.1                   # Password hashing
+python-multipart==0.0.6        # Form parsing
+
+# Performance and optimization
+orjson==3.9.10                  # Fast JSON library
+ujson==5.8.0                    # Ultra fast JSON encoder/decoder (fallback)
+msgpack==1.0.7                  # MessagePack serializer
+lz4==4.3.2                      # LZ4 compression
+zstandard==0.22.0               # Zstandard compression
+
+# Production utilities
+rich==13.7.0                    # Rich text and beautiful formatting
+typer==0.9.0                    # CLI framework
+click==8.1.7                    # Command line interface toolkit
+environs==10.0.0                # Environment variable parsing
+python-dotenv==1.0.0            # .env file support
+
+# Health checks and diagnostics
+psutil==5.9.6                   # System and process utilities
+py-cpuinfo==9.0.0              # CPU information
+GPUtil==1.4.0                   # GPU utilities (if available)
+
+# Enterprise features
+celery==5.3.4                   # Distributed task queue
+flower==2.0.1                   # Celery monitoring
+kombu==5.3.4                    # Messaging library
+
+# API documentation
+fastapi==0.104.1                # Web framework
+starlette==0.27.0               # ASGI toolkit
+python-jose[cryptography]==3.3.0  # JWT tokens
+
+# Testing in production
+pytest-xdist==3.3.1            # Pytest distributed testing
+pytest-benchmark==4.0.0        # Performance benchmarking
+locust==2.17.0                  # Load testing
+
+# Development and debugging (production-safe versions)
+structlog==23.2.0               # Structured logging
+loguru==0.7.2                   # Logging made (stupidly) simple
+
+# Machine Learning (production optimized)
+torch==2.1.1+cpu               # PyTorch CPU version for inference
+torchvision==0.16.1+cpu        # PyTorch vision CPU
+scikit-learn==1.3.2            # Machine learning library
+joblib==1.3.2                  # Lightweight pipelining
+cloudpickle==3.0.0             # Extended pickling capabilities
+
+# Data processing (optimized versions)
+pandas==2.1.3                  # Data manipulation and analysis
+numpy==1.25.2                  # Numerical computing
+scipy==1.11.4                  # Scientific computing
+
+# Networking and HTTP
+httpx==0.25.2                  # Async HTTP client
+urllib3==2.1.0                 # HTTP library with thread-safe connection pooling
+certifi==2023.11.17            # Root certificates for validating SSL
+
+# Configuration management
+dynaconf==3.2.4                # Configuration management
+pydantic-settings==2.0.3       # Settings management using Pydantic
+
+# Async support
+asyncpg==0.29.0                # Async PostgreSQL driver
+aiofiles==23.2.1               # Async file operations
+aioredis==2.0.1                # Async Redis client
+
+# Memory profiling and optimization
+pympler==0.9                   # Memory profiler
+memory_profiler==0.61.0        # Line-by-line memory usage
+
+# Production deployment helpers
+supervisor==4.2.5              # Process control system
+setproctitle==1.3.3            # Set process title
