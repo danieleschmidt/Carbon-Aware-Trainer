@@ -367,6 +367,8 @@ class APIKeyManager:
             True if stored successfully
         """
         try:
+            from datetime import datetime
+            
             # Validate API key
             if not self.validator.validate_api_key(api_key):
                 raise ValueError(f"Invalid API key format for {provider}")
@@ -408,6 +410,7 @@ class APIKeyManager:
             decrypted_key = self._decrypt_api_key(key_data['encrypted_key'])
             
             # Update usage statistics
+            from datetime import datetime
             key_data['last_used'] = datetime.now().isoformat()
             key_data['usage_count'] += 1
             
@@ -486,6 +489,7 @@ class APIKeyManager:
             return True
         
         try:
+            from datetime import datetime
             created_at = datetime.fromisoformat(key_data['created_at'])
             age = datetime.now() - created_at
             return age.days > max_age_days

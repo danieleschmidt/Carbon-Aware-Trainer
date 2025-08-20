@@ -327,7 +327,24 @@ class CarbonForecaster:
         )
         
         if not forecast:
-            return {"error": "No forecast available"}
+            # Fallback to current intensity if no forecast available
+            current_intensity = await self.monitor.get_current_intensity(region)
+            if current_intensity:
+                carbon_intensity = current_intensity.carbon_intensity
+            else:
+                carbon_intensity = 200.0  # Default fallback
+            
+            # Calculate emissions using current/default intensity
+            total_energy_kwh = avg_power_kw * num_gpus * duration_hours
+            total_emissions = total_energy_kwh * (carbon_intensity / 1000)
+            
+            return {
+                'predicted_emissions_kg': total_emissions,
+                'total_energy_kwh': total_energy_kwh,
+                'avg_carbon_intensity': carbon_intensity,
+                'forecast_confidence': 0.5,  # Lower confidence for fallback
+                'fallback_used': True
+            }
         
         # Filter forecast to training window
         training_start = start_time
@@ -339,7 +356,22 @@ class CarbonForecaster:
         ]
         
         if not relevant_points:
-            return {"error": "No forecast data for training window"}
+            # Fallback using average of forecast data
+            if forecast.data_points:
+                avg_carbon_intensity = sum(p.carbon_intensity for p in forecast.data_points) / len(forecast.data_points)
+            else:
+                avg_carbon_intensity = 200.0  # Default fallback
+            
+            total_energy_kwh = avg_power_kw * num_gpus * duration_hours
+            total_emissions = total_energy_kwh * (avg_carbon_intensity / 1000)
+            
+            return {
+                'predicted_emissions_kg': total_emissions,
+                'total_energy_kwh': total_energy_kwh,
+                'avg_carbon_intensity': avg_carbon_intensity,
+                'forecast_confidence': 0.3,  # Lower confidence for fallback
+                'fallback_used': True
+            }
         
         # Calculate emissions
         total_energy_kwh = avg_power_kw * num_gpus * duration_hours
