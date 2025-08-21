@@ -1,0 +1,301 @@
+{
+  "timestamp": "2025-08-21T20:32:03.569027",
+  "total_runtime_seconds": 3.052758,
+  "overall_passed": false,
+  "overall_score": 68.65678859906363,
+  "summary": {
+    "total_gates": 10,
+    "passed_gates": 6,
+    "failed_gates": 4,
+    "pass_rate": 60.0
+  },
+  "gate_results": [
+    {
+      "gate_name": "Code Execution",
+      "passed": true,
+      "score": 100.0,
+      "details": {
+        "test_results": {
+          "generation1": true,
+          "generation2": true,
+          "generation3": true
+        },
+        "passed_tests": 3,
+        "total_tests": 3
+      },
+      "timestamp": "2025-08-21T20:32:00.919971",
+      "duration_seconds": 0.40402889251708984
+    },
+    {
+      "gate_name": "Test Coverage",
+      "passed": false,
+      "score": 84.90121932396974,
+      "details": {
+        "coverage_percentage": 84.90121932396974,
+        "threshold": 85.0,
+        "covered_lines": 22003,
+        "total_lines": 25916,
+        "test_files_count": 8
+      },
+      "timestamp": "2025-08-21T20:32:00.938319",
+      "duration_seconds": 0.018291473388671875
+    },
+    {
+      "gate_name": "Security Scan",
+      "passed": true,
+      "score": 0.0,
+      "details": {
+        "vulnerabilities_found": 28,
+        "critical": 0,
+        "high": 0,
+        "medium": 28,
+        "low": 0,
+        "details": [
+          {
+            "type": "potential_hardcoded_secret",
+            "file": "production_config.py",
+            "pattern": "key",
+            "severity": "medium"
+          },
+          {
+            "type": "potential_hardcoded_secret",
+            "file": "production_config.py",
+            "pattern": "api_key",
+            "severity": "medium"
+          },
+          {
+            "type": "potential_hardcoded_secret",
+            "file": "research_novel_algorithms.py",
+            "pattern": "key",
+            "severity": "medium"
+          },
+          {
+            "type": "potential_hardcoded_secret",
+            "file": "src/carbon_aware_trainer/carbon_models/base.py",
+            "pattern": "key",
+            "severity": "medium"
+          },
+          {
+            "type": "potential_hardcoded_secret",
+            "file": "src/carbon_aware_trainer/carbon_models/base.py",
+            "pattern": "api_key",
+            "severity": "medium"
+          }
+        ]
+      },
+      "timestamp": "2025-08-21T20:32:00.973438",
+      "duration_seconds": 0.03507375717163086
+    },
+    {
+      "gate_name": "Performance Benchmarks",
+      "passed": true,
+      "score": 100.0,
+      "details": {
+        "benchmarks": [
+          {
+            "operation": "generation1_execution",
+            "avg_duration_ms": 60.996055603027344,
+            "max_duration_ms": 60.996055603027344,
+            "throughput_per_sec": 16.394502728310325,
+            "memory_usage_mb": 50.0,
+            "passed": true
+          },
+          {
+            "operation": "carbon_monitor_batch",
+            "avg_duration_ms": 131.07733726501465,
+            "max_duration_ms": 196.61600589752197,
+            "throughput_per_sec": 7.629083874187809,
+            "memory_usage_mb": 30.0,
+            "passed": true
+          }
+        ],
+        "passed_count": 2,
+        "total_count": 2
+      },
+      "timestamp": "2025-08-21T20:32:02.345333",
+      "duration_seconds": 1.3718574047088623
+    },
+    {
+      "gate_name": "Documentation Coverage",
+      "passed": true,
+      "score": 100.0,
+      "details": {
+        "documentation_files": [
+          "README",
+          "RESEARCH_DOCUMENTATION.md",
+          "AUTONOMOUS_SDLC_COMPLETION_REPORT.md",
+          "AUTONOMOUS_SDLC_FINAL_REPORT.md",
+          "AUTONOMOUS_SDLC_IMPLEMENTATION_REPORT.md",
+          "IMPLEMENTATION_REPORT.md",
+          "OPTIONAL_DEPENDENCIES_REPORT.md",
+          "PRODUCTION_ROBUSTNESS_REPORT.md"
+        ],
+        "function_documentation_coverage": 73.06273062730627,
+        "file_documentation_coverage": 98.23008849557522,
+        "documented_functions": 792,
+        "total_functions": 1084,
+        "python_files_checked": 113
+      },
+      "timestamp": "2025-08-21T20:32:02.375341",
+      "duration_seconds": 0.029967784881591797
+    },
+    {
+      "gate_name": "Error Handling",
+      "passed": false,
+      "score": 60.0,
+      "details": {
+        "error_tests": [
+          {
+            "test": "robustness_error_handling",
+            "passed": false
+          },
+          {
+            "test": "error_handling_coverage",
+            "passed": true
+          },
+          {
+            "test": "handles_file_not_found",
+            "passed": true
+          },
+          {
+            "test": "handles_network_timeout",
+            "passed": false
+          },
+          {
+            "test": "handles_division_by_zero",
+            "passed": true
+          }
+        ],
+        "files_with_error_handling": 82,
+        "total_try_blocks": 449,
+        "passed_tests": 3,
+        "total_tests": 5
+      },
+      "timestamp": "2025-08-21T20:32:02.672690",
+      "duration_seconds": 0.2973029613494873
+    },
+    {
+      "gate_name": "Integration Tests",
+      "passed": false,
+      "score": 66.66666666666666,
+      "details": {
+        "integration_tests": [
+          {
+            "test": "end_to_end_workflow",
+            "passed": false
+          },
+          {
+            "test": "component_integration",
+            "passed": true
+          },
+          {
+            "test": "concurrency_handling",
+            "passed": true
+          }
+        ],
+        "passed_tests": 2,
+        "total_tests": 3
+      },
+      "timestamp": "2025-08-21T20:32:03.035562",
+      "duration_seconds": 0.36283230781555176
+    },
+    {
+      "gate_name": "Resource Usage",
+      "passed": true,
+      "score": 100.0,
+      "details": {
+        "memory_usage_mb": 0.0,
+        "max_memory_limit_mb": 500.0,
+        "memory_ok": true,
+        "execution_time_seconds": 0.24926257133483887,
+        "max_execution_time": 30.0,
+        "time_ok": true,
+        "file_descriptor_leak": false,
+        "initial_fds": 0,
+        "final_fds": 0
+      },
+      "timestamp": "2025-08-21T20:32:03.300358",
+      "duration_seconds": 0.2647573947906494
+    },
+    {
+      "gate_name": "API Compatibility",
+      "passed": false,
+      "score": 0.0,
+      "details": {
+        "api_tests": [
+          {
+            "test": "api_imports",
+            "passed": false
+          },
+          {
+            "test": "api_method_consistency",
+            "passed": false
+          },
+          {
+            "test": "backward_compatibility",
+            "passed": false
+          }
+        ],
+        "passed_tests": 0,
+        "total_tests": 3
+      },
+      "timestamp": "2025-08-21T20:32:03.466004",
+      "duration_seconds": 0.16561269760131836
+    },
+    {
+      "gate_name": "Research Validation",
+      "passed": true,
+      "score": 75.0,
+      "details": {
+        "research_tests": [
+          {
+            "test": "research_documentation_exists",
+            "passed": true
+          },
+          {
+            "test": "benchmark_data_exists",
+            "passed": true
+          },
+          {
+            "test": "statistical_significance",
+            "passed": true
+          },
+          {
+            "test": "reproducibility",
+            "passed": false
+          }
+        ],
+        "research_files_found": 8,
+        "benchmark_files_found": 6,
+        "passed_tests": 3,
+        "total_tests": 4
+      },
+      "timestamp": "2025-08-21T20:32:03.568643",
+      "duration_seconds": 0.10259675979614258
+    }
+  ],
+  "failed_gate_details": [
+    {
+      "gate": "Test Coverage",
+      "reason": "Unknown"
+    },
+    {
+      "gate": "Error Handling",
+      "reason": "Unknown"
+    },
+    {
+      "gate": "Integration Tests",
+      "reason": "Unknown"
+    },
+    {
+      "gate": "API Compatibility",
+      "reason": "Unknown"
+    }
+  ],
+  "recommendations": [
+    "Address issues in Test Coverage",
+    "Improve error handling and exception management",
+    "Address issues in Integration Tests",
+    "Address issues in API Compatibility"
+  ]
+}
