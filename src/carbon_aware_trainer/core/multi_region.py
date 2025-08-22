@@ -9,12 +9,46 @@ from typing import Dict, List, Optional, Any, Tuple
 from dataclasses import dataclass
 from enum import Enum
 
-import numpy as np
-from pydantic import BaseModel
+try:
+    import numpy as np
+    HAS_NUMPY = True
+except ImportError:
+    # Fallback for when numpy is not available
+    HAS_NUMPY = False
+    class np:
+        @staticmethod
+        def mean(data):
+            return sum(data) / len(data) if data else 0.0
+        
+        @staticmethod
+        def std(data):
+            if not data or len(data) < 2:
+                return 0.0
+            mean = np.mean(data)
+            return (sum((x - mean) ** 2 for x in data) / len(data)) ** 0.5
+
+try:
+    from pydantic import BaseModel
+    HAS_PYDANTIC = True
+except ImportError:
+    HAS_PYDANTIC = False
+    class BaseModel:
+        def __init__(self, **kwargs):
+            for key, value in kwargs.items():
+                setattr(self, key, value)
 
 from .types import CarbonIntensity, CarbonForecast
-from .monitor import CarbonMonitor
-from .exceptions import CarbonAwareException
+
+try:
+    from .monitor import CarbonMonitor
+except ImportError:
+    CarbonMonitor = None
+
+try:
+    from .exceptions import CarbonAwareException
+except ImportError:
+    class CarbonAwareException(Exception):
+        pass
 
 
 logger = logging.getLogger(__name__)
