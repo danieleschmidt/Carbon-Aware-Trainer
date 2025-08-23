@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: carbon-aware-trainer
+  labels:
+    app: carbon-aware-trainer
+    tier: production
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: carbon-aware-trainer
+  template:
+    metadata:
+      labels:
+        app: carbon-aware-trainer
+        tier: production
+    spec:
+      containers:
+      - name: carbon-trainer
+        image: carbon-aware-trainer:production
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
+        env:
+        - name: CARBON_AWARE_MODE
+          value: "production"
+        - name: OPTIMIZATION_MODE
+          value: "balanced"
+        - name: MAX_CONCURRENT_JOBS
+          value: "8"
+        volumeMounts:
+        - name: config
+          mountPath: /app/config
+        - name: checkpoints
+          mountPath: /app/checkpoints
+        ports:
+        - containerPort: 8080
+          name: http
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+      volumes:
+      - name: config
+        configMap:
+          name: carbon-aware-config
+      - name: checkpoints
+        persistentVolumeClaim:
+          claimName: carbon-checkpoints-pvc

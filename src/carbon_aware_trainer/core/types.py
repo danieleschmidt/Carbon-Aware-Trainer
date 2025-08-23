@@ -117,6 +117,7 @@ class OptimalWindow:
 @dataclass
 class TrainingConfig:
     """Configuration for carbon-aware training."""
+    # Carbon awareness settings
     carbon_threshold: float = 100.0  # Max carbon intensity (gCO2/kWh)
     pause_threshold: float = 150.0   # Carbon intensity to pause training
     resume_threshold: float = 80.0   # Carbon intensity to resume training
@@ -127,6 +128,26 @@ class TrainingConfig:
     excluded_regions: List[str] = field(default_factory=list)
     carbon_data_source: CarbonDataSource = CarbonDataSource.ELECTRICITYMAP
     forecast_horizon: timedelta = field(default_factory=lambda: timedelta(hours=24))  # Forecast window
+    
+    # Generation 2: Resilience and reliability settings
+    enable_resilience: bool = True   # Enable resilience manager
+    max_failures: int = 5           # Maximum failures before aborting
+    checkpoint_interval: int = 100  # Steps between automatic checkpoints
+    max_recovery_time: timedelta = field(default_factory=lambda: timedelta(minutes=30))  # Max recovery time
+    backup_enabled: bool = False    # Enable backup to remote storage
+    backup_location: Optional[str] = None  # Backup storage location
+    health_check_interval: int = 60  # Seconds between health checks
+    retry_attempts: int = 3         # Max retry attempts for failed operations
+    circuit_breaker_enabled: bool = True  # Enable circuit breaker pattern
+    
+    # Generation 3: Performance optimization and scaling 
+    resource_optimization_enabled: bool = True  # Enable Generation 3 optimizer
+    optimization_mode: str = "balanced"         # balanced, carbon_first, performance_first, cost_optimized
+    target_utilization: float = 0.8             # Target resource utilization (0-1)
+    auto_scaling_enabled: bool = True            # Enable automatic scaling
+    max_concurrent_jobs: int = 4                 # Maximum parallel jobs/workers
+    adaptive_batch_sizing: bool = True           # Enable adaptive batch sizing
+    performance_monitoring: bool = True          # Enable performance monitoring
 
 
 @dataclass  

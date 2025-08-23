@@ -1,0 +1,37 @@
+{
+  "dashboard": {
+    "title": "Carbon-Aware Training Dashboard",
+    "panels": [
+      {
+        "title": "Carbon Intensity",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "carbon_intensity_gco2_kwh"
+          }
+        ]
+      },
+      {
+        "title": "Training Throughput",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "training_throughput_samples_per_sec"
+          }
+        ]
+      },
+      {
+        "title": "Resource Utilization",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "cpu_utilization_percent"
+          },
+          {
+            "expr": "memory_utilization_percent"
+          }
+        ]
+      }
+    ]
+  }
+}

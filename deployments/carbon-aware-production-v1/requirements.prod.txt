@@ -1,0 +1,26 @@
+# Production requirements for Carbon-Aware Trainer
+# Core dependencies
+requests>=2.31.0
+numpy>=1.24.0
+pandas>=2.0.0
+pydantic>=2.0.0
+python-dateutil>=2.8.2
+pytz>=2023.3
+aiohttp>=3.8.4
+
+# Optional performance dependencies
+psutil>=5.9.5
+redis>=4.5.0
+
+# Production monitoring
+prometheus-client>=0.17.0
+structlog>=23.1.0
+
+# Security and validation
+cryptography>=41.0.0
+pyjwt>=2.7.0
+
+# Optional ML frameworks (install as needed)
+# torch>=2.0.0
+# tensorflow>=2.13.0
+# transformers>=4.30.0
