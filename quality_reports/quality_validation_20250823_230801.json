@@ -1,0 +1,41 @@
+{
+  "timestamp": "2025-08-23T23:08:01.021703",
+  "overall_score": 74.0,
+  "all_gates_passed": false,
+  "gates_results": {
+    "Security Scan": {
+      "passed": true,
+      "score": 80,
+      "details": "Scanned 72 Python files. Found 35 security issues across 3 categories."
+    },
+    "Performance Benchmark": {
+      "passed": true,
+      "score": 100,
+      "details": "Import: 90.9ms, Init: 0.1ms, Operations: 0.0ms, Memory: 50.0MB"
+    },
+    "Code Quality Analysis": {
+      "passed": true,
+      "score": 90,
+      "details": "Files: 72, Lines: 37928, Functions: 759, Classes: 353, Docstring: 98.0%, Comments: 6.2%"
+    },
+    "Integration Testing": {
+      "passed": false,
+      "score": 0,
+      "details": "Integration testing failed: CarbonIntensity.__init__() got an unexpected keyword argument 'value'"
+    },
+    "Documentation Coverage": {
+      "passed": true,
+      "score": 100.0,
+      "details": "Docs present: 100%, README quality: 100%, Module docs: 100%"
+    }
+  },
+  "recommendations": [
+    "Replace 28 insecure random calls with secrets module",
+    "Replace 1 hardcoded secrets with environment variables",
+    "Secure 6 command injection vulnerabilities",
+    "Increase adoption of secure coding practices (secrets module, SSL verification)",
+    "Consider breaking down large files into smaller modules",
+    "Fix critical import/instantiation errors"
+  ],
+  "ready_for_production": false
+}
