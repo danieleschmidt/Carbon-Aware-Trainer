@@ -1,618 +1,202 @@
-# Carbon-Aware-Trainer 🌱⚡
+# Carbon-Aware Trainer 🌱
 
-[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
-[![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-orange.svg)](https://pytorch.org)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Science Advances](https://img.shields.io/badge/Paper-Science%20Advances-red.svg)](https://www.science.org/doi/10.1126/sciadv.xxxxx)
-[![Carbon Neutral](https://img.shields.io/badge/Carbon-Neutral%20AI-brightgreen.svg)](https://github.com/yourusername/Carbon-Aware-Trainer)
+> Shift your ML training jobs to low-carbon time windows and cut your CO2 footprint without changing your model code.
 
-Drop-in scheduler that intelligently aligns large-scale ML training with regional carbon intensity forecasts, supporting Slurm, Kubernetes, and PyTorch Lightning.
+## The idea
 
-## 🌍 Impact
+The carbon intensity of the electrical grid varies throughout the day — sometimes dramatically. In California, solar floods the grid at midday, dropping intensity below 100 gCO2/kWh. In Texas, evening peakers push it past 500. A 6-hour training run on a 300W A100 can emit 280g or 130g CO2 depending purely on *when* you start it.
 
-Training large models produces significant CO₂ emissions. Carbon-Aware-Trainer can reduce training emissions by **40-80%** by:
-- Scheduling compute during low-carbon periods
-- Migrating workloads to cleaner regions
-- Optimizing batch sizes based on grid carbon intensity
-- Providing real-time carbon accounting
+This library does one thing well: **find the greenest time window for your job and stay there**.
 
-## 🚀 Quick Start
-
-### Installation
-
-```bash
-# Basic installation
-pip install carbon-aware-trainer
-
-# With all schedulers
-pip install carbon-aware-trainer[all]
-
-# Development version
-git clone https://github.com/yourusername/Carbon-Aware-Trainer.git
-cd Carbon-Aware-Trainer
-pip install -e ".[dev]"
+```
+Naive start:   2026-03-19 15:00 UTC  |  157 gCO2/kWh  |  282g CO2
+Optimal start: 2026-03-19 19:00 UTC  |  129 gCO2/kWh  |  231g CO2
+                                                 saves  ▶  51g CO2  (18%)
 ```
 
-### PyTorch Integration
+Scale that up to a week-long fine-tune and you're talking kilograms.
+
+---
+
+## Installation
+
+```bash
+pip install -e .
+```
+
+Requires Python ≥ 3.8. No API key needed for synthetic mode (great for testing and demos).
+
+For live grid data, get a free key at [ElectricityMaps](https://www.electricitymaps.com/) and set:
+```bash
+export ELECTRICITY_MAPS_API_KEY=your_key_here
+```
+
+---
+
+## Quick start
+
+### 1. Find the optimal window for a training job
 
 ```python
-from carbon_aware_trainer import CarbonAwareTrainer
-import torch
+from carbon_aware_trainer import CarbonIntensityProvider, TrainingScheduler, TrainingJob
 
-# Drop-in replacement for standard training
-trainer = CarbonAwareTrainer(
-    model=your_model,
-    optimizer=optimizer,
-    carbon_model='electricitymap',  # or 'watttime'
-    region='US-CA',
-    target_carbon_intensity=50  # gCO2/kWh
+provider = CarbonIntensityProvider(region="US-CA")   # synthetic by default
+scheduler = TrainingScheduler(provider, lookahead_hours=48)
+
+job = TrainingJob(job_hours=6.0, gpu_tdp_watts=300.0, name="ResNet-50")
+window = scheduler.find_optimal_window(job=job)
+
+print(window.summary())
+# Optimal start: 2026-03-19 19:00 UTC  (+4.0h delay)  |  saves 51g CO2 (18.0%)
+```
+
+### 2. Add carbon awareness to your training loop
+
+```python
+from carbon_aware_trainer import CarbonAwareCallback
+
+cb = CarbonAwareCallback(
+    provider,
+    threshold_gco2_kwh=250,    # pause above this
+    gpu_tdp_watts=300,
 )
 
-# Training automatically pauses during high-carbon periods
-for epoch in range(epochs):
+cb.on_train_start()
+for epoch in range(num_epochs):
+    cb.on_epoch_start(epoch)   # pauses here if grid is dirty
     for batch in dataloader:
-        loss = trainer.train_step(batch)
-        
-        # Optional: View carbon metrics
-        if trainer.step % 100 == 0:
-            metrics = trainer.get_carbon_metrics()
-            print(f"Current intensity: {metrics['current_intensity']} gCO2/kWh")
-            print(f"Carbon saved: {metrics['carbon_saved_kg']:.2f} kg")
+        loss = train_step(batch)
+        cb.on_step_end()
+
+cb.on_train_end()
+print(cb.summary())
 ```
 
-### Lightning Integration
+### 3. Estimate carbon footprint
 
 ```python
-import pytorch_lightning as pl
-from carbon_aware_trainer.lightning import CarbonAwareCallback
+from carbon_aware_trainer import EnergyEstimator
 
-# Add as Lightning callback
-carbon_callback = CarbonAwareCallback(
-    pause_threshold=100,  # gCO2/kWh
-    migration_enabled=True,
-    regions=['US-CA', 'US-WA', 'EU-FR']
+est = EnergyEstimator.full_estimate(
+    gpu_tdp_watts=400,   # A100
+    hours=6,
+    intensity_gco2_kwh=200,
 )
-
-trainer = pl.Trainer(
-    callbacks=[carbon_callback],
-    accelerator='gpu',
-    devices=8
-)
-
-trainer.fit(model, datamodule)
+print(f"Energy: {est['energy_kwh']} kWh  |  CO2: {est['carbon_g']}g")
+# Energy: 2.4 kWh  |  CO2: 480.0g
 ```
 
-## 🏗️ Architecture
+---
 
-```
-carbon-aware-trainer/
-├── core/                    # Core scheduling logic
-│   ├── scheduler.py        # Main scheduler
-│   ├── forecasting.py      # Carbon forecasting
-│   ├── optimization.py     # Schedule optimization
-│   └── migration.py        # Cross-region migration
-├── carbon_models/          # Carbon intensity providers
-│   ├── electricitymap.py   # ElectricityMap API
-│   ├── watttime.py        # WattTime API
-│   ├── custom.py          # Custom data sources
-│   └── cached.py          # Offline forecasts
-├── integrations/          # Framework integrations
-│   ├── pytorch/           # PyTorch native
-│   ├── lightning/         # PyTorch Lightning
-│   ├── tensorflow/        # TensorFlow/Keras
-│   ├── jax/              # JAX/Flax
-│   └── huggingface/      # Transformers
-├── cluster/              # Cluster schedulers
-│   ├── slurm/            # SLURM integration
-│   ├── kubernetes/       # K8s operators
-│   ├── aws_batch/        # AWS Batch
-│   └── azure_ml/         # Azure ML
-├── monitoring/           # Carbon tracking
-│   ├── dashboard/        # Real-time dashboard
-│   ├── reporting/        # Carbon reports
-│   └── mlflow/          # MLflow integration
-└── strategies/          # Scheduling strategies
-    ├── threshold.py      # Simple threshold
-    ├── predictive.py     # ML-based prediction
-    ├── adaptive.py       # Adaptive scheduling
-    └── multi_region.py   # Multi-region optimization
-```
+## Components
 
-## 📊 Carbon Intelligence
+### `CarbonIntensityProvider`
 
-### Real-time Carbon Monitoring
+Provides carbon intensity data (gCO2/kWh) for a grid region.
+
+| Mode | Description |
+|------|-------------|
+| `synthetic` | Sinusoidal 24h model based on typical grid patterns. No API key. Works offline. |
+| `electricitymaps` | Live + forecast data from [ElectricityMaps API](https://www.electricitymaps.com/). Falls back to synthetic on failure. |
+
+**Supported regions (synthetic):** `US-CA`, `US-TX`, `US-NY`, `US-MW`, `US-NE`, `EU-DE`, `EU-FR`, `EU-GB`, `EU-PL`, `AU-NSW`, `AU-SA` — plus any ElectricityMaps zone code in live mode.
 
 ```python
-from carbon_aware_trainer import CarbonMonitor
-
-monitor = CarbonMonitor(
-    regions=['US-CA', 'US-TX', 'EU-DE', 'IN-KA'],
-    update_interval=300  # 5 minutes
+provider = CarbonIntensityProvider(
+    region="US-CA",
+    mode="synthetic",           # or "electricitymaps"
+    api_key=None,               # or ELECTRICITY_MAPS_API_KEY env var
+    cache_ttl_seconds=300,
 )
 
-# Get current carbon intensity
-intensity = monitor.get_current_intensity('US-CA')
-print(f"California grid: {intensity['carbon_intensity']} gCO2/kWh")
-print(f"Energy mix: {intensity['energy_mix']}")
-
-# Get 24-hour forecast
-forecast = monitor.get_forecast('US-CA', hours=24)
-optimal_window = monitor.find_optimal_window(
-    duration_hours=8,  # Training duration
-    max_carbon_intensity=100
-)
-
-print(f"Best time to train: {optimal_window['start_time']}")
-print(f"Expected carbon intensity: {optimal_window['avg_intensity']} gCO2/kWh")
+reading = provider.current()       # CarbonReading right now
+forecast = provider.forecast(hours=48)  # List[CarbonReading]
 ```
 
-### Adaptive Scheduling
+### `TrainingScheduler`
+
+Slides a job-duration window across the forecast to find the minimum-carbon start time.
 
 ```python
-from carbon_aware_trainer.strategies import AdaptiveScheduler
+scheduler = TrainingScheduler(provider, lookahead_hours=48, resolution_minutes=60)
+window = scheduler.find_optimal_window(job_hours=6.0, gpu_tdp_watts=300)
 
-# ML-based scheduling that learns patterns
-scheduler = AdaptiveScheduler(
-    historical_data='carbon_history.parquet',
-    workload_flexibility=0.3,  # 30% deadline flexibility
-    prediction_model='transformer'
-)
+window.start_time                    # datetime
+window.mean_intensity_gco2_kwh       # float
+window.carbon_kg                     # float
+window.carbon_saved_kg               # vs naive (start now)
+window.carbon_saved_pct              # percentage savings
+```
 
-# Train scheduler on historical patterns
-scheduler.train(
-    carbon_history=monitor.get_historical_data(),
-    training_logs='past_training_runs.json'
-)
+### `CarbonAwareCallback`
 
-# Get intelligent recommendations
-recommendation = scheduler.recommend(
-    job_duration=timedelta(hours=12),
-    deadline=datetime.now() + timedelta(days=3),
-    required_gpus=8,
-    interruptible=True
-)
-
-print(f"Recommended start: {recommendation['start_time']}")
-print(f"Expected carbon savings: {recommendation['carbon_savings_kg']:.1f} kg")
-print(f"Cost increase: {recommendation['cost_increase_pct']:.1%}")
-
-## 🎯 Integration Examples
-
-### SLURM Cluster
+Drop-in callback that pauses training when grid intensity exceeds a threshold and resumes when it drops back (with hysteresis).
 
 ```python
-# carbon_aware_job.py
-from carbon_aware_trainer.cluster import SlurmCarbonScheduler
-
-scheduler = SlurmCarbonScheduler(
-    partition='gpu-v100',
-    carbon_threshold=75,  # gCO2/kWh
-    check_interval=600    # 10 minutes
+cb = CarbonAwareCallback(
+    provider,
+    threshold_gco2_kwh=300,         # pause above this
+    resume_threshold_gco2_kwh=270,  # resume below this (default: 90% of threshold)
+    gpu_tdp_watts=300,
+    check_interval_seconds=60,      # how often to re-check while paused
+    max_pause_seconds=0,            # 0 = no time limit on pauses
+    dry_run=False,                  # True = log only, never sleep
 )
-
-# Submit carbon-aware job
-job_id = scheduler.submit(
-    script='train_model.sh',
-    nodes=4,
-    time='48:00:00',
-    carbon_flexibility=0.5  # Allow 50% time extension for carbon
-)
-
-# Monitor and pause/resume based on carbon
-scheduler.monitor_and_control(job_id)
 ```
 
-### Kubernetes Deployment
+Hooks: `on_train_start()`, `on_epoch_start(epoch)`, `on_step_end()`, `on_train_end()`
 
-```yaml
-# carbon-aware-training-job.yaml
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: carbon-aware-training
-  annotations:
-    carbon-aware.io/enabled: "true"
-    carbon-aware.io/threshold: "100"
-    carbon-aware.io/regions: "us-west-1,eu-west-1"
-spec:
-  template:
-    spec:
-      containers:
-      - name: training
-        image: your-training-image
-        env:
-        - name: CARBON_AWARE_MODE
-          value: "adaptive"
-        resources:
-          requests:
-            nvidia.com/gpu: 8
-      nodeSelector:
-        carbon-aware.io/scheduler: "true"
-```
+### `EnergyEstimator`
+
+Simple carbon math — no dependencies.
 
 ```python
-# Deploy with Carbon-Aware Operator
-from carbon_aware_trainer.cluster import K8sCarbonOperator
-
-operator = K8sCarbonOperator(namespace='ml-training')
-operator.install()
-
-# Submit job
-job = operator.create_job(
-    name='bert-training',
-    image='pytorch/pytorch:2.0.0-cuda11.8',
-    script='train_bert.py',
-    gpus=8,
-    carbon_policy='minimize'
-)
-
-# Track carbon metrics
-metrics = operator.get_job_carbon_metrics(job.name)
-print(f"Total emissions: {metrics['total_co2_kg']:.2f} kg")
+EnergyEstimator.energy_kwh(gpu_tdp_watts=300, hours=6)       # → 1.8 kWh
+EnergyEstimator.carbon_kg(energy_kwh=1.8, intensity_gco2_kwh=200)  # → 0.36 kg
+EnergyEstimator.full_estimate(300, 6, 200)                   # → dict
+EnergyEstimator.tdp_for_gpu("A100")                          # → 400
 ```
 
-### Multi-Region Training
+---
 
-```python
-from carbon_aware_trainer import MultiRegionOrchestrator
-
-# Configure multi-region setup
-orchestrator = MultiRegionOrchestrator(
-    regions={
-        'us-west-2': {'gpus': 16, 'cost_per_hour': 12.8},
-        'eu-west-1': {'gpus': 8, 'cost_per_hour': 14.2},
-        'ap-south-1': {'gpus': 12, 'cost_per_hour': 10.5}
-    },
-    migration_bandwidth_gbps=10
-)
-
-# Optimize placement
-placement = orchestrator.optimize_placement(
-    model_size_gb=50,
-    dataset_size_gb=500,
-    training_hours=168,  # 1 week
-    carbon_budget_kg=1000,
-    cost_budget_usd=5000
-)
-
-# Execute multi-region training
-orchestrator.execute_training(
-    placement_plan=placement,
-    checkpoint_interval=timedelta(hours=1),
-    migration_threshold=50  # Migrate if carbon > 50 gCO2/kWh
-)
-```
-
-## 📈 Carbon Accounting
-
-### Detailed Carbon Tracking
-
-```python
-from carbon_aware_trainer.monitoring import CarbonDashboard
-
-# Launch interactive dashboard
-dashboard = CarbonDashboard(port=8050)
-dashboard.launch()
-
-# Programmatic access to metrics
-tracker = dashboard.get_tracker()
-
-# Training loop with carbon tracking
-with tracker.track_training('model_v2'):
-    for epoch in range(epochs):
-        carbon_metrics = tracker.log_epoch_start(epoch)
-        
-        # Your training code
-        train_epoch(model, dataloader, optimizer)
-        
-        tracker.log_epoch_end(
-            epoch,
-            metrics={'loss': loss, 'accuracy': acc}
-        )
-
-# Generate carbon report
-report = tracker.generate_report()
-print(f"Total training emissions: {report['total_kg_co2']:.2f} kg CO2")
-print(f"Equivalent to: {report['equivalents']['miles_driven']:.0f} miles driven")
-print(f"Carbon intensity: {report['g_co2_per_parameter']:.2f} gCO2/param")
-
-# Export for ESG reporting
-report.export('carbon_report_q4_2024.pdf')
-report.export_mlflow()  # Log to MLflow
-```
-
-### Comparative Analysis
-
-```python
-# Compare carbon footprint across runs
-from carbon_aware_trainer.analysis import CarbonComparator
-
-comparator = CarbonComparator()
-
-# Add baseline (non-carbon-aware)
-comparator.add_run(
-    'baseline',
-    carbon_log='logs/baseline_training.json',
-    duration_hours=168
-)
-
-# Add carbon-aware run
-comparator.add_run(
-    'carbon_aware',
-    carbon_log='logs/carbon_aware_training.json',
-    duration_hours=201  # Longer but cleaner
-)
-
-# Generate comparison
-comparison = comparator.compare()
-comparator.plot_comparison(
-    metrics=['cumulative_co2', 'hourly_intensity', 'cost']
-)
-
-print(f"Carbon reduction: {comparison['carbon_reduction_pct']:.1%}")
-print(f"Time increase: {comparison['time_increase_pct']:.1%}")
-print(f"Cost change: {comparison['cost_change_pct']:+.1%}")
-```
-
-## 🔧 Advanced Features
-
-### Predictive Carbon Optimization
-
-```python
-from carbon_aware_trainer.strategies import PredictiveCarbonOptimizer
-
-# Use ML to predict optimal training windows
-optimizer = PredictiveCarbonOptimizer(
-    forecasting_model='prophet',
-    weather_data=True,  # Weather affects renewable generation
-    demand_data=True    # Grid demand patterns
-)
-
-# Plan week-long training
-training_plan = optimizer.create_plan(
-    start_date=datetime.now(),
-    end_date=datetime.now() + timedelta(days=7),
-    total_compute_hours=120,
-    gpu_power_watts=400,
-    num_gpus=8,
-    flexibility_hours=48  # Can delay up to 48 hours
-)
-
-# Visualize plan
-optimizer.visualize_plan(
-    training_plan,
-    show_carbon_forecast=True,
-    show_price_forecast=True,
-    show_renewable_mix=True
-)
-
-# Execute with automatic rescheduling
-executor = optimizer.create_executor(training_plan)
-executor.run(
-    training_function=your_training_function,
-    checkpoint_dir='./checkpoints',
-    auto_reschedule=True
-)
-```
-
-### Federated Carbon-Aware Learning
-
-```python
-from carbon_aware_trainer.federated import CarbonAwareFederated
-
-# Carbon-aware federated learning
-fed_scheduler = CarbonAwareFederated(
-    clients=['edge-eu', 'edge-us', 'edge-asia'],
-    aggregation_server='central-cloud'
-)
-
-# Schedule rounds based on regional carbon
-for round_num in range(100):
-    # Select clients in low-carbon regions
-    selected_clients = fed_scheduler.select_clients(
-        round_num,
-        num_clients=5,
-        carbon_threshold=80
-    )
-    
-    # Train on selected clients
-    client_updates = []
-    for client in selected_clients:
-        update = fed_scheduler.train_client(
-            client,
-            model=global_model,
-            data=client_data[client],
-            carbon_aware=True
-        )
-        client_updates.append(update)
-    
-    # Aggregate when server region is clean
-    fed_scheduler.carbon_aware_aggregate(
-        client_updates,
-        wait_for_clean_energy=True,
-        max_wait_hours=6
-    )
-```
-
-### Carbon-Aware Hyperparameter Optimization
-
-```python
-from carbon_aware_trainer.hpo import CarbonAwareOptuna
-
-# Modify hyperparameter search based on carbon
-study = CarbonAwareOptuna.create_study(
-    direction='minimize',
-    carbon_budget_kg=100,
-    sampler='TPESampler'
-)
-
-def objective(trial):
-    # Adjust compute based on current carbon
-    carbon_intensity = monitor.get_current_intensity()
-    
-    # Use smaller models during high-carbon periods
-    if carbon_intensity > 200:
-        hidden_size = trial.suggest_int('hidden_size', 128, 512)
-        batch_size = trial.suggest_int('batch_size', 16, 32)
-    else:
-        hidden_size = trial.suggest_int('hidden_size', 256, 1024)
-        batch_size = trial.suggest_int('batch_size', 32, 128)
-    
-    # Train and return loss
-    model = create_model(hidden_size)
-    loss = train_model(model, batch_size=batch_size)
-    
-    # Record carbon
-    trial.set_user_attr('carbon_kg', tracker.get_trial_carbon())
-    
-    return loss
-
-# Optimize with carbon awareness
-study.optimize(
-    objective,
-    n_trials=100,
-    callbacks=[CarbonAwareCallback(threshold=100)]
-)
-
-# Analyze carbon-performance tradeoffs
-study.plot_pareto_front(['loss', 'carbon_kg'])
-```
-
-## 📊 Real-World Impact
-
-### Case Studies
-
-| Organization | Model | Baseline CO₂ | With Carbon-Aware | Reduction | Time Increase |
-|-------------|-------|--------------|-------------------|-----------|---------------|
-| University A | GPT-3 Fine-tune | 12,450 kg | 4,980 kg | 60% | 15% |
-| Company B | Vision Transformer | 8,200 kg | 2,050 kg | 75% | 22% |
-| Research Lab C | Protein Folding | 45,000 kg | 18,000 kg | 60% | 8% |
-| Startup D | Recommendation System | 3,200 kg | 640 kg | 80% | 35% |
-
-### Grid Carbon Intensity Patterns
-
-```python
-# Analyze carbon patterns
-from carbon_aware_trainer.analysis import GridAnalyzer
-
-analyzer = GridAnalyzer()
-
-# Best regions and times for training
-best_windows = analyzer.find_best_windows(
-    duration_hours=24,
-    regions=['US-CA', 'US-WA', 'EU-FR', 'EU-NO'],
-    lookback_days=365
-)
-
-analyzer.plot_carbon_heatmap(
-    regions=best_windows.keys(),
-    period='yearly',
-    show_renewables=True
-)
-
-# Recommendations
-for region, windows in best_windows.items():
-    print(f"\n{region}:")
-    print(f"  Best months: {windows['best_months']}")
-    print(f"  Best hours: {windows['best_hours']}")
-    print(f"  Avg carbon: {windows['avg_carbon']:.1f} gCO2/kWh")
-```
-
-## 🛠️ Configuration
-
-### Environment Variables
+## Demo
 
 ```bash
-# API Keys
-export ELECTRICITYMAP_API_KEY="your-key"
-export WATTTIME_API_KEY="your-key"
-
-# Default behavior
-export CARBON_AWARE_MODE="adaptive"  # or "strict", "flexible"
-export CARBON_THRESHOLD="100"         # gCO2/kWh
-export CARBON_CHECK_INTERVAL="300"    # seconds
-
-# Multi-region
-export CARBON_AWARE_REGIONS="US-CA,US-WA,EU-FR"
-export CARBON_MIGRATION_ENABLED="true"
+python demo.py
 ```
 
-### Configuration File
+Shows:
+1. 48-hour carbon intensity forecast with ASCII sparkline
+2. Optimal vs. naive scheduling for a 6-hour job (CO2 savings)
+3. GPU comparison table (V100, A100, H100, RTX 4090)
+4. CarbonAwareCallback dry-run with epoch-based pause simulation
 
-```yaml
-# carbon_aware_config.yaml
-carbon_aware:
-  mode: adaptive
-  threshold: 100
-  
-  data_sources:
-    primary: electricitymap
-    fallback: watttime
-    cache_duration: 3600
-  
-  scheduling:
-    algorithm: predictive
-    flexibility: 0.3
-    min_batch_hours: 2
-    
-  regions:
-    preferred:
-      - US-WA  # Hydro power
-      - EU-NO  # Hydro power
-      - BR-RS  # Wind power
-    avoid:
-      - US-WV  # Coal heavy
-      - PL     # Coal heavy
-      
-  reporting:
-    mlflow_tracking: true
-    carbon_labels: true
-    esg_reports: quarterly
+---
+
+## Tests
+
+```bash
+pytest tests/ -v
 ```
 
-## 📚 Research & Citations
+50 tests, no external dependencies needed.
 
-```bibtex
-@article{carbon_aware_training2025,
-  title={Carbon-Aware Training: Reducing ML's Climate Impact through Intelligent Scheduling},
-  author={Daniel Schmidt},
-  journal={Science Advances},
-  year={2025},
-  doi={10.1126/sciadv.xxxxx}
-}
+---
 
-@inproceedings{adaptive_carbon_scheduling2024,
-  title={Adaptive Carbon-Aware Scheduling for Distributed ML Training},
-  author={Daniel Schmidt},
-  booktitle={ICML},
-  year={2024}
-}
-```
+## Why this matters
 
-## 🤝 Contributing
+A single A100 training run that shifts 4 hours saves ~50g CO2. At scale:
 
-Priority contributions:
-- Additional carbon data sources
-- Improved forecasting models
-- Cloud provider integrations
-- Real-world case studies
+| Scenario | Annual CO2 saved |
+|----------|-----------------|
+| 1 researcher, 1 job/day | ~18 kg/year |
+| 10-GPU cluster, continuous | ~1.8 tonnes/year |
+| 100-GPU cluster | ~18 tonnes/year |
 
-See [CONTRIBUTING.md](CONTRIBUTING.md)
+The biggest levers: **region** (France's nuclear grid vs Australia's coal) and **timing** (solar surplus windows). This library handles the timing piece automatically.
 
-## 🌱 Carbon Offset Partners
+---
 
-A portion of this project's funding goes to verified carbon removal projects:
-- Direct air capture
-- Reforestation
-- Renewable energy development
+## License
 
-## 📄 License
-
-MIT License - see [LICENSE](LICENSE)
-
-## 🔗 Resources
-
-- [Documentation](https://carbon-aware-trainer.org)
-- [Carbon Intensity APIs](https://github.com/yourusername/Carbon-Aware-Trainer/wiki/APIs)
-- [Best Practices Guide](https://carbon-aware-trainer.org/best-practices)
-- [Community Forum](https://discuss.carbon-aware-trainer.org)
+MIT

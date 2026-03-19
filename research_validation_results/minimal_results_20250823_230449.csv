@@ -1,6 +1,0 @@
-test_name,algorithm,metric,value,baseline_value,improvement_percentage,execution_time_seconds
-quantum_carbon_optimization,quantum_inspired,carbon_reduction_percentage,77.62528167835625,0.0,None,0.008891105651855469
-neural_prediction_accuracy,minimal_neural_network,mean_absolute_error,82.46170609358555,18.003206888039767,358.03898497866,0.0035181045532226562
-neural_prediction_accuracy,minimal_neural_network,mean_absolute_error,22.53331025298973,22.53331025298973,0.0,0.004288673400878906
-neural_prediction_accuracy,minimal_neural_network,mean_absolute_error,44.451811119466726,17.76547104927925,150.21464950837964,0.003228902816772461
-rl_optimization_reward,minimal_rl,average_reward,0.5486959224980288,None,None,0.0
